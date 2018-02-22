@@ -1,0 +1,147 @@
+.App {
+  font-family: "calibri";
+  margin: 1em;
+}
+
+
+
+.App-header {
+  background-color: #222;
+  height: 150px;
+  padding: 20px;
+  color: white;
+}
+
+.App-title {
+  font-size: 1.5em;
+}
+
+.App-intro {
+  font-size: large;
+}
+
+@keyframes App-logo-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.companySearchResultCard {
+  padding: 0.25em;
+  margin: 1em;
+  height: 280px;
+  width: 300px;
+  border: groove 1px;
+  float: left;
+}
+
+.coDescription {
+  padding: 0.35em;
+  display: block;
+}
+
+.location, .industryList {
+  font-size: 12px;
+  vertical-align: bottom;
+  padding: 0.35em;
+}
+
+.jobSearchResultItem {
+  padding: 0.25em;
+  margin: 1em;
+  height: 180px;
+  width: 280px;
+  border: groove 1px;
+  float: left;
+}
+
+.jobDescription {
+  padding: 0.25em;
+  margin: 1em;
+}
+
+.mySavedJobList {
+  margin: 1em;
+  padding: 1em;
+}
+
+
+.myJobDetail {
+  margin: 1em;
+  padding: 1em;
+}
+
+.myJobDetailDashboard {
+
+  clear: both;
+  padding: 1em;
+  background-color: blue;
+}
+
+.myJobInfoAndNotes {
+  clear: both;
+  display: grid;
+  padding: 1em;
+  grid-gap: 15px;
+  grid-template-columns: 40% 60%;
+  grid-template-areas:
+  "header  header  header"
+    "sidebar content content"
+    "footer  footer  footer";
+}
+
+.myJobDetailSavedInfo {
+  display: grid;
+  background-color: darkblue;
+  color: white;
+
+}
+
+.myJobDetailNote {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 10px;
+  grid-auto-rows: minmax(100px, auto);
+  background-color: coral;
+  padding: 0.25em;
+  height: 100%;
+  width: 100%;
+
+
+}
+
+textarea {
+  align:center;
+  width: 200%;
+  font-family: "open sans";
+  align:center;
+}
+
+textarea.noteContent {
+  min-height: 600px;
+  flex-direction: row;
+  font-size: 15px;
+  font-weight: 500;
+  margin: 0.2em;
+}
+
+textarea.noteTitle {
+  margin: 0.2em;
+  resize: none;
+  height: 30px;
+  vertical-align: middle;
+  flex-direction: row;
+  width: 200%;
+  font-weight: 600;
+  font-size: 22px;
+}
+
+
+
+
+img.icon {
+  width: 160px;
+  float: right;
+  display: inline;
+  padding: 0 0.25em 0.25em 0.25em;
+  margin: 0.5em;
+}
