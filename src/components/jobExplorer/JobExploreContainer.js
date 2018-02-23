@@ -76,7 +76,7 @@ class JobExploreContainer extends React.Component {
 
       for(let i=0; i<6; i++) {
 
-        
+
         let jobUrl = "https://api-v2.themuse.com/jobs?" + categories + levels + locations + "&api-key=82b2d1f745512b99a70044e6c6b316d86739a97719d5e88caf67a3f7fd788a00&page=" + i
         fetch(jobUrl)
         .then(response => response.json())
@@ -89,7 +89,6 @@ class JobExploreContainer extends React.Component {
     }
 
     render() {
-      console.log(this.props)
       return (
       <div>
       <h2>Search for a Job!</h2>

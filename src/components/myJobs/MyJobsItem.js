@@ -11,10 +11,10 @@ class MyJobsItem extends React.Component {
 
 
   render() {
-
+    console.log(this.props.job)
     return(
       <div className="mySavedJob">
-        <Link to={`/myjobs/${this.props.job.id}`} job={this.props.job}>{this.props.job.name}</Link>
+        <Link to={`/myjobs/${this.props.job.museId}`} job={this.props.job}>{this.props.job.title}</Link>
       </div>
     )
   }

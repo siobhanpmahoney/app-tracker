@@ -59,7 +59,6 @@ class ExploreCompanyContainer extends React.Component{
 
 
    render() {
-     console.log(this.state)
      return (
        <div>
        <h2>Search for a Company!</h2>

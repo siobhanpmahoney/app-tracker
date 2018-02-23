@@ -5,14 +5,16 @@ class MyJobsContainer extends React.Component {
   constructor(props) {
     super(props)
 
-
+    this.state = {
+      savedJobs: []
+    }
   }
 
   render() {
-    console.log(this.props.savedJobs)
+
     return(
       <div className="mySavedJobList">
-        <MyJobsList savedJobs={this.props.savedJobs}/>
+        <MyJobsList user = {this.props.user} savedJobs={this.props.savedJobs}/>
       </div>
     )
   }

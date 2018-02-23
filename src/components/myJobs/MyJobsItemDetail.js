@@ -42,8 +42,7 @@ twitter = () => {
   render() {
     let th = "https://twitter.com/" + this.state.company.twitter + "?ref_src=twsrc%5Etfw"
 
-    console.log(th)
-    console.log(this.state)
+    
     if (!this.state.job) {
       return <div>Loading</div>;
     }

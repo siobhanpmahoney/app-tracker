@@ -58,7 +58,7 @@ class JobDescription extends React.Component {
     let savedCheck = this.props.savedJobs.filter((j) => {
       return j.id == this.props.jobId
     })
-  
+
     if (savedCheck.length > 0) {
       return (<i className="material-icons" style={{color:"blue", fontSize:"100%"}}>bookmark</i>)
 
@@ -69,8 +69,7 @@ class JobDescription extends React.Component {
 
 
   render() {
-    console.log(this.props.savedJobs)
-    console.log(this.state.job)
+
     if (!this.state.job) {
       return <div>Loading</div>;
     }

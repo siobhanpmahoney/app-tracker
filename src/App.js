@@ -75,7 +75,6 @@ class App extends Component {
 
 // <Route exact path="/myjobs" component={MyJobsContainer} savedJobs={this.state.savedJobs} addToSavedJobs={this.addToSavedJobs} />
   render() {
-    console.log(this.state)
     if (!this.state.savedJobs) {
       return <div>Loading</div>;
     }
