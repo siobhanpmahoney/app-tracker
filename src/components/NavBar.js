@@ -18,7 +18,7 @@ const NavBar = () => {
         style={link}
         activeStyle={{
           background: '#FF5370'
-        }}>Home</NavLink>
+        }}>Profile</NavLink>
       <NavLink
         to="/search/companies"
         exact

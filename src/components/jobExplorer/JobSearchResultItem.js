@@ -23,11 +23,14 @@ class JobSearchResultItem extends React.Component {
   }
 
   saveJob = (event) => {
+    console.log("in saveJob")
     event.preventDefault()
     this.props.addToSavedJobs(this.props.job)
+    console.log(this.props)
   }
-  
+
   dynamicIcon = () => {
+    console.log("in dynamicicon")
     if (this.props.savedJobs.includes(this.props.job)) {
        return (<i className="material-icons" style={{color:"blue"}}>bookmark</i>)
     } else {
