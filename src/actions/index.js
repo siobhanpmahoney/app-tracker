@@ -32,7 +32,7 @@ export function saveNewJob(selectedJob) {
             level: selectedJob.levels[0].name,
             date_saved: Date.now(),
             applied_status: false,
-            company_id: 2
+            company_museId: selectedJob.company.id
           }
         })
       })

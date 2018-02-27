@@ -28,16 +28,13 @@ class App extends Component {
     this.props.loadCurrentUser()
   }
 
-
-
   addToSavedJobs = (selectedJob) => {
     this.props.saveNewJob(selectedJob)
   }
 
 
-// <Route exact path="/myjobs" component={MyJobsContainer} savedJobs={this.state.savedJobs} addToSavedJobs={this.addToSavedJobs} />
   render() {
-    console.log(this.props)
+    
     if (!this.props.savedJobs) {
       return <div>Loading</div>;
     }

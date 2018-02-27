@@ -55,9 +55,12 @@ class JobDescription extends React.Component {
   }
 
   dynamicIcon = () => {
-    let savedCheck = this.props.savedJobs.filter((j) => {
-      return j.museId == this.props.jobId
+    let savedCheck = []
+    if (this.props.savedJobs.length > 0) {
+      savedCheck = this.props.savedJobs.filter((j) => {
+        return j.museId == this.state.jobId
     })
+  }
 
     if (savedCheck.length > 0) {
       return (<i className="material-icons" style={{color:"blue", fontSize:"100%"}}>bookmark</i>)
@@ -69,7 +72,8 @@ class JobDescription extends React.Component {
 
 
   render() {
-
+    console.log(this.props)
+    console.log(this.state)
     if (!this.state.job) {
       return <div>Loading</div>;
     }

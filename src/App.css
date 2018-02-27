@@ -64,6 +64,19 @@
   padding: 1em;
 }
 
+.mySavedJob {
+  padding: 0.25em;
+  margin: 1em;
+  height: 180px;
+  width: 280px;
+  border: groove 1px;
+  float: left;
+}
+
+.mySavedJob div.dateSaved {
+  font-style: italic;
+}
+
 
 .myJobDetail {
   margin: 1em;
