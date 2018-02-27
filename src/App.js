@@ -9,6 +9,9 @@ import JobExploreContainer from './components/jobExplorer/JobExploreContainer'
 import JobDescription from './components/jobExplorer/JobDescription'
 import MyJobsContainer from './components/myJobs/MyJobsContainer'
 import MyJobsItemDetail from './components/myJobs/MyJobsItemDetail'
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import * as Actions from './actions'
 
 
 class App extends Component {
@@ -22,22 +25,44 @@ class App extends Component {
   }
 
   componentDidMount() {
-    fetch("http://localhost:3000/api/v1/users/1")
-    .then(response => response.json())
-    .then(json => this.setState({
-      currentUser: json,
-      savedJobs: json.jobs
-    }))
+    this.props.loadCurrentUser()
   }
 
+  // addOrUpdateCompany = (selectedJob) => {
+  //   let companyCheck = this.state.find((c) => {
+  //     return c.museId == selectedJob.company.id
+  //   })
+  //   if (companyCheck == undefined) {
+  //     let newCompany;
+  //     let currentCompanyState = this.state.savedCompanies.slice()
+  //     fetch("https://api-v2.themuse.com/companies/" + selectedJob.company.id )
+  //     .then(response => response.json())
+  //     .then(json => this.setState({
+  //       savedCompanies: [...currentCompanyState, newCompany]
+  //     }))
+  //   }
+  // }
+
+  addOrUpdateCompany = (selectedJob) => {
+    let companyCheck = this.state.find((c) => {
+      return c.museId == selectedJob.company.id
+    })
+    if (companyCheck == undefined) {
+      let newCompany;
+      return fetch("https://api-v2.themuse.com/companies/" + selectedJob.company.id )
+        .then(response => response.json())
+        .then(json => newCompany = json)
+      } else {
+        return companyCheck
+      }
+    }
 
   addToSavedJobs = (selectedJob) => {
-    let currentSavedJobs = this.state.savedJobs.slice(0)
-    let stateCheck = this.state.savedJobs.find((j) => {
+    let currentSavedJobs = this.props.savedJobs.slice(0)
+    let stateCheck = this.props.savedJobs.find((j) => {
       return j.museId === selectedJob.id
     })
     const url = "http://localhost:3000/api/v1/users/1/jobs"
-
     {stateCheck == undefined &&
       fetch(url,
         {
@@ -56,6 +81,10 @@ class App extends Component {
               level: selectedJob.levels[0].name,
               date_saved: Date.now(),
               applied_status: false
+              // ,
+              // company: {
+              //   this.addOrUpdateCompany(selectedJob)
+              // }
             }
           })
         })
@@ -75,7 +104,8 @@ class App extends Component {
 
 // <Route exact path="/myjobs" component={MyJobsContainer} savedJobs={this.state.savedJobs} addToSavedJobs={this.addToSavedJobs} />
   render() {
-    if (!this.state.savedJobs) {
+    console.log(this.props)
+    if (!this.props.savedJobs) {
       return <div>Loading</div>;
     }
 
@@ -84,17 +114,17 @@ class App extends Component {
         <div className="App">
           <NavBar />
 
-          <Route exact path="/" render={() => <Profile user={this.state.currentUser} savedJobs={this.state.savedJobs} /> } />
+          <Route exact path="/" render={() => <Profile user={this.props.currentUser} savedJobs={this.props.savedJobs} /> } />
 
           <Route exact path="/search/companies" component={ExploreCompanyContainer} />
 
-          <Route exact path="/search/jobs" render={() => <JobExploreContainer user={this.state.currentUser} savedJobs={this.state.savedJobs} addToSavedJobs={this.addToSavedJobs} />} />
+          <Route exact path="/search/jobs" render={() => <JobExploreContainer user={this.props.currentUser} savedJobs={this.props.savedJobs} addToSavedJobs={this.addToSavedJobs} />} />
 
-          <Route path="/jobs/:jobId" render={(props) => <JobDescription jobId={props.match.params.jobId} user={this.state.currentUser} savedJobs={this.state.savedJobs} addToSavedJobs={this.addToSavedJobs} /> } />
+          <Route path="/jobs/:jobId" render={(props) => <JobDescription jobId={props.match.params.jobId} user={this.props.currentUser} savedJobs={this.props.savedJobs} addToSavedJobs={this.addToSavedJobs} /> } />
 
-          <Route exact path="/myjobs" render={() => <MyJobsContainer savedJobs={this.state.savedJobs} user={this.state.currentUser} addToSavedJobs={this.addToSavedJobs} />} />
+          <Route exact path="/myjobs" render={() => <MyJobsContainer savedJobs={this.props.savedJobs} user={this.props.currentUser} addToSavedJobs={this.addToSavedJobs} />} />
 
-          <Route path="/myjobs/:jobId" render={(props) => <MyJobsItemDetail user={this.state.currentUser} jobId={props.match.params.jobId} savedJobs={this.state.savedJobs} /> } />
+          <Route path="/myjobs/:jobId" render={(props) => <MyJobsItemDetail user={this.props.currentUser} jobId={props.match.params.jobId} savedJobs={this.props.savedJobs} /> } />
 
         </div>
       </Router>
@@ -102,4 +132,15 @@ class App extends Component {
   }
 }
 
-export default App;
+function mapStateToProps(state, props) {
+  return {
+    currentUser: state.user.currentUser,
+    savedJobs: state.user.savedJobs
+  }
+}
+
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators(Actions, dispatch);
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
