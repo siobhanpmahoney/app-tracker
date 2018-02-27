@@ -28,78 +28,11 @@ class App extends Component {
     this.props.loadCurrentUser()
   }
 
-  // addOrUpdateCompany = (selectedJob) => {
-  //   let companyCheck = this.state.find((c) => {
-  //     return c.museId == selectedJob.company.id
-  //   })
-  //   if (companyCheck == undefined) {
-  //     let newCompany;
-  //     let currentCompanyState = this.state.savedCompanies.slice()
-  //     fetch("https://api-v2.themuse.com/companies/" + selectedJob.company.id )
-  //     .then(response => response.json())
-  //     .then(json => this.setState({
-  //       savedCompanies: [...currentCompanyState, newCompany]
-  //     }))
-  //   }
-  // }
 
-  addOrUpdateCompany = (selectedJob) => {
-    let companyCheck = this.state.find((c) => {
-      return c.museId == selectedJob.company.id
-    })
-    if (companyCheck == undefined) {
-      let newCompany;
-      return fetch("https://api-v2.themuse.com/companies/" + selectedJob.company.id )
-        .then(response => response.json())
-        .then(json => newCompany = json)
-      } else {
-        return companyCheck
-      }
-    }
 
   addToSavedJobs = (selectedJob) => {
-    let currentSavedJobs = this.props.savedJobs.slice(0)
-    let stateCheck = this.props.savedJobs.find((j) => {
-      return j.museId === selectedJob.id
-    })
-    const url = "http://localhost:3000/api/v1/users/1/jobs"
-    {stateCheck == undefined &&
-      fetch(url,
-        {
-          method: 'post',
-          headers: {
-            'Content-Type': 'application/json',
-            'Accepts': 'application/json'
-          },
-          body: JSON.stringify({
-            jobs: {
-              title: selectedJob.name,
-              date_published: selectedJob.publication_date,
-              contents: selectedJob.contents,
-              museId: selectedJob.id,
-              location: selectedJob.locations[0].name,
-              level: selectedJob.levels[0].name,
-              date_saved: Date.now(),
-              applied_status: false
-              // ,
-              // company: {
-              //   this.addOrUpdateCompany(selectedJob)
-              // }
-            }
-          })
-        })
-        .then(response => response.json())
-        .then(json => {
-          this.setState({
-            savedJobs: [...currentSavedJobs, selectedJob]
-          })
-        })
-      }
-    }
-
-
-
-
+    this.props.saveNewJob(selectedJob)
+  }
 
 
 // <Route exact path="/myjobs" component={MyJobsContainer} savedJobs={this.state.savedJobs} addToSavedJobs={this.addToSavedJobs} />

@@ -56,7 +56,7 @@ class JobDescription extends React.Component {
 
   dynamicIcon = () => {
     let savedCheck = this.props.savedJobs.filter((j) => {
-      return j.id == this.props.jobId
+      return j.museId == this.props.jobId
     })
 
     if (savedCheck.length > 0) {
