@@ -55,19 +55,28 @@ class JobDescription extends React.Component {
   }
 
   dynamicIcon = () => {
-    let savedCheck = []
-    if (this.props.savedJobs.length > 0) {
-      savedCheck = this.props.savedJobs.filter((j) => {
-        return j.museId == this.state.jobId
-    })
-  }
-
-    if (savedCheck.length > 0) {
+    if (this.props.savedJobs.find((job) => {
+      return job.museId == this.state.job.id
+    })) {
       return (<i className="material-icons" style={{color:"blue", fontSize:"100%"}}>bookmark</i>)
-
     } else {
       return (<i className="material-icons" onClick={this.saveJob} style={{color:"blue"}}>bookmark_border</i>)
     }
+
+
+    // let savedCheck = []
+    //
+    //   savedCheck = this.props.savedJobs.filter((j) => {
+    //     return j.museId == this.state.jobId
+    // })
+
+
+    // if (savedCheck.length > 0) {
+    //   return (<i className="material-icons" style={{color:"blue", fontSize:"100%"}}>bookmark</i>)
+
+    // } else {
+    //   return (<i className="material-icons" onClick={this.saveJob} style={{color:"blue"}}>bookmark_border</i>)
+    // }
   }
 
 
