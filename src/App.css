@@ -83,11 +83,11 @@
   padding: 1em;
 }
 
-.myJobDetailDashboard {
-
+div.myJobDetailDashboard {
   clear: both;
-  padding: 1em;
-  background-color: blue;
+  padding: 0.5em;
+  border: solid 1.5px;
+  border-color: blue;
 }
 
 .myJobInfoAndNotes {
@@ -106,7 +106,6 @@
   display: grid;
   background-color: darkblue;
   color: white;
-
 }
 
 .myJobDetailNote {
@@ -118,9 +117,17 @@
   padding: 0.25em;
   height: 100%;
   width: 100%;
-
-
 }
+
+.myJobDetail h2, h3 {
+  line-height: 50%;
+}
+
+h3.myJobDetailCompanyName {
+  font-size: 130%;
+}
+
+
 
 textarea {
   align:center;

@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-
 import './App.css';
 import {BrowserRouter as Router, Route} from 'react-router-dom';
 import NavBar from './components/NavBar'
@@ -20,7 +19,8 @@ class App extends Component {
 
     this.state = {
       currentUser: {},
-      savedJobs: []
+      savedJobs: [],
+      savedCompanies: []
     }
   }
 
@@ -32,9 +32,12 @@ class App extends Component {
     this.props.saveNewJob(selectedJob)
   }
 
+  loadJob = (jobId) => {
+    this.props.loadSavedJob(jobId)
+  }
+
 
   render() {
-    
     if (!this.props.savedJobs) {
       return <div>Loading</div>;
     }
@@ -44,17 +47,17 @@ class App extends Component {
         <div className="App">
           <NavBar />
 
-          <Route exact path="/" render={() => <Profile user={this.props.currentUser} savedJobs={this.props.savedJobs} /> } />
+          <Route exact path="/" render={() => <Profile user={this.props.currentUser} savedJobs={this.props.savedJobs} savedCompanies={this.props.savedCompanies} /> } />
 
           <Route exact path="/search/companies" component={ExploreCompanyContainer} />
 
-          <Route exact path="/search/jobs" render={() => <JobExploreContainer user={this.props.currentUser} savedJobs={this.props.savedJobs} addToSavedJobs={this.addToSavedJobs} />} />
+          <Route exact path="/search/jobs" render={() => <JobExploreContainer user={this.props.currentUser} savedJobs={this.props.savedJobs} addToSavedJobs={this.addToSavedJobs} savedCompanies={this.props.savedCompanies} />} />
 
-          <Route path="/jobs/:jobId" render={(props) => <JobDescription jobId={props.match.params.jobId} user={this.props.currentUser} savedJobs={this.props.savedJobs} addToSavedJobs={this.addToSavedJobs} /> } />
+          <Route path="search/jobs/:museJobId" render={(props) => <JobDescription museJobId={props.match.params.museJobId} user={this.props.currentUser} savedJobs={this.props.savedJobs} addToSavedJobs={this.addToSavedJobs} savedCompanies={this.props.savedCompanies} /> } />
 
-          <Route exact path="/myjobs" render={() => <MyJobsContainer savedJobs={this.props.savedJobs} user={this.props.currentUser} addToSavedJobs={this.addToSavedJobs} />} />
+          <Route exact path="/myjobs" render={() => <MyJobsContainer savedJobs={this.props.savedJobs} user={this.props.currentUser} addToSavedJobs={this.addToSavedJobs} savedCompanies={this.props.savedCompanies} loadSavedJob={this.props.loadSavedJob} />} />
 
-          <Route path="/myjobs/:jobId" render={(props) => <MyJobsItemDetail user={this.props.currentUser} jobId={props.match.params.jobId} savedJobs={this.props.savedJobs} /> } />
+          <Route path="/myjobs/:jobId" render={(props) => <MyJobsItemDetail user={this.props.currentUser} jobId={props.match.params.jobId} savedJobs={this.props.savedJobs} savedCompanies={this.props.savedCompanies} loadSavedJob={this.loadJob} renderedJob={this.props.renderedJob} renderedCompany={this.props.renderedCompany} /> } />
 
         </div>
       </Router>
@@ -65,7 +68,8 @@ class App extends Component {
 function mapStateToProps(state, props) {
   return {
     currentUser: state.user.currentUser,
-    savedJobs: state.user.savedJobs
+    savedJobs: state.user.savedJobs,
+    savedCompanies: state.user.savedCompanies,
   }
 }
 

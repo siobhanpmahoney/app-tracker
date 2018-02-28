@@ -30,10 +30,12 @@ class JobSearchResultItem extends React.Component {
   }
 
   dynamicIcon = () => {
-    if (this.props.savedJobs.includes(this.props.job)) {
-       return (<i className="material-icons" style={{color:"blue"}}>bookmark</i>)
+    if (this.props.savedJobs.find((job) => {
+      return job.museId == this.props.job.id
+    })) {
+      return (<i className="material-icons" style={{color:"blue", fontSize:"100%"}}>bookmark</i>)
     } else {
-       return (<i className="material-icons" onClick={this.saveJob} style={{color:"blue"}}>bookmark_border</i>)
+      return (<i className="material-icons" onClick={this.saveJob} style={{color:"blue"}}>bookmark_border</i>)
     }
   }
 
@@ -46,7 +48,7 @@ class JobSearchResultItem extends React.Component {
         <div className="jobSearchResultCompany">{this.props.job.company.name}</div>
         <div className="jobSearchResultLocation">{this.renderCategoryList()}</div>
         <div className="jobSearchResultLevel">{this.renderLocationList()}</div>
-        <button className="learnMore">Learn More</button>
+
         <Link to={`/jobs/${this.props.job.id}`} props={this.props}>Read More</Link>
       </div>
     )

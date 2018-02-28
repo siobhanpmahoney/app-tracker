@@ -1,5 +1,6 @@
 export const CURRENT_USER = 'CURRENT_USER'
 export const ADD_NEW_JOB = 'ADD_NEW_JOB'
+export const LOAD_SAVED_JOB = 'LOAD_SAVED_JOB'
 
 export function loadCurrentUser() {
   return (dispatch) => {
@@ -9,6 +10,20 @@ export function loadCurrentUser() {
       type: CURRENT_USER,
       currentUser: json,
       savedJobs: json.jobs,
+      savedCompanies: json.companies
+    }))
+  }
+}
+
+export function loadSavedJob(jobId) {
+  let url = "http://localhost:3000/api/v1/users/1/jobs/" + jobId
+  return(dispatch) => {
+    fetch(url)
+    .then(response => response.json())
+    .then(json => dispatch ({
+      type: LOAD_SAVED_JOB,
+      renderedJob: json,
+      renderedCompany: json.company
     }))
   }
 }

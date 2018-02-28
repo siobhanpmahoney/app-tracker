@@ -1,23 +1,30 @@
 import React from 'react'
 import MyJobsList from './MyJobsList'
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import * as Actions from '../../actions'
 
 class MyJobsContainer extends React.Component {
-  constructor(props) {
-    super(props)
-
-    this.state = {
-      savedJobs: []
-    }
-  }
 
   render() {
-
     return(
       <div className="mySavedJobList">
-        <MyJobsList user = {this.props.user} savedJobs={this.props.savedJobs}/>
+        <MyJobsList user = {this.props.user} savedJobs={this.props.savedJobs} savedCompanies={this.props.savedCompanies} loadSavedJob={this.props.loadSavedJob} />
       </div>
     )
   }
 }
 
-export default MyJobsContainer
+function mapStateToProps(state, props) {
+  return {
+    currentUser: state.user.currentUser,
+    savedJobs: state.user.savedJobs,
+    savedCompanies: state.user.savedCompanies,
+  }
+}
+
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators(Actions, dispatch);
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(MyJobsContainer);

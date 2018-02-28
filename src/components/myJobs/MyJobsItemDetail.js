@@ -1,5 +1,8 @@
 import React from 'react'
 import JobDescription from '../jobExplorer/JobDescription'
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import * as Actions from '../../actions'
 
 class MyJobsItemDetail extends React.Component {
   constructor(props) {
@@ -12,58 +15,82 @@ class MyJobsItemDetail extends React.Component {
   }
 
   componentDidMount() {
-    fetch(`https://api-v2.themuse.com/jobs/${this.props.jobId}`)
+    console.log(this.props);
+    let url = "http://localhost:3000/api/v1/users/1/jobs/" + this.props.jobId
+    console.log(url)
+
+     fetch(url)
     .then(response => response.json())
     .then(json => {
       this.setState({
-        job: json
+        job: json,
+        company: json.company
       });
-      fetch(`https://api-v2.themuse.com/companies/${json.company.id}`)
-        .then(r => r.json())
-        .then(thisJson => this.setState({
-          company: thisJson
-        }));
+    //   fetch(`https://api-v2.themuse.com/companies/${json.company.id}`)
+    //     .then(r => r.json())
+    //     .then(thisJson => this.setState({
+    //       company: thisJson
+    //     }));
     });
   }
 
-twitterhandle = () => {
-  return "https://twitter.com/" + this.state.company.twitter
+  contents = () => {
+    return {
+      __html: this.state.job.contents
+    };
+  }
+
+
+// twitterhandle = () => {
+//   return "https://twitter.com/" + this.props.company.twitter
+// }
+//
+// twitter = () => {
+//    return `<a href={this.twitterhandle()}
+//     className="twitter-follow-button"
+//     data-show-count="false"
+//     data-show-screen-name="false"
+//   >
+//   </a>`
+// };
+formattedDate = () => {
+  let pubDate = new Date(this.state.job.date_saved)
+  return pubDate.toLocaleDateString()
 }
 
-twitter = () => {
-   return `<a href={this.twitterhandle()}
-    className="twitter-follow-button"
-    data-show-count="false"
-    data-show-screen-name="false"
-  >
-  </a>`
-};
 
   render() {
-    console.log(this.props)
-    let th = "https://twitter.com/" + this.state.company.twitter + "?ref_src=twsrc%5Etfw"
-
 
     if (!this.state.job) {
       return <div>Loading</div>;
     }
+    console.log(this.state)
+    console.log(this.props)
+
     return (
       <div className="myJobDetail">
-
+        <h2>{this.state.job.title}</h2>
+        <h3 className="myJobDetailCompanyName">{this.state.company.name}</h3>
        <div className="myJobDetailDashboard">
-
+         <p><label>Date Saved: <input type="text" value={this.formattedDate()} readOnly />
+         </label></p>
+       <p><label>Applied?<input type="checkbox" />
+       </label></p>
+     <p><label>Date Applied: <input type="contentEditable" placeholderText={this.state.job.date_applied}/>
+     </label></p>
        </div>
 
        <div className="myJobInfoAndNotes">
 
           <div className="myJobDetailSavedInfo">
+
           <details>
             <summary>Job Description</summary>
-            <JobDescription jobId={this.props.jobId} job={this.state.job} savedJobs={this.props.savedJobs}/>
+             <div dangerouslySetInnerHTML={this.contents()}></div>
           </details>
+
           <details>
             <summary>Company Details</summary>
-            {this.twitter}
           </details>
           </div>
 
@@ -84,4 +111,17 @@ twitter = () => {
   }
 }
 
-export default MyJobsItemDetail
+
+function mapStateToProps(state, props) {
+  return {
+    currentUser: state.user.currentUser,
+    savedJobs: state.user.savedJobs,
+    savedCompanies: state.user.savedCompanies,
+  }
+}
+
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators(Actions, dispatch);
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(MyJobsItemDetail);

@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux';
-import { CURRENT_USER, ADD_NEW_JOB } from '../actions'
+import { CURRENT_USER, ADD_NEW_JOB, LOAD_SAVED_JOB } from '../actions'
 
-const user = (state = {currentUser: null, savedJobs: []}, action) => {
+const user = (state = {currentUser: null, savedJobs: [], savedCompanies: [], renderedJob: [], renderedCompany: []}, action) => {
   switch(action.type) {
     case CURRENT_USER:
       state = Object.assign({},
@@ -9,6 +9,7 @@ const user = (state = {currentUser: null, savedJobs: []}, action) => {
         {
           currentUser: action.currentUser,
           savedJobs: action.savedJobs,
+          savedCompanies: action.savedCompanies,
         }
       );
       return state;
@@ -19,7 +20,17 @@ const user = (state = {currentUser: null, savedJobs: []}, action) => {
           savedJobs: action.savedJobs,
         }
       );
-      return state
+      return state;
+    case LOAD_SAVED_JOB:
+
+      state = Object.assign({},
+        state,
+        {
+          renderedJob: action.renderedJob,
+          renderedCompany: action.renderedCompany,
+        }
+      );
+      return state;
     default:
       return state;
   }
