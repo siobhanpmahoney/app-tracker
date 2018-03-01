@@ -40,7 +40,7 @@ class JobSearchResultItem extends React.Component {
   }
 
   render() {
-
+    
     return (
       <div className="jobSearchResultItem">
         {this.dynamicIcon()}
@@ -49,7 +49,7 @@ class JobSearchResultItem extends React.Component {
         <div className="jobSearchResultLocation">{this.renderCategoryList()}</div>
         <div className="jobSearchResultLevel">{this.renderLocationList()}</div>
 
-        <Link to={`/jobs/${this.props.job.id}`} props={this.props}>Read More</Link>
+        <Link to={`/search/jobs/${this.props.museJobId}`} props={this.props}>Read More</Link>
       </div>
     )
   }

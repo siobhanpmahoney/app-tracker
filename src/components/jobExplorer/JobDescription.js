@@ -1,16 +1,19 @@
 import React from 'react'
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import * as Actions from '../../actions'
 
 class JobDescription extends React.Component {
   constructor(props) {
     super(props)
-
+    console.log("hi")
     this.state = {
       job: null
     }
   }
 
   componentDidMount() {
-    fetch(`https://api-v2.themuse.com/jobs/${this.props.jobId}`)
+    fetch(`https://api-v2.themuse.com/jobs/${this.props.museJobId}`)
     .then(response => response.json())
     .then(json => this.setState({
       job: json
@@ -52,9 +55,11 @@ class JobDescription extends React.Component {
   saveJob = (event) => {
     event.preventDefault()
     this.props.addToSavedJobs(this.state.job)
+
   }
 
   dynamicIcon = () => {
+
     if (this.props.savedJobs.find((job) => {
       return job.museId == this.state.job.id
     })) {
@@ -66,7 +71,8 @@ class JobDescription extends React.Component {
 
 
   render() {
-
+    console.log(this.props)
+    console.log(this.state)
     if (!this.state.job) {
       return <div>Loading</div>;
     }
@@ -88,4 +94,16 @@ class JobDescription extends React.Component {
   }
 }
 
-export default JobDescription
+function mapStateToProps(state, props) {
+  return {
+    currentUser: state.user.currentUser,
+    savedJobs: state.user.savedJobs,
+    savedCompanies: state.user.savedCompanies,
+  }
+}
+
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators(Actions, dispatch);
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(JobDescription);

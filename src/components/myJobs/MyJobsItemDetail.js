@@ -1,4 +1,5 @@
 import React from 'react'
+import { HashRouter } from 'react-router-dom'
 import JobDescription from '../jobExplorer/JobDescription'
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
@@ -9,16 +10,14 @@ class MyJobsItemDetail extends React.Component {
     super(props)
 
     this.state = {
-      job: [],
-      company: []
+      job: null,
+      company: [],
+
     }
   }
 
   componentDidMount() {
-    console.log(this.props);
     let url = "http://localhost:3000/api/v1/users/1/jobs/" + this.props.jobId
-    console.log(url)
-
      fetch(url)
     .then(response => response.json())
     .then(json => {
@@ -58,6 +57,31 @@ formattedDate = () => {
   return pubDate.toLocaleDateString()
 }
 
+deleteJob = () => {
+  this.setState({
+    saved: false
+  })
+  window.location = '/myjobs'
+  this.props.deleteJob(this.props.jobId)
+}
+
+handleEditsSubmit = (event) => {
+  event.preventDefault()
+  this.props.editJob(this.state.job)
+}
+
+editListener = (event) => {
+  let value = event.target.type === 'checkbox' ? event.target.checked : event.target.value
+  let name = event.target.name
+  let currentJobState = Object.assign({}, this.state.job)
+  console.log(currentJobState)
+  currentJobState[name] = value
+  console.log(currentJobState)
+
+  this.setState({
+    job: currentJobState
+  })
+}
 
   render() {
 
@@ -65,19 +89,23 @@ formattedDate = () => {
       return <div>Loading</div>;
     }
     console.log(this.state)
-    console.log(this.props)
 
     return (
       <div className="myJobDetail">
         <h2>{this.state.job.title}</h2>
         <h3 className="myJobDetailCompanyName">{this.state.company.name}</h3>
+
        <div className="myJobDetailDashboard">
-         <p><label>Date Saved: <input type="text" value={this.formattedDate()} readOnly />
-         </label></p>
-       <p><label>Applied?<input type="checkbox" />
-       </label></p>
-     <p><label>Date Applied: <input type="contentEditable" placeholderText={this.state.job.date_applied}/>
-     </label></p>
+         <p><label>Date Saved: <input type="text" value={this.formattedDate()} readOnly /></label></p>
+
+         <p><label>Applied?<input type="checkbox" name="applied_status" checked={this.state.job.applied_status} onChange={this.editListener} /></label></p>
+
+         <p><label>Date Applied: <input type="contentEditable" name="date_applied" onChange={this.editListener} value={this.state.job.date_applied}/></label></p>
+
+        <button onClick={this.handleEditsSubmit}>Save Updates</button>
+
+        <button onClick={this.deleteJob}  > Delete</button>
+
        </div>
 
        <div className="myJobInfoAndNotes">

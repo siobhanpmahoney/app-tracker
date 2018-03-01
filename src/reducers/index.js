@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux';
-import { CURRENT_USER, ADD_NEW_JOB, LOAD_SAVED_JOB } from '../actions'
+import { CURRENT_USER, ADD_NEW_JOB, EDIT_JOB, DELETE_JOB } from '../actions'
 
-const user = (state = {currentUser: null, savedJobs: [], savedCompanies: [], renderedJob: [], renderedCompany: []}, action) => {
+const user = (state = {currentUser: null, savedJobs: [], savedCompanies: []}, action) => {
   switch(action.type) {
     case CURRENT_USER:
       state = Object.assign({},
@@ -21,16 +21,36 @@ const user = (state = {currentUser: null, savedJobs: [], savedCompanies: [], ren
         }
       );
       return state;
-    case LOAD_SAVED_JOB:
+    case EDIT_JOB:
+      let index = state.savedJobs.findIndex((job) => {
+        return job.id == action.job.id
+      })
 
+      return [
+        ...state.savedJobs.slice(0, index),
+        action.job,
+        ...state.savedJobs.slice(index + 1)
+      ];
+
+    case DELETE_JOB:
+      const jobs = state.savedJobs.filter((job) => job.id != action.selectedJobId)
       state = Object.assign({},
-        state,
-        {
-          renderedJob: action.renderedJob,
-          renderedCompany: action.renderedCompany,
+        state, {
+          savedJobs: jobs,
         }
-      );
+      )
       return state;
+
+    // case LOAD_SAVED_JOB:
+    //
+    //   state = Object.assign({},
+    //     state,
+    //     {
+    //       renderedJob: action.renderedJob,
+    //       renderedCompany: action.renderedCompany,
+    //     }
+    //   );
+    //   return state;
     default:
       return state;
   }
