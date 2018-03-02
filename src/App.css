@@ -87,7 +87,8 @@ div.myJobDetailDashboard {
   clear: both;
   padding: 0.5em;
   border: solid 1.5px;
-  border-color: blue;
+  border-color: #2ab7ca;
+  border-radius: 4px;
 }
 
 .myJobInfoAndNotes {
@@ -95,7 +96,7 @@ div.myJobDetailDashboard {
   display: grid;
   padding: 1em;
   grid-gap: 15px;
-  grid-template-columns: 40% 60%;
+  grid-template-columns: 45% 55%;
   grid-template-areas:
   "header  header  header"
     "sidebar content content"
@@ -104,27 +105,48 @@ div.myJobDetailDashboard {
 
 .myJobDetailSavedInfo {
   display: grid;
-  background-color: darkblue;
-  color: white;
+  background-color: #f4f4f8;
 }
+
+
+div.noteTitleList {
+  border: 1px groove #355C7D;
+  margin: 0 0.3em;
+  padding: 0.3em;
+  font-size: 1.1em;
+}
+
+.noteTitleList:hover {
+  background-color: #fff294;
+}
+
+button.openButton {
+  border: none;
+  background: none;
+}
+
 
 .myJobDetailNote {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   grid-gap: 10px;
   grid-auto-rows: minmax(100px, auto);
-  background-color: coral;
+  background-color: #c0c2ce;
   padding: 0.25em;
   height: 100%;
   width: 100%;
+  align-self: center;
 }
 
-.myJobDetail h2, h3 {
-  line-height: 50%;
-}
+
 
 h3.myJobDetailCompanyName {
   font-size: 130%;
+}
+
+.myJobDetailNote form {
+  align-self: center;
+
 }
 
 
@@ -132,7 +154,7 @@ h3.myJobDetailCompanyName {
 textarea {
   align:center;
   width: 200%;
-  font-family: "open sans";
+  font-family: "Calibri";
   align:center;
 }
 
@@ -142,6 +164,7 @@ textarea.noteContent {
   font-size: 15px;
   font-weight: 500;
   margin: 0.2em;
+
 }
 
 textarea.noteTitle {

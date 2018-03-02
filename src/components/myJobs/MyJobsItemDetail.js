@@ -3,6 +3,7 @@ import { HashRouter } from 'react-router-dom'
 import JobDescription from '../jobExplorer/JobDescription'
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router'
 import * as Actions from '../../actions'
 
 class MyJobsItemDetail extends React.Component {
@@ -12,18 +13,22 @@ class MyJobsItemDetail extends React.Component {
     this.state = {
       job: null,
       company: [],
-
+      notes: [],
+      displayNote: null
     }
   }
 
   componentDidMount() {
+    console.log("mounting my job item details")
     let url = "http://localhost:3000/api/v1/users/1/jobs/" + this.props.jobId
      fetch(url)
     .then(response => response.json())
     .then(json => {
       this.setState({
         job: json,
-        company: json.company
+        company: json.company,
+        notes: json.notes.sort((a,b) => b.id - a.id),
+        displayNote: json.notes[json.notes.length -1]
       });
     //   fetch(`https://api-v2.themuse.com/companies/${json.company.id}`)
     //     .then(r => r.json())
@@ -31,6 +36,8 @@ class MyJobsItemDetail extends React.Component {
     //       company: thisJson
     //     }));
     });
+    // let notes = json.notes.filter((note) => note.job_id === json.id)
+
   }
 
   contents = () => {
@@ -40,17 +47,7 @@ class MyJobsItemDetail extends React.Component {
   }
 
 
-// twitterhandle = () => {
-//   return "https://twitter.com/" + this.props.company.twitter
-// }
-//
-// twitter = () => {
-//    return `<a href={this.twitterhandle()}
-//     className="twitter-follow-button"
-//     data-show-count="false"
-//     data-show-screen-name="false"
-//   >
-//   </a>`
+
 // };
 formattedDate = () => {
   let pubDate = new Date(this.state.job.date_saved)
@@ -65,30 +62,54 @@ deleteJob = () => {
   this.props.deleteJob(this.props.jobId)
 }
 
-handleEditsSubmit = (event) => {
-  event.preventDefault()
-  this.props.editJob(this.state.job)
-}
-
-editListener = (event) => {
+dashboardListener = (event) => {
   let value = event.target.type === 'checkbox' ? event.target.checked : event.target.value
   let name = event.target.name
   let currentJobState = Object.assign({}, this.state.job)
-  console.log(currentJobState)
   currentJobState[name] = value
-  console.log(currentJobState)
-
   this.setState({
     job: currentJobState
   })
 }
 
-  render() {
+dashboardEditSubmit = (event) => {
+  event.preventDefault()
+  window.location = `/myjobs/${this.props.jobId}`
+  this.props.editJob(this.state.job)
+}
 
+
+displayNote = (event) => {
+  let selectedNote = this.state.notes.find((note) => note.id == event.target.id)
+  this.setState({
+    displayNote: selectedNote
+  })
+}
+
+noteEditListener = (event) => {
+  let value = event.target.value
+  let name = event.target.name
+  let currentNoteState = Object.assign({}, this.state.displayNote)
+  currentNoteState[name] = value
+  this.setState({
+    displayNote: currentNoteState
+  })
+}
+
+// (selectedNote, noteUserId, noteJobId, noteCompanyId)
+
+noteEditSubmit = (event) => {
+  event.preventDefault()
+  window.location = `/myjobs/${this.props.jobId}`
+  this.props.editNote(this.state.displayNote, this.props.currentUser.user.id, this.state.job.id, this.state.company.id)
+}
+
+  render() {
+    console.log('rerendering')
     if (!this.state.job) {
       return <div>Loading</div>;
     }
-    console.log(this.state)
+    // console.log(this.state)
 
     return (
       <div className="myJobDetail">
@@ -98,13 +119,13 @@ editListener = (event) => {
        <div className="myJobDetailDashboard">
          <p><label>Date Saved: <input type="text" value={this.formattedDate()} readOnly /></label></p>
 
-         <p><label>Applied?<input type="checkbox" name="applied_status" checked={this.state.job.applied_status} onChange={this.editListener} /></label></p>
+         <p><label>Applied?<input type="checkbox" name="applied_status" checked={this.state.job.applied_status} onChange={this.dashboardListener} /></label></p>
 
-         <p><label>Date Applied: <input type="contentEditable" name="date_applied" onChange={this.editListener} value={this.state.job.date_applied}/></label></p>
+         <p><label>Date Applied: <input type="contentEditable" name="date_applied" onChange={this.dashboardListener} value={this.state.job.date_applied}/></label></p>
 
-        <button onClick={this.handleEditsSubmit}>Save Updates</button>
+        <button onClick={this.dashboardEditSubmit}>Save Updates</button>
 
-        <button onClick={this.deleteJob}  > Delete</button>
+        <button onClick={this.deleteJob}> Delete</button>
 
        </div>
 
@@ -120,15 +141,28 @@ editListener = (event) => {
           <details>
             <summary>Company Details</summary>
           </details>
+
+          <div className = "notes">
+            <h3>Notes</h3>
+              {this.state.notes.map((note) => {
+                return <div className="noteTitleList" id={note.id} onClick={this.displayNote}>
+                  {note.title}
+
+                  <button className="openButton"><i className="material-icons" style={{fontSize:"15px"}}>launch</i></button>
+              </div>
+              })}
+          </div>
+
           </div>
 
           <div className="myJobDetailNote">
           <form>
-              <textarea className="noteTitle">
-              </textarea>
-
-            <textarea className="noteContent">
+          <button onClick={this.noteEditSubmit}>Save</button><textarea className="noteTitle" name="title" value={this.state.displayNote.title} type="contentEditable" onChange={this.noteEditListener}>
             </textarea>
+
+          <textarea className="noteContent" name="content" value={this.state.displayNote.content} type="contentEditable" onChange={this.noteEditListener}>
+          </textarea>
+
           </form>
           </div>
 
@@ -145,6 +179,7 @@ function mapStateToProps(state, props) {
     currentUser: state.user.currentUser,
     savedJobs: state.user.savedJobs,
     savedCompanies: state.user.savedCompanies,
+    savedNotes: state.user.savedNotes
   }
 }
 

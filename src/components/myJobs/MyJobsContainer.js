@@ -7,9 +7,10 @@ import * as Actions from '../../actions'
 class MyJobsContainer extends React.Component {
 
   render() {
+    console.log(this.props)
     return(
       <div className="mySavedJobList">
-        <MyJobsList user = {this.props.user} savedJobs={this.props.savedJobs} savedCompanies={this.props.savedCompanies} loadSavedJob={this.props.loadSavedJob} />
+        <MyJobsList user = {this.props.user} savedJobs={this.props.savedJobs} savedCompanies={this.props.savedCompanies} savedNotes={this.props.savedNotes} loadSavedJob={this.props.loadSavedJob} />
       </div>
     )
   }
@@ -20,6 +21,7 @@ function mapStateToProps(state, props) {
     currentUser: state.user.currentUser,
     savedJobs: state.user.savedJobs,
     savedCompanies: state.user.savedCompanies,
+    savedNotes: state.user.savedNotes
   }
 }
 
