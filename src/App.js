@@ -1,6 +1,12 @@
 import React, { Component } from 'react';
 import './App.css';
-import {BrowserRouter as Router, Route} from 'react-router-dom';
+import {BrowserRouter as Router, Route, Switch, Redirect, NavLink, withRouter} from 'react-router-dom';
+
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import * as Actions from './actions'
+
+import Login from './components/Login'
 import NavBar from './components/NavBar'
 import Profile from './components/Profile'
 import ExploreCompanyContainer from './components/companyExplorer/ExploreCompanyContainer'
@@ -8,9 +14,8 @@ import JobExploreContainer from './components/jobExplorer/JobExploreContainer'
 import JobDescription from './components/jobExplorer/JobDescription'
 import MyJobsContainer from './components/myJobs/MyJobsContainer'
 import MyJobsItemDetail from './components/myJobs/MyJobsItemDetail'
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
-import * as Actions from './actions'
+
+
 
 
 class App extends Component {
@@ -18,15 +23,68 @@ class App extends Component {
     super(props)
 
     this.state = {
-      currentUser: {},
+      auth: {
+        currentUser: null,
+        loggingIn: true
+      },
       savedJobs: [],
       savedCompanies: [],
       savedNotes: []
     }
   }
 
+  setLoggedInUser = (user) => {
+     localStorage.setItem('token', user.token)
+     this.setState({
+       auth: {
+         currentUser: {
+           username: user.username,
+           id: user.id
+         },
+         loggingIn: false
+       }
+     })
+     this.props.history.push('/profile')
+   }
+
+
   componentDidMount() {
-    this.props.loadCurrentUser()
+    const token=localStorage.getItem('token')
+    if (token) {
+      return fetch("http://localhost:3000/api/v1/current_user", {
+        headers:  {
+          'Content-Type': 'application/json',
+          Accepts: 'application/json',
+          Authorization: token
+        }})
+        .then(response => response.json())
+        .then(user => {
+          if(user) {
+            this.setState({
+              auth: {
+                currentUser: user
+              },
+              loggingIn: false
+            })
+          } else {
+            this.setState({
+              auth: {
+                currentUser: null,
+                loggingIn: false
+              }
+            })
+          }
+        })
+
+      }
+    // } else {
+    //   this.setState({
+    //     auth: {
+    //       loggingIn: false
+    //     }
+    //   })
+    // }
+    // this.props.loadCurrentUser()
   }
 
   addToSavedJobs = (selectedJob) => {
@@ -49,15 +107,17 @@ class App extends Component {
 
 
   render() {
-    if (!this.props.savedJobs) {
-      return <div>Loading</div>;
-    }
-    
+    // if (!this.props.savedJobs) {
+    //   return <div>Loading</div>;
+    // }
+
 
     return (
       <Router>
         <div className="App">
           <NavBar />
+
+          <Route exact path="/login" render={() => <Login setLoggedInUser={this.setLoggedInUser} /> } />
 
           <Route exact path="/" render={() => <Profile user={this.props.currentUser} savedJobs={this.props.savedJobs} savedCompanies={this.props.savedCompanies} /> } />
 
@@ -75,7 +135,10 @@ class App extends Component {
       </Router>
     );
   }
+
 }
+
+
 
 function mapStateToProps(state, props) {
   return {
