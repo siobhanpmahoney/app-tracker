@@ -4,9 +4,9 @@ export const EDIT_JOB = 'EDIT_JOB'
 export const DELETE_JOB = 'DELETE_JOB'
 export const EDIT_NOTE = 'EDIT_NOTE'
 
-export function loadCurrentUser() {
+export function loadCurrentUser(user) {
   return (dispatch) => {
-    fetch("http://localhost:3000/api/v1/users/1")
+    fetch(`http://localhost:3000/api/v1/users/${user.id}`)
     .then(response => response.json())
     .then(json => dispatch({
       type: CURRENT_USER,

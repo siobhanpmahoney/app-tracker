@@ -7,6 +7,7 @@ import { connect } from 'react-redux';
 import * as Actions from './actions'
 
 import Login from './components/Login'
+import Logout from './components/Login'
 import NavBar from './components/NavBar'
 import Profile from './components/Profile'
 import ExploreCompanyContainer from './components/companyExplorer/ExploreCompanyContainer'
@@ -44,9 +45,17 @@ class App extends Component {
          loggingIn: false
        }
      })
+     this.props.loadCurrentUser(this.state.auth.currentUser)
      this.props.history.push('/profile')
    }
 
+   logOutUser = () => {
+     localStorage.removeItem('token')
+     this.setState({
+       auth: { currentUser: null, loggingIn: false }
+     })
+     window.location = `/login`
+   }
 
   componentDidMount() {
     const token=localStorage.getItem('token')
@@ -65,8 +74,10 @@ class App extends Component {
                 currentUser: user
               },
               loggingIn: false
-            })
-          } else {
+            }); this.props.loadCurrentUser(this.state.auth.currentUser)
+          }
+
+          else {
             this.setState({
               auth: {
                 currentUser: null,
@@ -75,16 +86,7 @@ class App extends Component {
             })
           }
         })
-
       }
-    // } else {
-    //   this.setState({
-    //     auth: {
-    //       loggingIn: false
-    //     }
-    //   })
-    // }
-    // this.props.loadCurrentUser()
   }
 
   addToSavedJobs = (selectedJob) => {
@@ -107,6 +109,7 @@ class App extends Component {
 
 
   render() {
+    console.log(this.props)
     // if (!this.props.savedJobs) {
     //   return <div>Loading</div>;
     // }
@@ -115,9 +118,11 @@ class App extends Component {
     return (
       <Router>
         <div className="App">
-          <NavBar />
+          <NavBar currentUser = {this.state.auth.currentUser} logOutUser = {this.logOutUser} />
 
           <Route exact path="/login" render={() => <Login setLoggedInUser={this.setLoggedInUser} /> } />
+
+          <Route exact path="/logout" render={() => <Logout /> } />
 
           <Route exact path="/" render={() => <Profile user={this.props.currentUser} savedJobs={this.props.savedJobs} savedCompanies={this.props.savedCompanies} /> } />
 
