@@ -12,54 +12,47 @@ const link = {
   color: 'white',
 }
 
-const NavBar = ({logOutUser, currentUser}) => {
+class NavBar extends React.Component {
 
-  const loggedIn = !!currentUser
+  renderHTML = () => {
+    if (!!this.props.currentUser) {
+      return (
+        <div>
+        <NavLink to="/" exact style={link} activeStyle={{background: '#FF5370'}}>Profile</NavLink>
 
+        <NavLink to="/search/companies" exact style={link} activeStyle={{background: '#FF5370'}}>Explore Companies</NavLink>
 
-  return (
-    <div className="navbar">
+        <NavLink to="/search/jobs" exact style={link} activeStyle={{background:'#FF5370'}}>Search Jobs</NavLink>
 
-      <NavLink
-        to="/"
-        exact
-        style={link}
-        activeStyle={{
-          background: '#FF5370'
-        }}>Profile</NavLink>
-      <NavLink
-        to="/search/companies"
-        exact
-        style={link}
-        activeStyle={{
-          background: '#FF5370'
-        }}>Explore Companies</NavLink>
-      <NavLink
-        to="/search/jobs"
-        exact
-        style={link}
-        activeStyle={{
-          background: '#FF5370'
-        }}>Search Jobs</NavLink>
-      <NavLink
-        to="/myjobs"
-        exact
-        style={link}
-        activeStyle={{
-          background: '#FF5370'
-        }}>My Jobs</NavLink>
-        <NavLink
-          to="/logout"
-          exact
-          style={link}
-          activeStyle={{
-            background: '#FF5370'
-          }}>Log Out</NavLink>
+      <NavLink to="/myjobs" exact style={link} activeStyle={{background:'#FF5370'}}>My Jobs</NavLink>
 
+    <NavLink to="/logout" exact style={link} activeStyle={{background: '#FF5370'}}> Log Out </NavLink>
     </div>
-  );
+  )
 
-};
+      } else {
+        return (
+          <div>
+          <NavLink
+            to="/logout"
+            exact
+            style={link}
+            activeStyle={{
+              background: '#FF5370'
+            }}>Log Out</NavLink>
+            </div>
+        )
+      }
+    }
+
+  render() {
+    return (
+      <div className="navbar">
+        {this.renderHTML()}
+      </div>)
+    }
+}
+
 
 
 function mapStateToProps(state, props) {
