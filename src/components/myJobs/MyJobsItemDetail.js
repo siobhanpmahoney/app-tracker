@@ -1,11 +1,10 @@
 import React from 'react'
 import { HashRouter } from 'react-router-dom'
-import JobDescription from '../jobExplorer/JobDescription'
+import { withRouter } from 'react-router'
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router'
 import * as Actions from '../../actions'
-import ReactQuill from 'react-quill'
+import CompanyFeeds from '../myCompanies/CompanyFeeds'
 
 class MyJobsItemDetail extends React.Component {
   constructor(props) {
@@ -107,6 +106,7 @@ noteEditSubmit = (event) => {
 
   render() {
     console.log('rerendering')
+    console.log(this.state)
     if (!this.state.job) {
       return <div>Loading</div>;
     }
@@ -139,12 +139,14 @@ noteEditSubmit = (event) => {
              <div dangerouslySetInnerHTML={this.contents()}></div>
           </details>
 
-          <details>
-            <summary>Company Details</summary>
-          </details>
+          <h2>Read up on the company</h2>
+
+            <CompanyFeeds job={this.state.job} company={this.state.company}/>
+
+
 
           <div className = "notes">
-            <h3>Notes</h3>
+            <h2>Notes</h2>
               {this.state.notes.map((note) => {
                 return <div className="noteTitleList" id={note.id} onClick={this.displayNote}>
                   {note.title}

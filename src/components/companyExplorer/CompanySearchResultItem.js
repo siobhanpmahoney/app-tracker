@@ -1,4 +1,8 @@
 import React from 'react'
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import * as Actions from '../../actions'
+
 
 class CompanySearchResultItem extends React.Component {
   constructor(props) {
@@ -20,6 +24,7 @@ class CompanySearchResultItem extends React.Component {
   }
 
   render() {
+    console.log(this.props.company)
     return (
       <div>
 
@@ -27,13 +32,13 @@ class CompanySearchResultItem extends React.Component {
 
 
         {this.props.company.refs &&
-          <img src={this.props.company.refs.f1_image} className="icon" />
+          <img src={this.props.company.refs.f1_image} style={{width:"350px"}} />
         }
           <h4>{this.props.company.name}</h4>
         <div className="location">{this.renderIndustryList()}</div>
         <div className="industryList">{this.renderLocationList()}</div>
-        <div className="coDescription">{this.props.company.description}</div>
-        
+
+
 
       </div>
       </div>
@@ -41,4 +46,17 @@ class CompanySearchResultItem extends React.Component {
   }
 }
 
-export default CompanySearchResultItem
+function mapStateToProps(state, props) {
+  return {
+    currentUser: state.user.currentUser,
+    savedJobs: state.user.savedJobs,
+    savedCompanies: state.user.savedCompanies,
+    savedNotes: state.user.savedNotes
+  }
+}
+
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators(Actions, dispatch);
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(CompanySearchResultItem);

@@ -45,7 +45,7 @@ class Login extends React.Component {
         alert(res.error)
       }
       else {
-        window.location = `/profile`
+        window.location = `/`
         this.props.setLoggedInUser(res)
       }
     })

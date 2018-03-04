@@ -26,7 +26,7 @@ class NavBar extends React.Component {
 
       <NavLink to="/myjobs" exact style={link} activeStyle={{background:'#FF5370'}}>My Jobs</NavLink>
 
-    <NavLink to="/logout" exact style={link} activeStyle={{background: '#FF5370'}}> Log Out </NavLink>
+    <NavLink onClick={this.props.logOutUser} to="/logout" exact style={link} activeStyle={{background: '#FF5370'}}> Log Out </NavLink>
     </div>
   )
 
@@ -34,12 +34,12 @@ class NavBar extends React.Component {
         return (
           <div>
           <NavLink
-            to="/logout"
+            to="/login"
             exact
             style={link}
             activeStyle={{
               background: '#FF5370'
-            }}>Log Out</NavLink>
+            }}>Log In</NavLink>
             </div>
         )
       }

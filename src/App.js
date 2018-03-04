@@ -10,6 +10,7 @@ import Login from './components/Login'
 import Logout from './components/Login'
 import NavBar from './components/NavBar'
 import Profile from './components/Profile'
+
 import ExploreCompanyContainer from './components/companyExplorer/ExploreCompanyContainer'
 import JobExploreContainer from './components/jobExplorer/JobExploreContainer'
 import JobDescription from './components/jobExplorer/JobDescription'
@@ -46,7 +47,7 @@ class App extends Component {
        }
      })
      this.props.loadCurrentUser(this.state.auth.currentUser)
-     this.props.history.push('/profile')
+
    }
 
    logOutUser = () => {
@@ -126,7 +127,9 @@ class App extends Component {
 
           <Route exact path="/" render={() => <Profile user={this.props.currentUser} savedJobs={this.props.savedJobs} savedCompanies={this.props.savedCompanies} /> } />
 
-          <Route exact path="/search/companies" component={ExploreCompanyContainer} />
+        <Route exact path="/search/companies" render={() => <ExploreCompanyContainer /> } />
+
+
 
           <Route exact path="/search/jobs" render={() => <JobExploreContainer user={this.props.currentUser} savedJobs={this.props.savedJobs} addToSavedJobs={this.addToSavedJobs} savedCompanies={this.props.savedCompanies} />} />
 

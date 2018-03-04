@@ -1,5 +1,5 @@
 .App {
-  font-family: "calibri";
+  font-family: "Source Sans Pro";
   margin: 1em;
 }
 
@@ -25,24 +25,29 @@
   to { transform: rotate(360deg); }
 }
 
+.companySearchResults {
+  flex: auto;
+  align-self: center;
+  align-content: center;
+  margin-left: 1em;
+  background-color: #c0c2ce;
+}
+
 .companySearchResultCard {
   padding: 0.25em;
-  margin: 1em;
-  height: 280px;
-  width: 300px;
-  border: groove 1px;
+  margin: 0.75em;
+  height: 380px;
+  width: 350px;
+  display: block;
+  border: groove #53b6d0 2px;
   float: left;
 }
 
-.coDescription {
-  padding: 0.35em;
-  display: block;
-}
 
 .location, .industryList {
-  font-size: 12px;
+  font-size: 14px;
   vertical-align: bottom;
-  padding: 0.35em;
+
 }
 
 .jobSearchResultItem {
@@ -96,7 +101,8 @@ div.myJobDetailDashboard {
   display: grid;
   padding: 1em;
   grid-gap: 15px;
-  grid-template-columns: 45% 55%;
+  width: 100%;
+  grid-template-columns: 36% 60%;
   grid-template-areas:
   "header  header  header"
     "sidebar content content"
@@ -106,6 +112,7 @@ div.myJobDetailDashboard {
 .myJobDetailSavedInfo {
   display: grid;
   background-color: #f4f4f8;
+  overflow-y: scroll;
 }
 
 
@@ -113,7 +120,7 @@ div.noteTitleList {
   border: 1px groove #355C7D;
   margin: 0 0.3em;
   padding: 0.3em;
-  font-size: 1.1em;
+  font-size: 1em;
 }
 
 .noteTitleList:hover {
@@ -128,9 +135,10 @@ button.openButton {
 
 .myJobDetailNote {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(1, 1fr);
   grid-gap: 10px;
   grid-auto-rows: minmax(100px, auto);
+  grid-auto-columns: 100%;
   background-color: #c0c2ce;
   padding: 0.25em;
   height: 100%;
@@ -146,6 +154,7 @@ h3.myJobDetailCompanyName {
 
 .myJobDetailNote form {
   align-self: center;
+  width: inherit;
 
 }
 
@@ -153,8 +162,9 @@ h3.myJobDetailCompanyName {
 
 textarea {
   align:center;
-  width: 200%;
-  font-family: "Calibri";
+  grid-column: 1 / 2;
+  width: 98%;
+  font-family: "Source Sans Pro";
   align:center;
 }
 
@@ -173,7 +183,6 @@ textarea.noteTitle {
   height: 30px;
   vertical-align: middle;
   flex-direction: row;
-  width: 200%;
   font-weight: 600;
   font-size: 22px;
 }
