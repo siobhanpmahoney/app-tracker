@@ -20,13 +20,6 @@ class MyJobsItem extends React.Component {
     return dateSaved.toLocaleDateString()
   }
 
-
-
-
-
-
-
-
   render() {
     console.log(this.props)
     return(

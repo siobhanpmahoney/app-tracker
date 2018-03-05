@@ -4,7 +4,6 @@ import { withRouter } from 'react-router'
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import * as Actions from '../../actions'
-import CompanyFeeds from '../myCompanies/CompanyFeeds'
 
 class MyJobsItemDetail extends React.Component {
   constructor(props) {
@@ -139,9 +138,7 @@ noteEditSubmit = (event) => {
              <div dangerouslySetInnerHTML={this.contents()}></div>
           </details>
 
-          <h2>Read up on the company</h2>
-
-            <CompanyFeeds job={this.state.job} company={this.state.company}/>
+          
 
 
 

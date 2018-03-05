@@ -24,6 +24,8 @@ class NavBar extends React.Component {
 
         <NavLink to="/search/jobs" exact style={link} activeStyle={{background:'#FF5370'}}>Search Jobs</NavLink>
 
+      <NavLink to="/mycompanies" exact style={link} activeStyle={{background:'#FF5370'}}>My Companies</NavLink>
+
       <NavLink to="/myjobs" exact style={link} activeStyle={{background:'#FF5370'}}>My Jobs</NavLink>
 
     <NavLink onClick={this.props.logOutUser} to="/logout" exact style={link} activeStyle={{background: '#FF5370'}}> Log Out </NavLink>
