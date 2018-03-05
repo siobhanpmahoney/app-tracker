@@ -6,6 +6,9 @@ import * as Actions from '../../actions'
 import MyJobsItem from '../myJobs/MyJobsItem'
 import CompanyArticleFeed from '../reusableCompany/CompanyArticleFeed'
 import CompanyPRFeed from '../reusableCompany/CompanyPRFeed'
+import JobSearchResultList from '../jobExplorer/JobSearchResultList'
+import JobSearchResultItem from '../jobExplorer/JobSearchResultList'
+
 
 
 class MyCompanyDetail extends React.Component {
@@ -14,12 +17,12 @@ class MyCompanyDetail extends React.Component {
 
     this.state={
       company: null,
-      myJobs: []
+      myJobs: [],
+      openJobs: []
     }
   }
 
   componentDidMount() {
-
     let companyid = this.props.companyId
     // let userid = this.props.currentUser.user.id
     // let url = `http://localhost:3000/api/v1/users/${userid}/companies/${companyid}`
@@ -30,33 +33,34 @@ class MyCompanyDetail extends React.Component {
        company: json.company,
        myJobs: json.company_jobs
     }))
-    // let findCo = this.props.savedCompanies.find((company) => {
-    //   console.log(company)
-    //   console.log(company.id)
-    //   console.log(this.props)
-    //   console.log(this.props.companyId)
-    //   console.log(company.id == this.props.companyId)
-    //   return company.id == this.props.companyId
-    // })
-    // debugger
-    //
-    // let museid = findCo.museId
-    //
-    // let companyJobs = this.props.filter((job) => {
-    //   return job.company_museId == museid
-    // })
-    //
-    //
-    // let url = `https://api-v2.themuse.com/jobs?company=${findCo.name}&api-key=82b2d1f745512b99a70044e6c6b316d86739a97719d5e88caf67a3f7fd788a00&page=1`
-    //
-    // fetch(url)
-    // .then(response => response.json())
-    // .then(json => this.setState({
-    //   company: findCo,
-    //   myJobs: companyJobs,
-    //   openJobs: json.results
-    // }))
+    // .then(() => this.fetchOpenJobs(this.state.company.name))
+
+    .then(() => fetch(`https://api-v2.themuse.com/jobs?company=${this.state.company.name}&api-key=82b2d1f745512b99a70044e6c6b316d86739a97719d5e88caf67a3f7fd788a00&page=1`))
+    .then(res => res.json())
+    .then(json => this.setState({
+      openJobs: json.results
+    }))
+    .then(() => console.log(this.state))
   }
+
+  // fetchOpenJobs = (companyName) => {
+  //
+  //   let openJobState = this.state.openJobs
+  //   for(let i=0; i<6; i++) {
+  //     let jobUrl = "https://api-v2.themuse.com/jobs?company=" + companyName + "&api-key=82b2d1f745512b99a70044e6c6b316d86739a97719d5e88caf67a3f7fd788a00&page=" + i
+  //     fetch(jobUrl)
+  //     .then(response => response.json())
+  //     .then(res => this.setState({
+  //       openJobs: [...openJobState, res.results]
+  //     }))
+  //     .then(() => console.log(this.state))
+  //   }
+  // }
+
+
+
+
+
 
 
   render() {
@@ -89,7 +93,8 @@ class MyCompanyDetail extends React.Component {
     <div className="myCompanyMyJobs">
       <h2>Bookmarked Jobs</h2>
       {this.state.myJobs.map((job) => {
-        return <MyJobsItem job={job} key={job.id}/>
+        return <MyJobsItem job={job} key={job.id} user = {this.props.currentUser} savedJobs={this.props.savedJobs} savedCompanies={this.props.savedCompanies} savedNotes={this.props.savedNotes} />
+
       })}
     </div>
 
@@ -109,6 +114,7 @@ class MyCompanyDetail extends React.Component {
 
     <div className="myCompanyFindJobs" style={{clear:"both"}}>
       <h2>Explore Open Positions at {this.state.company.name}</h2>
+      <JobSearchResultList jobSearchResults = {this.state.openJobs} savedJobs={this.props.savedJobs} addToSavedJobs={this.props.saveNewJob} />
     </div>
 
   </div>

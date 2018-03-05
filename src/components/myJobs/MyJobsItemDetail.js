@@ -13,7 +13,7 @@ class MyJobsItemDetail extends React.Component {
       job: null,
       company: [],
       notes: [],
-      displayNote: null
+      displayNote: {}
     }
   }
 
@@ -27,7 +27,7 @@ class MyJobsItemDetail extends React.Component {
         job: json,
         company: json.company,
         notes: json.notes.sort((a,b) => b.id - a.id),
-        displayNote: json.notes[json.notes.length -1]
+        // displayNote: json.notes[json.notes.length -1]
       });
     //   fetch(`https://api-v2.themuse.com/companies/${json.company.id}`)
     //     .then(r => r.json())
@@ -138,7 +138,7 @@ noteEditSubmit = (event) => {
              <div dangerouslySetInnerHTML={this.contents()}></div>
           </details>
 
-          
+
 
 
 

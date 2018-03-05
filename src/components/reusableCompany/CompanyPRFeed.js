@@ -17,6 +17,7 @@ class CompanyPRFeed extends React.Component {
   componentDidMount() {
       let searchCompany = this.props.company.name.split(" ").join("+")
       let url = `https://newsapi.org/v2/everything?q=%22${searchCompany}%22&pageSize=100&domains=prnewswire.com,reuters.com&language=en&sortBy=relevancy&apiKey=ad5900690118454582f702c63e4286f8`
+      console.log(url)
       fetch(url)
       .then(response => response.json())
       .then(json => this.setState({
@@ -39,15 +40,19 @@ formattedDate = (date) => {
     return (
       <div>
         {this.state.pressReleases.map((press) => {
-          return <div style={{display: "block", verticalAlign: "middle", justifyContent: "left", boxShadow:"rgba(0, 0, 0, 0.25) 0px 14px 14px, rgba(0, 0, 0, 0.22) 0px 10px 10px", margin: "0.5em", padding: "0.5em", height: "150px", width: "320px", paddingTop:"2em"}}>
+          return <div style={{display: "block", verticalAlign: "middle", justifyContent: "left", boxShadow:"rgba(0, 0, 0, 0.25) 0px 14px 14px, rgba(0, 0, 0, 0.22) 0px 10px 10px", margin: "0.5em", padding: "0.5em", height: "150px", width: "360px", paddingTop:"2em"}}>
 
-          <div><img src={press.urlToImage} style={{height:"75px", float:"right", display:"inlineBlock", verticalAlign: "top", padding:"0.2em", margin:"0.2em", border:"1px red solid"}} /></div>
+            <span style={{display:"block", verticalAlign:"top",clear:"both", alignment:"right", margin:"0.1em", color:"blue"}}>
+            <i className="material-icons" style={{fontSize:"18px"}}>bookmark_border</i><a href={press.url} target="_blank"><i className="material-icons" style={{fontSize:"18px"}}>launch</i></a>
+          </span>
 
-          <div style={{marginTop:"1em", padding:"0.5em", fontSize:"14px", fontWeight:"bold", display:"inline",  verticalAlign:"bottom"}}>{press.source.name}</div><br/>
+          <div><img src={press.urlToImage} style={{maxHeight:"75px", maxWidth:"120px", float:"right", display:"inlineBlock", verticalAlign: "top", padding:"0.2em", margin:"0.2em", border:"1px red solid"}} /></div>
 
-          <p><div className="companyPressCardTitle" style={{margin:"0.25em", padding:"0.25em", display:"inline", verticalAlign:"bottom", textIndent:"0em"}}>{press.title}</div></p>
+          <div style={{marginTop:"1em", padding:"0.5em", fontSize:"12.5px", fontWeight:"bold", display:"inline",  verticalAlign:"bottom"}}>{press.source.name}</div>
 
-          <p><div className="companyPressCardTitle">{press.publishedAt}</div></p>
+          <div className="companyPressCardTitle" style={{margin:"0.25em", padding:"0.25em", display:"inlineBlock", verticalAlign:"bottom", textIndent:"0em", fontSize:"13px", fontFamily:"Roboto"}}>{press.title}</div>
+
+          <div className="companyPressCardTitle" style={{fontSize:"12.5px", fontFamily:"Roboto", margin:"0.25em", padding:"0.25em", fontStyle:"italic" }}>{press.publishedAt}</div>
 
           </div>
         })}}

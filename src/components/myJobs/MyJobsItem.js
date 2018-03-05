@@ -1,6 +1,10 @@
 import React from 'react'
 import {BrowserRouter as Router, Link, Route, Switch} from 'react-router-dom';
 import MyJobsItemDetail from './MyJobsItemDetail'
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import * as Actions from '../../actions'
+
 
 class MyJobsItem extends React.Component {
   constructor(props) {
@@ -33,4 +37,17 @@ class MyJobsItem extends React.Component {
   }
 }
 
-export default MyJobsItem
+function mapStateToProps(state, props) {
+  return {
+    currentUser: state.user.currentUser,
+    savedJobs: state.user.savedJobs,
+    savedCompanies: state.user.savedCompanies,
+    savedNotes: state.user.savedNotes
+  }
+}
+
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators(Actions, dispatch);
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(MyJobsItem)

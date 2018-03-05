@@ -60,6 +60,7 @@ class App extends Component {
      window.location = `/login`
    }
 
+
   componentDidMount() {
     const token=localStorage.getItem('token')
     if (token) {
@@ -111,6 +112,7 @@ class App extends Component {
   }
 
 
+
   render() {
     console.log(this.props)
     // if (!this.props.savedJobs) {
@@ -139,11 +141,13 @@ class App extends Component {
 
       <Route exact path="/mycompanies" render={() => <MyCompanyContainer /> } />
 
-      <Route path="/mycompanies/:companyId" render={(props) => <MyCompanyDetail companyId={props.match.params.companyId} currentUser={this.props.currentUser} savedJobs={this.props.savedJobs} savedCompanies={this.props.savedCompanies} savedNotes={this.props.savedNotes} />} />
+      <Route path="/mycompanies/:companyId" render={(props) => <MyCompanyDetail
+          companyId={props.match.params.companyId} currentUser={this.props.currentUser} savedJobs={this.props.savedJobs} savedCompanies={this.props.savedCompanies} savedNotes={this.props.savedNotes} editJob={this.props.editJob} addJob={this.props.addJob} editNote={this.editNote}  />} />
 
       <Route exact path="/myjobs" render={() => <MyJobsContainer savedJobs={this.props.savedJobs} user={this.props.currentUser} addToSavedJobs={this.addToSavedJobs} savedCompanies={this.props.savedCompanies} loadSavedJob={this.props.loadSavedJob} savedNotes={this.props.savedNotes} />} />
 
-      <Route path="/myjobs/:jobId" render={(props) => <MyJobsItemDetail user={this.props.currentUser} jobId={props.match.params.jobId} savedJobs={this.props.savedJobs} savedCompanies={this.props.savedCompanies} savedNotes={this.props.savedNotes} editJob={this.props.editJob} addJob={this.props.addJob} loadSavedJob={this.loadJob} editNote={this.editNote} renderedJob={this.props.renderedJob} renderedCompany={this.props.renderedCompany} /> } />
+      <Route path="/myjobs/:jobId" render={(props) => <MyJobsItemDetail
+          user={this.props.currentUser} jobId={props.match.params.jobId} savedJobs={this.props.savedJobs} savedCompanies={this.props.savedCompanies} savedNotes={this.props.savedNotes} editJob={this.props.editJob} addJob={this.props.addJob} loadSavedJob={this.loadJob} editNote={this.editNote} renderedJob={this.props.renderedJob} renderedCompany={this.props.renderedCompany} /> } />
 
         </div>
       </Router>
