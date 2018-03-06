@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux';
-import { CURRENT_USER, ADD_NEW_JOB, EDIT_JOB, DELETE_JOB, EDIT_NOTE } from '../actions'
+import { CURRENT_USER, ADD_NEW_JOB, EDIT_JOB, DELETE_JOB, ADD_NEW_NOTE, EDIT_NOTE } from '../actions'
 
 const user = (state = {currentUser: null, savedJobs: [], savedCompanies: [], savedNotes: []}, action) => {
   switch(action.type) {
@@ -44,6 +44,19 @@ const user = (state = {currentUser: null, savedJobs: [], savedCompanies: [], sav
       )
       return state;
 
+    case ADD_NEW_NOTE:
+      let userNotes = state.savedNotes.filter((note) => {
+        return note.user_id == state.currentUser.id
+      })
+
+    state=Object.assign({},
+      state,
+      {
+        savedNotes: userNotes,
+      }
+    );
+    return state;
+
 
     case EDIT_NOTE:
       let noteIndex = state.savedNotes.findIndex((note) => {
@@ -54,7 +67,6 @@ const user = (state = {currentUser: null, savedJobs: [], savedCompanies: [], sav
         action.note,
         ...state.savedNotes.slice(noteIndex + 1)
       ];
-
 
     default:
       return state;

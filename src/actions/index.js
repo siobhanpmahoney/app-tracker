@@ -3,6 +3,7 @@ export const ADD_NEW_JOB = 'ADD_NEW_JOB'
 export const EDIT_JOB = 'EDIT_JOB'
 export const DELETE_JOB = 'DELETE_JOB'
 export const EDIT_NOTE = 'EDIT_NOTE'
+export const ADD_NEW_NOTE = 'ADD_NEW_NOTE'
 
 export function loadCurrentUser(user) {
   return (dispatch) => {
@@ -92,6 +93,33 @@ export function saveNewJob(selectedJob) {
       .then(json => dispatch({
         type: ADD_NEW_JOB,
         savedJobs: json
+      }))
+    }
+  }
+
+  export function addNewNote(selectedNote, noteUserId, noteCompanyId, noteJobId) {
+    console.log("in action")
+    console.log(selectedNote, noteUserId, noteCompanyId, noteJobId)
+    return(dispatch) => {
+       fetch(`http://localhost:3000/api/v1/notes`, {
+        method: 'post',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accepts': 'application/json'
+        },
+        body: JSON.stringify({
+          title: selectedNote.title,
+          content: selectedNote.content,
+          user_id: noteUserId,
+          company_id: noteCompanyId,
+          job_id: noteJobId
+        })
+      })
+      .then(response => response.json())
+      .then(json => dispatch({
+        type: ADD_NEW_NOTE,
+        savedNotes: json,
+        user: noteUserId
       }))
     }
   }

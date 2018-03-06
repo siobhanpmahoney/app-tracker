@@ -35,8 +35,16 @@ formattedDate = (date) => {
     if (!this.props) {
       return<div>Loading!</div>
     }
-    console.log(this.state)
-    console.log(this.props)
+
+    // if (this.props.company && this.state.pressReleases.length > 0) {
+    //   this.state.pressReleases.map((pr) => {
+    //     console.log({url: pr.url, title: pr.title, company_id: this.props.company.id})
+    //   })
+    // }
+    //
+    //
+    // console.log(this.state.pressReleases[0].title, this.state.pressRelease)
+    // console.log(this.props)
     return (
       <div>
         {this.state.pressReleases.map((press) => {

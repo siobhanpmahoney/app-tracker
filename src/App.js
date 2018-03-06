@@ -95,7 +95,6 @@ class App extends Component {
 
   addToSavedJobs = (selectedJob) => {
     this.props.saveNewJob(selectedJob)
-
   }
 
   editJob = (selectedJob) => {
@@ -104,6 +103,11 @@ class App extends Component {
 
   deleteJob = (selectedJobId) => {
     this.props.deleteJob(selectedJobId)
+  }
+
+  addNewNote = (event, noteUserId, noteJobId, noteCompanyId) => {
+    event.preventDefault()
+    this.props.addNewNote(noteUserId, noteJobId, noteCompanyId)
   }
 
   editNote = (event, selectedNote, noteUserId, noteJobId, noteCompanyId) => {
@@ -147,7 +151,7 @@ class App extends Component {
       <Route exact path="/myjobs" render={() => <MyJobsContainer savedJobs={this.props.savedJobs} user={this.props.currentUser} addToSavedJobs={this.addToSavedJobs} savedCompanies={this.props.savedCompanies} loadSavedJob={this.props.loadSavedJob} savedNotes={this.props.savedNotes} />} />
 
       <Route path="/myjobs/:jobId" render={(props) => <MyJobsItemDetail
-          user={this.props.currentUser} jobId={props.match.params.jobId} savedJobs={this.props.savedJobs} savedCompanies={this.props.savedCompanies} savedNotes={this.props.savedNotes} editJob={this.props.editJob} addJob={this.props.addJob} loadSavedJob={this.loadJob} editNote={this.editNote} renderedJob={this.props.renderedJob} renderedCompany={this.props.renderedCompany} /> } />
+          user={this.props.currentUser} jobId={props.match.params.jobId} savedJobs={this.props.savedJobs} savedCompanies={this.props.savedCompanies} savedNotes={this.props.savedNotes} editJob={this.props.editJob} addJob={this.props.addJob} loadSavedJob={this.loadJob} addNewNote={this.props.addNewNote} editNote={this.editNote} renderedJob={this.props.renderedJob} renderedCompany={this.props.renderedCompany} /> } />
 
         </div>
       </Router>
