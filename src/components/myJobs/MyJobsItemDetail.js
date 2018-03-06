@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 import * as Actions from '../../actions'
 import NotesContainer from '../myNotes/NotesContainer'
 import NoteCreate from '../myNotes/NoteCreate'
+import BookmarkList from '../myBookmarks/BookmarkList'
 
 class MyJobsItemDetail extends React.Component {
   constructor(props) {
@@ -15,6 +16,7 @@ class MyJobsItemDetail extends React.Component {
       job: null,
       company: [],
       notes: [],
+      bookmarks: [],
       displayNote: {},
       noteStatusNew: false
     }
@@ -27,9 +29,12 @@ class MyJobsItemDetail extends React.Component {
     .then(response => response.json())
     .then(json => {
       this.setState({
-        job: json,
+        job: this.props.savedJobs.find((job) => job.id == this.props.jobId),
+        // company: this.props.savedCompanies.find((company) => company.id == this.props.job.company_id),
         company: json.company,
-        notes: json.notes.sort((a,b) => b.id - a.id),
+        notes: this.props.savedNotes.filter((note) =>  note.company_id == json.company.id),
+        // notes: json.notes.sort((a,b) => b.id - a.id),
+        bookmarks: json.bookmarks,
         displayNote: json.notes[json.notes.length -1]
       });
     //   fetch(`https://api-v2.themuse.com/companies/${json.company.id}`)
@@ -37,20 +42,21 @@ class MyJobsItemDetail extends React.Component {
     //     .then(thisJson => this.setState({
     //       company: thisJson
     //     }));
-    });
+    })
+    ;
     // let notes = json.notes.filter((note) => note.job_id === json.id)
 
   }
 
   contents = () => {
     return {
-      __html: this.state.job.contents
+      __html: this.props.job.contents
     };
   }
 
 // };
 formattedDate = () => {
-  let pubDate = new Date(this.state.job.date_saved)
+  let pubDate = new Date(this.props.job.date_saved)
   return pubDate.toLocaleDateString()
 }
 
@@ -65,7 +71,9 @@ deleteJob = () => {
 dashboardListener = (event) => {
   let value = event.target.type === 'checkbox' ? event.target.checked : event.target.value
   let name = event.target.name
-  let currentJobState = Object.assign({}, this.state.job)
+
+  let currentJobState = this.props.job
+  debugger
   currentJobState[name] = value
   this.setState({
     job: currentJobState
@@ -75,7 +83,7 @@ dashboardListener = (event) => {
 dashboardEditSubmit = (event) => {
   event.preventDefault()
   window.location = `/myjobs/${this.props.jobId}`
-  this.props.editJob(this.state.job)
+  this.props.editJob(this.props.job)
 }
 
 renderNewNoteForm = (event) => {
@@ -114,16 +122,17 @@ noteTypeRender = () => {
 
 addTestNewNote = (event) => {
   event.preventDefault()
-  debugger
+
   console.log("adding new?")
-  console.log(this.state.displayNote, this.props.currentUser.id, this.state.company.id, this.state.job.id)
-  this.props.addNewNote(this.state.displayNote, this.props.currentUser.user.id, this.state.company.id, this.state.job.id)
+  console.log(this.state.displayNote, this.props.currentUser.id, this.state.company.id, this.props.job.id)
+  this.props.addNewNote(this.state.displayNote, this.props.currentUser.user.id, this.state.company.id, this.props.job.id)
 }
 
 
 displayNote = (event) => {
+
   event.preventDefault()
-  let selectedNote = this.state.notes.find((note) => note.id == event.target.id)
+  let selectedNote = this.relevantNotes().find((note) => note.id == event.target.id)
   this.setState({
     displayNote: selectedNote,
     noteStatusNew: false
@@ -145,28 +154,34 @@ noteEditListener = (event) => {
 noteEditSubmit = (event) => {
   event.preventDefault()
   window.location = `/myjobs/${this.props.jobId}`
-  this.props.editNote(this.state.displayNote, this.props.currentUser.user.id, this.state.job.id, this.state.company.id)
+  this.props.editNote(this.state.displayNote, this.props.currentUser.user.id, this.props.job.id, this.state.company.id)
+}
+
+relevantNotes = () => {
+  return this.props.savedNotes.filter((note) => {
+    return note.company_id == this.props.company.id
+  })
 }
 
   render() {
     console.log('rerendering')
-    console.log(this.state)
-    if (!this.state.job) {
+    console.log(this.props)
+    console.log(this.props.company)
+    if (!this.props.job) {
       return <div>Loading</div>;
     }
-    // console.log(this.state)
-
+    const relevantNotes = this.relevantNotes()
     return (
       <div className="myJobDetail">
-        <h2>{this.state.job.title}</h2>
+        <h2>{this.props.job.title}</h2>
         <h3 className="myJobDetailCompanyName">{this.state.company.name}</h3>
 
        <div className="myJobDetailDashboard">
          <p><label>Date Saved: <input type="text" value={this.formattedDate()} readOnly /></label></p>
 
-         <p><label>Applied?<input type="checkbox" name="applied_status" checked={this.state.job.applied_status} onChange={this.dashboardListener} /></label></p>
+         <p><label>Applied?<input type="checkbox" name="applied_status" checked={this.props.job.applied_status} onChange={this.dashboardListener} /></label></p>
 
-         <p><label>Date Applied: <input type="contentEditable" name="date_applied" onChange={this.dashboardListener} value={this.state.job.date_applied}/></label></p>
+         <p><label>Date Applied: <input type="contentEditable" name="date_applied" onChange={this.dashboardListener} value={this.props.job.date_applied}/></label></p>
 
         <button onClick={this.dashboardEditSubmit}>Save Updates</button>
 
@@ -182,16 +197,24 @@ noteEditSubmit = (event) => {
              <div dangerouslySetInnerHTML={this.contents()}></div>
           </details>
 
+          <div classname="bookmarks">
+            <h2>Bookmarks</h2>
+            <BookmarkList bookmarks={this.state.bookmarks}/>
+
+          </div>
+
 
           <div className = "notes">
             <h2>Notes <button onClick={this.renderNewNoteForm}>+</button></h2>
-              {this.state.notes.map((note) => {
+
+              {relevantNotes.map((note) => {
                 return <div className="noteTitleList" id={note.id} onClick={this.displayNote}>
                   {note.title}
 
                   <button className="openButton"><i className="material-icons" style={{fontSize:"15px"}}>launch</i></button>
               </div>
               })}
+
           </div>
 
           </div>
@@ -214,7 +237,8 @@ function mapStateToProps(state, props) {
     currentUser: state.user.currentUser,
     savedJobs: state.user.savedJobs,
     savedCompanies: state.user.savedCompanies,
-    savedNotes: state.user.savedNotes
+    savedNotes: state.user.savedNotes,
+    savedBookmarks: state.user.savedBookmarks
   }
 }
 

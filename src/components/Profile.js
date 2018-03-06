@@ -21,7 +21,8 @@ function mapStateToProps(state, props) {
     currentUser: state.user.currentUser,
     savedJobs: state.user.savedJobs,
     savedCompanies: state.user.savedCompanies,
-    savedNotes: state.user.savedNotes
+    savedNotes: state.user.savedNotes,
+    savedBookmarks: state.user.savedBookmarks
   }
 }
 

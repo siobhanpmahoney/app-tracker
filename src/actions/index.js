@@ -2,8 +2,10 @@ export const CURRENT_USER = 'CURRENT_USER'
 export const ADD_NEW_JOB = 'ADD_NEW_JOB'
 export const EDIT_JOB = 'EDIT_JOB'
 export const DELETE_JOB = 'DELETE_JOB'
-export const EDIT_NOTE = 'EDIT_NOTE'
 export const ADD_NEW_NOTE = 'ADD_NEW_NOTE'
+export const EDIT_NOTE = 'EDIT_NOTE'
+export const ADD_NEW_BOOKMARK = 'ADD_NEW_BOOKMARK'
+
 
 export function loadCurrentUser(user) {
   return (dispatch) => {
@@ -14,7 +16,8 @@ export function loadCurrentUser(user) {
       currentUser: json,
       savedJobs: json.jobs,
       savedCompanies: json.companies,
-      savedNotes: json.notes
+      savedNotes: json.notes,
+      savedBookmarks: json.bookmarks
     }))
   }
 }
@@ -98,7 +101,6 @@ export function saveNewJob(selectedJob) {
   }
 
   export function addNewNote(selectedNote, noteUserId, noteCompanyId, noteJobId) {
-    console.log("in action")
     console.log(selectedNote, noteUserId, noteCompanyId, noteJobId)
     return(dispatch) => {
        fetch(`http://localhost:3000/api/v1/notes`, {
@@ -116,11 +118,14 @@ export function saveNewJob(selectedJob) {
         })
       })
       .then(response => response.json())
-      .then(json => dispatch({
+      .then(json => {
+
+        dispatch({
         type: ADD_NEW_NOTE,
-        savedNotes: json,
+        newNote: json,
         user: noteUserId
-      }))
+      })
+    })
     }
   }
 
@@ -146,6 +151,32 @@ export function saveNewJob(selectedJob) {
       .then(json => dispatch({
         type: EDIT_NOTE,
         note: selectedNote
+      }))
+    }
+  }
+
+  export function addNewBookmark(selected, bookmarkUserId, bookmarkCompanyId, bookmarkJobId) {
+    console.log("here in actions")
+    return (dispatch) => {
+      fetch('http://localhost:3000/api/v1/notes', {
+        method: 'post',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accepts': 'application/json'
+        },
+        body: JSON.stringify({
+          title: selected.title,
+          url: selected.url,
+          user_id: bookmarkUserId,
+          company_id: bookmarkCompanyId,
+          job_id: ""
+        })
+      })
+      .then(response => response.json())
+      .then(json => dispatch({
+        type: ADD_NEW_BOOKMARK,
+        savedBookmarks: json,
+        user: bookmarkUserId
       }))
     }
   }

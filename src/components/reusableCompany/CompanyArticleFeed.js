@@ -46,7 +46,11 @@ class CompanyArticleFeed extends React.Component {
           return <div style={{display: "block", verticalAlign: "middle", justifyContent: "left", boxShadow:"rgba(0, 0, 0, 0.25) 0px 14px 14px, rgba(0, 0, 0, 0.22) 0px 10px 10px", margin: "0.5em", padding: "0.5em", height: "150px", width: "360px", paddingTop:"2em"}}>
 
             <span style={{display:"block", verticalAlign:"top",clear:"both", alignment:"right", margin:"0.1em", color:"blue"}}>
-            <i className="material-icons" style={{fontSize:"22"}}>bookmark_border</i><a href={article.url} target="_blank"><i className="material-icons" style={{fontSize:"21x"}}>launch</i></a>
+
+            <i className="material-icons" style={{fontSize:"22"}}>bookmark_border</i><a href={article.url} target="_blank">
+
+              <i className="material-icons" style={{fontSize:"21x"}}>launch</i></a>
+
           </span>
 
           <div><img src={article.urlToImage} style={{maxHeight:"75px", maxWidth:"120px", float:"right", display:"inlineBlock", verticalAlign: "top", padding:"0.2em", margin:"0.2em", border:"1px red solid"}} /></div>
@@ -68,7 +72,8 @@ function mapStateToProps(state, props) {
     currentUser: state.user.currentUser,
     savedJobs: state.user.savedJobs,
     savedCompanies: state.user.savedCompanies,
-    savedNotes: state.user.savedNotes
+    savedNotes: state.user.savedNotes,
+    savedBookmarks: state.user.savedBookmarks
   }
 }
 

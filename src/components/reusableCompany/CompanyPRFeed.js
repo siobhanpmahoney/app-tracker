@@ -14,6 +14,8 @@ class CompanyPRFeed extends React.Component {
   }
 
 
+
+
   componentDidMount() {
       let searchCompany = this.props.company.name.split(" ").join("+")
       let url = `https://newsapi.org/v2/everything?q=%22${searchCompany}%22&pageSize=100&domains=prnewswire.com,reuters.com&language=en&sortBy=relevancy&apiKey=ad5900690118454582f702c63e4286f8`
@@ -29,6 +31,16 @@ class CompanyPRFeed extends React.Component {
 formattedDate = (date) => {
   let pubDate = new Date(date)
   return pubDate.toLocaleDateString()
+}
+
+dynamicBookmarkIcon = (bookmarkUrl) => {
+  if (this.props.savedBookmarks.find((bookmark) => {
+    return bookmark.url == bookmarkUrl
+  })) {
+    return (<i className="material-icons" style={{color:"blue", fontSize:"100%"}}>bookmark</i>)
+  } else {
+    return (<i className="material-icons" onClick={this.saveJob} style={{color:"blue"}}>bookmark_border</i>)
+  }
 }
 
   render() {
@@ -74,7 +86,8 @@ function mapStateToProps(state, props) {
     currentUser: state.user.currentUser,
     savedJobs: state.user.savedJobs,
     savedCompanies: state.user.savedCompanies,
-    savedNotes: state.user.savedNotes
+    savedNotes: state.user.savedNotes,
+    savedBookmarks: state.user.savedBookmarks
   }
 }
 
