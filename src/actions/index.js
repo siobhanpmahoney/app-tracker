@@ -17,7 +17,9 @@ export function loadCurrentUser(user) {
       savedJobs: json.jobs,
       savedCompanies: json.companies,
       savedNotes: json.notes,
-      savedBookmarks: json.bookmarks
+      savedBookmarks: json.bookmarks,
+      savedCategories: json.categories,
+      savedIndustries: json.industries
     }))
   }
 }
@@ -101,7 +103,7 @@ export function saveNewJob(selectedJob) {
             date_saved: Date.now(),
             applied_status: false,
             company_museId: selectedJob.company.id,
-            category: selectedJob.categories[0].name,
+            category: selectedJob.categories,
             overall_active_status: true
           }
         })
