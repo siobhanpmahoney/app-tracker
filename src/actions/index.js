@@ -44,7 +44,7 @@ export function editJob(selectedJob) {
           interview_1_date: selectedJob.interview_1_date,
           interview_1_type: selectedJob.interview_1_type,
           interview_1_technical: selectedJob.interview_1_technical,
-          interview_1_technical: selectedJob.interview_1_response,
+          interview_1_response: selectedJob.interview_1_response,
           interview_2_date: selectedJob.interview_2_date,
           interview_2_type: selectedJob.interview_2_type,
           interview_2_technical: selectedJob.interview_2_technical,
