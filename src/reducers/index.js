@@ -70,16 +70,16 @@ const user = (state = {currentUser: null, savedJobs: [], savedCompanies: [], sav
 
 
     case ADD_NEW_BOOKMARK:
-      let userBookmarks = state.savedBooks.filter((bookmark) => {
-        return bookmark.user_id == state.currentUser.id
-      })
-
+      let userBookmarks = state.savedBookmarks
+      console.log(userBookmarks)
+      console.log(action.newBookmark)
       state = Object.assign({},
         state,
         {
-          savedBookmarks: userBookmarks
+          savedBookmarks: [...userBookmarks, action.newBookmark],
         }
       );
+      console.log(state)
       return state;
 
 

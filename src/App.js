@@ -115,9 +115,9 @@ class App extends Component {
     this.props.editNote(selectedNote, noteUserId, noteJobId, noteCompanyId)
   }
 
-  addBookmark = (event, selected, bookmarkUserId, bookmarkCompanyId, bookmarkJobId) => {
-    event.preventDefault()
-    this.props.addNewBookmark(selected, bookmarkUserId, bookmarkCompanyId, bookmarkJobId)
+  addBookmark = (bookmarkTitle, bookmarkUrl, bookmarkUserId, bookmarkCompanyId) => {
+    console.log(bookmarkTitle, bookmarkUrl, bookmarkUserId, bookmarkCompanyId)
+    this.props.addNewBookmark(bookmarkTitle, bookmarkUrl, bookmarkUserId, bookmarkCompanyId)
   }
 
   relevantNotes = (company) => {
@@ -161,7 +161,8 @@ class App extends Component {
       <Route exact path="/mycompanies" render={() => <MyCompanyContainer /> } />
 
       <Route path="/mycompanies/:companyId" render={(props) => <MyCompanyDetail
-          companyId={props.match.params.companyId} currentUser={this.props.currentUser} savedJobs={this.props.savedJobs} savedCompanies={this.props.savedCompanies} savedNotes={this.props.savedNotes} editJob={this.props.editJob} addJob={this.props.addJob} editNote={this.editNote} addNewBookmark={this.addNewBookmark} />} />
+          user={this.props.currentUser}
+          companyId={props.match.params.companyId} currentUser={this.props.currentUser} savedJobs={this.props.savedJobs} savedCompanies={this.props.savedCompanies} savedNotes={this.props.savedNotes} editJob={this.props.editJob} addJob={this.props.addJob} editNote={this.editNote} addBookmark={this.addBookmark} />} />
 
       <Route exact path="/myjobs" render={() => <MyJobsContainer savedJobs={this.props.savedJobs} user={this.props.currentUser} addToSavedJobs={this.addToSavedJobs} savedCompanies={this.props.savedCompanies} loadSavedJob={this.props.loadSavedJob} savedNotes={this.props.savedNotes} />} />
 
@@ -171,7 +172,7 @@ class App extends Component {
            job={this.props.savedJobs.find((job) => job.id == props.match.params.jobId)}
 
            company = {this.props.savedCompanies.find((company) => company.id == this.props.savedJobs.find((job) => job.id == props.match.params.jobId).company_id)}
-    
+
            savedJobs={this.props.savedJobs} savedCompanies={this.props.savedCompanies} savedNotes={this.props.savedNotes} relevantNotes={this.relevantNotes} editJob={this.props.editJob} addJob={this.props.addJob}  addNewNote={this.props.addNewNote} editNote={this.editNote} renderedJob={this.props.renderedJob} renderedCompany={this.props.renderedCompany} /> } />
 
         </div>

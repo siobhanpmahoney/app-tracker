@@ -155,27 +155,26 @@ export function saveNewJob(selectedJob) {
     }
   }
 
-  export function addNewBookmark(selected, bookmarkUserId, bookmarkCompanyId, bookmarkJobId) {
-    console.log("here in actions")
+  export function addNewBookmark(bookmarkTitle, bookmarkUrl, bookmarkUserId, bookmarkCompanyId) {
+    console.log(bookmarkTitle, bookmarkUrl, bookmarkUserId, bookmarkCompanyId)
     return (dispatch) => {
-      fetch('http://localhost:3000/api/v1/notes', {
+      fetch('http://localhost:3000/api/v1/bookmarks', {
         method: 'post',
         headers: {
           'Content-Type': 'application/json',
           'Accepts': 'application/json'
         },
         body: JSON.stringify({
-          title: selected.title,
-          url: selected.url,
+          title: bookmarkTitle,
+          url: bookmarkUrl,
           user_id: bookmarkUserId,
-          company_id: bookmarkCompanyId,
-          job_id: ""
+          company_id: bookmarkCompanyId
         })
       })
       .then(response => response.json())
       .then(json => dispatch({
         type: ADD_NEW_BOOKMARK,
-        savedBookmarks: json,
+        newBookmark: json,
         user: bookmarkUserId
       }))
     }

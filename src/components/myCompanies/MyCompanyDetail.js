@@ -93,7 +93,7 @@ class MyCompanyDetail extends React.Component {
     <div className="myCompanyMyJobs">
       <h2>Bookmarked Jobs</h2>
       {this.state.myJobs.map((job) => {
-        return <MyJobsItem job={job} key={job.id} user = {this.props.currentUser} savedJobs={this.props.savedJobs} savedCompanies={this.props.savedCompanies} savedNotes={this.props.savedNotes} />
+        return <MyJobsItem job={job} key={job.id} user = {this.props.currentUser} savedJobs={this.props.savedJobs} savedCompanies={this.props.savedCompanies} savedNotes={this.props.savedNotes} user={this.props.currentUser}/>
 
       })}
     </div>
@@ -104,12 +104,12 @@ class MyCompanyDetail extends React.Component {
 
     <div className="myCompanyPressReleases" style={{clear:"both"}}>
       <h2>Press Releases mentioning {this.state.company.name}</h2>
-      <CompanyPRFeed company={this.state.company}/>
+      <CompanyPRFeed addBookmark = {this.props.addBookmark} user = {this.props.user} company={this.state.company}/>
     </div>
 
     <div className="myCompanyNews" style={{clear:"both"}}>
       <h2>{this.state.company.name} in the News</h2>
-      <CompanyArticleFeed company={this.state.company} />
+      <CompanyArticleFeed company={this.state.company} addBookmark = {this.props.addBookmark} user = {this.props.user} company={this.state.company}/>
     </div>
 
     <div className="myCompanyFindJobs" style={{clear:"both"}}>

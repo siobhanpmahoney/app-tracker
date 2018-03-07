@@ -19,7 +19,7 @@ class CompanyPRFeed extends React.Component {
   componentDidMount() {
       let searchCompany = this.props.company.name.split(" ").join("+")
       let url = `https://newsapi.org/v2/everything?q=%22${searchCompany}%22&pageSize=100&domains=prnewswire.com,reuters.com&language=en&sortBy=relevancy&apiKey=ad5900690118454582f702c63e4286f8`
-      console.log(url)
+
       fetch(url)
       .then(response => response.json())
       .then(json => this.setState({
@@ -33,17 +33,24 @@ formattedDate = (date) => {
   return pubDate.toLocaleDateString()
 }
 
-dynamicBookmarkIcon = (bookmarkUrl) => {
+addBookmark = (pr) => {
+  console.log("in PR component")
+  console.log(pr.title, pr.url, this.props.user.user.id, this.props.company.id)
+  this.props.addBookmark(pr.title, pr.url, this.props.user.user.id, this.props.company.id)
+}
+
+dynamicBookmarkIcon = (info) => {
   if (this.props.savedBookmarks.find((bookmark) => {
-    return bookmark.url == bookmarkUrl
+    return bookmark.url == info.url
   })) {
-    return (<i className="material-icons" style={{color:"blue", fontSize:"100%"}}>bookmark</i>)
+    return (<i className="material-icons" name={info.title} id={info.url} style={{color:"blue", fontSize:"100%"}}>bookmark</i>)
   } else {
-    return (<i className="material-icons" onClick={this.saveJob} style={{color:"blue"}}>bookmark_border</i>)
+    return (<i className="material-icons" value={info.title} id={info.url} onClick={()=>this.addBookmark(info)} style={{color:"blue"}}>bookmark_border</i>)
   }
 }
 
   render() {
+    console.log(this.props)
     if (!this.props) {
       return<div>Loading!</div>
     }
@@ -63,7 +70,10 @@ dynamicBookmarkIcon = (bookmarkUrl) => {
           return <div style={{display: "block", verticalAlign: "middle", justifyContent: "left", boxShadow:"rgba(0, 0, 0, 0.25) 0px 14px 14px, rgba(0, 0, 0, 0.22) 0px 10px 10px", margin: "0.5em", padding: "0.5em", height: "150px", width: "360px", paddingTop:"2em"}}>
 
             <span style={{display:"block", verticalAlign:"top",clear:"both", alignment:"right", margin:"0.1em", color:"blue"}}>
-            <i className="material-icons" style={{fontSize:"18px"}}>bookmark_border</i><a href={press.url} target="_blank"><i className="material-icons" style={{fontSize:"18px"}}>launch</i></a>
+
+          {this.dynamicBookmarkIcon(press)}
+
+          <a href={press.url} target="_blank"><i className="material-icons" style={{fontSize:"18px"}}>launch</i></a>
           </span>
 
           <div><img src={press.urlToImage} style={{maxHeight:"75px", maxWidth:"120px", float:"right", display:"inlineBlock", verticalAlign: "top", padding:"0.2em", margin:"0.2em", border:"1px red solid"}} /></div>
