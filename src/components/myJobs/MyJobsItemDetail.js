@@ -163,6 +163,12 @@ relevantNotes = () => {
   })
 }
 
+relevantBookmarks = () => {
+  return this.props.savedBookmarks.filter((bookmark) => {
+    return bookmark.company_id == this.props.company.id
+  })
+}
+
   render() {
     console.log('rerendering')
     console.log(this.props)
@@ -171,6 +177,7 @@ relevantNotes = () => {
       return <div>Loading</div>;
     }
     const relevantNotes = this.relevantNotes()
+    const relevantBookmarks = this.relevantBookmarks()
     return (
       <div className="myJobDetail">
         <h2>{this.props.job.title}</h2>
@@ -199,7 +206,7 @@ relevantNotes = () => {
 
           <div classname="bookmarks">
             <h2>Bookmarks</h2>
-            <BookmarkList bookmarks={this.state.bookmarks}/>
+            <BookmarkList bookmarks={relevantBookmarks}/>
 
           </div>
 

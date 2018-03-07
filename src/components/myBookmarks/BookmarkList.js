@@ -4,10 +4,12 @@ import { connect } from 'react-redux';
 import * as Actions from '../../actions'
 
 class BookmarkList extends React.Component {
+
   render() {
+    console.log("in bookmark")
     return (
       <div>
-        
+
         {this.props.bookmarks.map((bookmark) => {
           return <div>{bookmark.title}</div>
         })}

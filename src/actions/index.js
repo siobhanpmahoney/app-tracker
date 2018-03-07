@@ -70,6 +70,8 @@ export function deleteJob(selectedJobId) {
 }
 
 export function saveNewJob(selectedJob) {
+  console.log("in action - saveNewJob")
+  console.log(selectedJob)
   return(dispatch) => {
     fetch("http://localhost:3000/api/v1/users/1/jobs",
       {
@@ -88,7 +90,8 @@ export function saveNewJob(selectedJob) {
             level: selectedJob.levels[0].name,
             date_saved: Date.now(),
             applied_status: false,
-            company_museId: selectedJob.company.id
+            company_museId: selectedJob.company.id,
+            category: selectedJob.categories[0].name
           }
         })
       })
