@@ -36,15 +36,25 @@ export function editJob(selectedJob) {
           'Accepts': 'application/json'
         },
         body: JSON.stringify({
+          overall_active_status: selectedJob.overall_active_status,
           applied_status: selectedJob.applied_status,
           date_applied: selectedJob.date_applied,
-          response_date: selectedJob.response_date,
-          followup_date: selectedJob.followup_date,
+          application_response_status: selectedJob.application_response_status,
           interview_invite: selectedJob.interview_invite,
           interview_1_date: selectedJob.interview_1_date,
           interview_1_type: selectedJob.interview_1_type,
+          interview_1_technical: selectedJob.interview_1_technical,
+          interview_1_technical: selectedJob.interview_1_response,
           interview_2_date: selectedJob.interview_2_date,
-          interview_2_type: selectedJob.interview_2_type
+          interview_2_type: selectedJob.interview_2_type,
+          interview_2_technical: selectedJob.interview_2_technical,
+          interview_2_response: selectedJob.interview_2_response,
+          interview_3_date: selectedJob.interview_3_date,
+          interview_3_type: selectedJob.interview_3_type,
+          interview_3_technical: selectedJob.interview_3_technical,
+          interview_3_response: selectedJob.interview_3_response,
+          offer_status: selectedJob.offer_status
+
         })
       })
       .then(response => response.json())
@@ -91,7 +101,8 @@ export function saveNewJob(selectedJob) {
             date_saved: Date.now(),
             applied_status: false,
             company_museId: selectedJob.company.id,
-            category: selectedJob.categories[0].name
+            category: selectedJob.categories[0].name,
+            overall_active_status: true
           }
         })
       })

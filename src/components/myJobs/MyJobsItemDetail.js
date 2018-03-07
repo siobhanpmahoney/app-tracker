@@ -73,7 +73,6 @@ dashboardListener = (event) => {
   let name = event.target.name
 
   let currentJobState = this.props.job
-  debugger
   currentJobState[name] = value
   this.setState({
     job: currentJobState
@@ -170,9 +169,7 @@ relevantBookmarks = () => {
 }
 
   render() {
-    console.log('rerendering')
-    console.log(this.props)
-    console.log(this.props.company)
+
     if (!this.props.job) {
       return <div>Loading</div>;
     }
@@ -189,6 +186,23 @@ relevantBookmarks = () => {
          <p><label>Applied?<input type="checkbox" name="applied_status" checked={this.props.job.applied_status} onChange={this.dashboardListener} /></label></p>
 
          <p><label>Date Applied: <input type="contentEditable" name="date_applied" onChange={this.dashboardListener} value={this.props.job.date_applied}/></label></p>
+
+         <p><label>Response Date:<input type="contentEditable" name="response_date" onChange={this.dashboardListener} value={this.props.job.date_applied}/></label></p>
+
+         <p><label>Interview Invite?<input type="checkbox" name="interview_invite" checked={this.props.job.applied_status} onChange={this.dashboardListener} /></label></p>
+
+         <h4>Interviews</h4>
+         <p><b>First Round:</b></p>
+         <label>Interview Date:<input type="contentEditable" name="interview_1_date" onChange={this.dashboardListener} value={this.props.job.date_applied}/></label><br />
+         <label>Interview Type:<input type="contentEditable" name="interview_1_type" onChange={this.dashboardListener} value={this.props.job.date_applied}/></label>
+
+        <p><b>Second Round:</b></p>
+        <label>Interview Date:<input type="contentEditable" name="interview_2_date" onChange={this.dashboardListener} value={this.props.job.date_applied}/></label><br />
+        <label>Interview Type:<input type="contentEditable" name="interview_2_type" onChange={this.dashboardListener} value={this.props.job.date_applied}/></label>
+
+
+
+
 
         <button onClick={this.dashboardEditSubmit}>Save Updates</button>
 
