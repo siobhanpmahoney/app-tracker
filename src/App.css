@@ -40,19 +40,32 @@
   grid-auto-flow: dense;
 }
 
-.jobFilterCategory {
+.companyFilters {
+  display: grid;
+  grid-gap: 16px;
+  grid-template-columns: repeat(2, 1fr) minmax(50px, 1fr);
+  grid-template-rows: repeat(10, min-content);
+  grid-auto-flow: dense;
+}
+
+.jobFilterCategory .locationList {
   grid-column: 1 / span 1;
 }
 
-.jobFilterLevel {
-  grid-column: 2 / span 1;
+.jobFilterLevel .industryFilter {
+  grid-column: 2 / span 2;
 }
 
-.jobFilterLocation {
+.jobFilterLocation .sizeFilter {
   grid-column: 3 / span 1;
 }
 
 .searchContainerResults {
+  grid-column: 1 / span 3;
+  grid-auto-flow: dense;
+}
+
+.companySearchResults {
   grid-column: 1 / span 3;
   grid-auto-flow: dense;
 }
@@ -157,7 +170,7 @@
 }
 
 .myJobDetailDescrip {
-  grid-column: 1 / span 2;
+  grid-column: 1 / span 3;
   /* grid-row: 3 / span 4; */
 
 }

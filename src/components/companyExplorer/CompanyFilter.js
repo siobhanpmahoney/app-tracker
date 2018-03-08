@@ -8,7 +8,7 @@ const CompanyFilter = ({industrySelectListener, handleCompanySearchSubmit, indus
   const sizeOptions=["Small Size", "Medium Size", "Large Size"]
 
   return (
-    <div>
+    <div className="companyFilters">
     <div className="locationList">
       <h3>Filter By City</h3>
       <label style={{padding:"3px"}}>Austin, TX
@@ -50,7 +50,7 @@ const CompanyFilter = ({industrySelectListener, handleCompanySearchSubmit, indus
 
     </div>
 
-    <div className="industries">
+    <div className="industryFilter">
     <h3>Industry</h3>
     {industryOptions.map((industry) => {
     return <label> {industry}
@@ -60,7 +60,7 @@ const CompanyFilter = ({industrySelectListener, handleCompanySearchSubmit, indus
 
   </div>
 
-  <div className="sizes">
+  <div className="sizeFilter">
     <h3>Company Size</h3>
   {sizeOptions.map((size) => {
     return <label>{size}
