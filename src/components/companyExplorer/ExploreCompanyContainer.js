@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import CompanyFilter from './CompanyFilter'
 import CompanySearchResultList from './CompanySearchResultList'
 import { HashRouter } from 'react-router-dom'
@@ -99,7 +99,7 @@ class ExploreCompanyContainer extends React.Component{
 
 
    render() {
-     console.log(this.state)
+     console.log(this.props)
      return (
        <div>
        <h2>Search for a Company!</h2>
@@ -125,7 +125,9 @@ function mapStateToProps(state, props) {
     savedJobs: state.user.savedJobs,
     savedCompanies: state.user.savedCompanies,
     savedNotes: state.user.savedNotes,
-    savedBookmarks: state.user.savedBookmarks
+    savedBookmarks: state.user.savedBookmarks,
+    savedCategories: state.user.savedCategories,
+    savedIndustries: state.user.savedIndustries
   }
 }
 

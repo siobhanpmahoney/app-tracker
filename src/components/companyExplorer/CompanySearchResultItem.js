@@ -52,7 +52,9 @@ function mapStateToProps(state, props) {
     savedJobs: state.user.savedJobs,
     savedCompanies: state.user.savedCompanies,
     savedNotes: state.user.savedNotes,
-    savedBookmarks: state.user.savedBookmarks
+    savedBookmarks: state.user.savedBookmarks,
+    savedCategories: state.user.savedCategories,
+    savedIndustries: state.user.savedIndustries
   }
 }
 

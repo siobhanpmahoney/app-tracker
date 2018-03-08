@@ -23,7 +23,7 @@ class CompanyArticleFeed extends React.Component {
 
   componentDidMount() {
       let searchCompany = this.props.company.name.split(" ").join("+")
-      let articleUrl = `https://newsapi.org/v2/everything?q=%22${searchCompany}%22&pageSize=100&domains=alleywatch.com,bloomberg.com,businessinsider.com,cnbc.com,dealabs.com,digiday.com,engadget.com,entrepreneur.com,inc.com,mashable.com,nytimes.com,recode.com,seekingalpha.com,techcrunch.com,techdirt.com,techradar.com,thenextweb.com,theverge.com,wsj.com,wired.com&language=en&sortBy=relevancy&apiKey=ad5900690118454582f702c63e4286f8`
+      let articleUrl = `https://newsapi.org/v2/everything?q=%22${searchCompany}%22&pageSize=100&domains=alleywatch.com,bloomberg.com,businessinsider.com,cnbc.com,dealabs.com,digiday.com,engadget.com,entrepreneur.com,inc.com,mashable.com,nytimes.com,recode.com,seekingalpha.com,techcrunch.com,techdirt.com,techradar.com,thenextweb.com,theverge.com,wsj.com,wired.com,forbes.com&language=en&sortBy=relevancy&apiKey=ad5900690118454582f702c63e4286f8`
     fetch(articleUrl)
     .then(response => response.json())
     .then(json => this.setState({
@@ -90,7 +90,11 @@ function mapStateToProps(state, props) {
     savedJobs: state.user.savedJobs,
     savedCompanies: state.user.savedCompanies,
     savedNotes: state.user.savedNotes,
-    savedBookmarks: state.user.savedBookmarks
+    savedBookmarks: state.user.savedBookmarks,
+    savedCategories: state.user.savedCategories,
+    savedIndustries: state.user.savedIndustries,
+    savedCategories: state.user.savedCategories,
+    savedIndustries: state.user.savedIndustries
   }
 }
 

@@ -148,7 +148,7 @@ class App extends Component {
 
           <Route exact path="/logout" render={() => <Logout /> } />
 
-          <Route exact path="/" render={() => <Profile user={this.props.currentUser} savedJobs={this.props.savedJobs} savedCompanies={this.props.savedCompanies} /> } />
+          <Route exact path="/" render={() => <Profile user={this.props.currentUser} savedJobs={this.props.savedJobs} savedCompanies={this.props.savedCompanies} addToSavedJobs={this.addToSavedJobs} /> } />
 
     <Route exact path="/search/companies" render={() => <ExploreCompanyContainer /> } />
 

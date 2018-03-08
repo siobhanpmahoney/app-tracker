@@ -6,12 +6,16 @@ import * as Actions from '../../actions'
 
 
 const CompanySearchResultList = ({companySearchResults}) => {
+  console.log("here in CompanySearch")
+  console.log(companySearchResults)
   return(
+
     <div className="companySearchResults">
       {companySearchResults.map((company) => {
         return <CompanySearchResultItem company={company} key={company.id} />
       })}
     </div>
+  
   )
 }
 
@@ -21,7 +25,9 @@ function mapStateToProps(state, props) {
     savedJobs: state.user.savedJobs,
     savedCompanies: state.user.savedCompanies,
     savedNotes: state.user.savedNotes,
-    savedBookmarks: state.user.savedBookmarks
+    savedBookmarks: state.user.savedBookmarks,
+    savedCategories: state.user.savedCategories,
+    savedIndustries: state.user.savedIndustries
   }
 }
 
