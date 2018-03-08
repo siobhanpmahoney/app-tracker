@@ -186,15 +186,18 @@ class MyJobsItemDetail extends React.Component {
       const relevantBookmarks = this.relevantBookmarks()
       return (
         <div className="myJobDetail">
-          <h2>{this.props.job.title}</h2>
+          <div className="header">
+          <h2 className="myJobTitle">{this.props.job.title}</h2>
           <h3 className="myJobDetailCompanyName">{this.props.company.name}</h3>
+          </div>
 
           <div className="myJobDetailDashboard">
             <p><label>Date Saved: <input type="text" value={this.formattedDate()} readOnly /></label></p>
 
             <p><label>Applied?<input type="checkbox" name="applied_status" checked={this.props.job.applied_status} onChange={this.dashboardListener} /></label></p>
 
-<MyJobsResourceFeedInterviews addBookmark={this.props.addNewBookmark} company={this.props.company} user={this.props.user}/>
+
+
 
             {this.props.job.applied_status &&
 
@@ -320,10 +323,17 @@ class MyJobsItemDetail extends React.Component {
 
             </div>
           </div>
+
+          <div className="myJobDetailDescrip" >
           <details>
             <summary>Job Description</summary>
             <div dangerouslySetInnerHTML={this.contents()}></div>
           </details>
+        </div>
+
+      <div className="underDescrip" >
+
+
             <div className="myJobInfoAndNotes">
 
               <div className="myJobDetailSavedInfo">
@@ -352,11 +362,15 @@ class MyJobsItemDetail extends React.Component {
               </div>
 </div>
 
-            <div className="myJobDetailNote">
-              {this.noteTypeRender()}
-            </div>
 
+ </div>
+ <div className="myJobDetailNote">
+     {this.noteTypeRender()}
+ </div>
           </div>
+          <div className="myJobResource">
+                    <MyJobsResourceFeedInterviews addBookmark={this.props.addNewBookmark} company={this.props.company} user={this.props.user}/>
+                    </div>
 
         </div>
 

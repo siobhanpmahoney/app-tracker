@@ -7,7 +7,7 @@ class MyJobsDetailDashboard extends React.Component {
 
   render() {
     return (
-      <div className="myJobDetailDashboard">
+      <div>
       <p><label>Date Saved: <input type="text" value={this.props.formattedDate} readOnly /></label></p>
 
       <p><label>Applied?<input type="checkbox" name="applied_status" checked={this.props.job.applied_status} onChange={this.props.dashboardListener} /></label></p>

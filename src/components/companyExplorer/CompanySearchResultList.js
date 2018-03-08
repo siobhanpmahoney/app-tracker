@@ -6,8 +6,7 @@ import * as Actions from '../../actions'
 
 
 const CompanySearchResultList = ({companySearchResults}) => {
-  console.log("here in CompanySearch")
-  console.log(companySearchResults)
+
   return(
 
     <div className="companySearchResults">
@@ -15,7 +14,7 @@ const CompanySearchResultList = ({companySearchResults}) => {
         return <CompanySearchResultItem company={company} key={company.id} />
       })}
     </div>
-  
+
   )
 }
 

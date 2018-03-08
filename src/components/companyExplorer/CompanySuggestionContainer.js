@@ -25,7 +25,6 @@ class CompanySuggestionContainer extends React.Component {
     let industries = this.props.savedIndustries.map((i) => {
        i.name.split(' ').join('%20')
     })
-    console.log(industries)
     return industries.join("&industry=")
   }
 
@@ -36,13 +35,11 @@ class CompanySuggestionContainer extends React.Component {
   }
 
   render() {
-  console.log(this.state)
-  console.log(`https://api-v2.themuse.com/companies?industry=${this.props.industryUrl}&api-key=82b2d1f745512b99a70044e6c6b316d86739a97719d5e88caf67a3f7fd788a00&page=1`)
+
 
     if (this.state.suggestedCompanies == []) {
       return <div>Loading...</div>
     }
-    console.log(this.state)
     return (
       <div>
         <h2>Check out these Companies!</h2>

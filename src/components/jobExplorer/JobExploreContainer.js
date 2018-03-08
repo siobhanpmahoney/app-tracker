@@ -95,7 +95,10 @@ class JobExploreContainer extends React.Component {
 
       <JobFilter categorySelectListener={this.categorySelectListener} levelSelectListener = {this.levelSelectListener} locationSelectListener={this.locationSelectListener} handleJobSearchSubmit={this.handleJobSearchSubmit} />
 
+      <div className="searchContainerResults">
+        
       <JobSearchResultList jobSearchResults = {this.state.jobSearchResults} savedJobs={this.props.savedJobs} addToSavedJobs={this.props.addToSavedJobs} />
+      </div>
       </div>
     )}
 

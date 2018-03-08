@@ -6,7 +6,7 @@ import * as Actions from '../../actions'
 class NoteCreate extends React.Component {
   render() {
     return (
-      <div>
+      <div className="newNoteForm">
       <form>
       <button onClick={this.props.addTestNewNote}>Save</button><textarea className="noteTitle" name="title"  type="contentEditable" onChange={this.props.noteEditListener}>
         </textarea>

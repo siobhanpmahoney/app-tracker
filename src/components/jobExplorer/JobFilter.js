@@ -3,18 +3,18 @@ import React from 'react'
 const JobFilter = ({categorySelectListener, levelSelectListener, locationSelectListener, handleJobSearchSubmit}) => {
   const categoryOptions = [
     "Account Management", "Business & Strategy", "Creative & Design", "Customer Service", "Data Science", "Editorial", "Education", "Engineering", "Finance", "Fundraising & Development", "Healthcare & Medicine", "HR & Recruiting", "Legal", "Marketing & PR", "Operations", "Project & Product Management", "Retail", "Sales", "Social Media & Community"]
-    
+
   return (
-    <div>
+    <div className="jobFilters">
       <div className="jobFilterCategory">
-        <h3>Select Job Category</h3> 
+        <h3>Select Job Category</h3>
           {categoryOptions.map((c) => {
             return <label>{c}
               <input type="checkbox" value={c.split("&").join("%26").split(" ").join("%20")} onChange={categorySelectListener} />
             </label>
           })}
       </div>
-      
+
       <div className="jobFilterLevel">
         <h3>Select Level</h3>
         <label>Internship
@@ -30,7 +30,7 @@ const JobFilter = ({categorySelectListener, levelSelectListener, locationSelectL
           <input type="checkbox" onChange={levelSelectListener} value="Senior%20Level" />
         </label>
       </div>
-      
+
       <div className="jobFilterLocation">
       <h3>Filter By City</h3>
       <label style={{padding:"3px"}}>Austin, TX
@@ -69,8 +69,11 @@ const JobFilter = ({categorySelectListener, levelSelectListener, locationSelectL
       <input type="checkbox" onChange={locationSelectListener} value="Washington%2C%20DC" />
       </label>
       </div>
-      <input type="submit" value="search" onClick={handleJobSearchSubmit} />
+      <div className="searchButton" style={{gridColumn:"1/ span 1"}}>
+        <input type="submit" value="search" onClick={handleJobSearchSubmit} />
+      </div>
     </div>
+
   )
 }
 
