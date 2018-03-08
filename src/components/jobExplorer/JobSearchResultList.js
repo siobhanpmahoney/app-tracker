@@ -1,5 +1,8 @@
 import React from 'react'
 import JobSearchResultItem from './JobSearchResultItem'
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import * as Actions from '../../actions'
 
 const JobSearchResultList = ({jobSearchResults, savedJobs, addToSavedJobs}) => {
   return(
@@ -12,4 +15,21 @@ const JobSearchResultList = ({jobSearchResults, savedJobs, addToSavedJobs}) => {
 }
 
 
-export default JobSearchResultList
+
+function mapStateToProps(state, props) {
+  return {
+    currentUser: state.user.currentUser,
+    savedJobs: state.user.savedJobs,
+    savedCompanies: state.user.savedCompanies,
+    savedNotes: state.user.savedNotes,
+    savedBookmarks: state.user.savedBookmarks,
+    savedCategories: state.user.savedCategories,
+    savedIndustries: state.user.savedIndustries
+  }
+}
+
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators(Actions, dispatch);
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(JobSearchResultList);
