@@ -37,7 +37,7 @@ dynamicBookmarkIcon = (info) => {
 }
 
   render() {
-debugger
+
 console.log(this.props)
 
     return (

@@ -135,6 +135,7 @@ class App extends Component {
 
   render() {
     console.log(this.props)
+    debugger
     // if (!this.props.savedJobs) {
     //   return <div>Loading</div>;
     // }

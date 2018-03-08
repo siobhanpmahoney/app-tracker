@@ -48,7 +48,7 @@ const user = (state = {currentUser: null, savedJobs: [], savedCompanies: [], sav
       return state;
 
     case ADD_NEW_NOTE:
-    debugger
+    
       let userNotes = state.savedNotes
 
     state=Object.assign({},

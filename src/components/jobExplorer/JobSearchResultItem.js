@@ -28,6 +28,8 @@ class JobSearchResultItem extends React.Component {
   saveJob = (event) => {
 
     event.preventDefault()
+    console.log(this.props)
+    
     this.props.addToSavedJobs(this.props.job)
 
   }
@@ -39,7 +41,7 @@ class JobSearchResultItem extends React.Component {
       return (<i className="material-icons" onClick={this.saveJob} style={{color:"blue"}}>bookmark_border</i>)
     } else {
       if (this.props.savedJobs.find((job) => {
-        return job.museId == this.props.job.id
+        return job.museId == this.props.museJobId
       })) {
         return (<i className="material-icons" style={{color:"blue", fontSize:"100%"}}>bookmark</i>)
       }

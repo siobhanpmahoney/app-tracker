@@ -25,7 +25,6 @@ class MyJobsItemDetail extends React.Component {
   }
 
   componentDidMount() {
-    console.log("mounting my job item details")
     let url = "http://localhost:3000/api/v1/users/1/jobs/" + this.props.jobId
     fetch(url)
     .then(response => response.json())
@@ -73,11 +72,9 @@ class MyJobsItemDetail extends React.Component {
   dashboardListener = (event) => {
     let value = event.target.type === 'checkbox' ? event.target.checked : event.target.value
     let name = event.target.name
-    console.log(value)
+
     let currentJobState = this.props.job
-    console.log(currentJobState)
     currentJobState[name] = value
-    console.log(currentJobState)
     this.setState({
       job: currentJobState
     })
@@ -86,7 +83,7 @@ class MyJobsItemDetail extends React.Component {
   dashboardEditSubmit = (event) => {
     event.preventDefault()
     console.log(this.state.job)
-    debugger
+
     window.location = `/myjobs/${this.props.jobId}`
     this.props.editJob(this.state.job)
   }
@@ -163,7 +160,13 @@ class MyJobsItemDetail extends React.Component {
   }
 
   relevantNotes = () => {
+    console.log(this.props)
+    console.log(this.props.savedNotes)
     return this.props.savedNotes.filter((note) => {
+      console.log(note)
+      console.log(note.company_id)
+      console.log(this.props.company)
+      console.log(this.props.company.id)
       return note.company_id == this.props.company.id
     })
   }
@@ -175,7 +178,7 @@ class MyJobsItemDetail extends React.Component {
   }
 
   render() {
-    console.log(this.props)
+
     if (!this.props.job) {
       return <div>Loading</div>;
       }
