@@ -12,6 +12,7 @@ import NavBar from './components/NavBar'
 import Profile from './components/Profile'
 
 import ExploreCompanyContainer from './components/companyExplorer/ExploreCompanyContainer'
+import CompanyDetail from './components/companyExplorer/CompanyDetail'
 import MyCompanyContainer from './components/myCompanies/MyCompanyContainer'
 import MyCompanyDetail from './components/myCompanies/MyCompanyDetail'
 import JobExploreContainer from './components/jobExplorer/JobExploreContainer'
@@ -152,7 +153,7 @@ class App extends Component {
 
     <Route exact path="/search/companies" render={() => <ExploreCompanyContainer /> } />
 
-
+    <Route path="/search/companies/:museCompanyId" render={(props) => <CompanyDetail user={this.props.currentUser} museCompanyId={props.match.params.museCompanyId} currentUser={this.props.currentUser} savedJobs={this.props.savedJobs} savedCompanies={this.props.savedCompanies} savedNotes={this.props.savedNotes} editJob={this.props.editJob} addJob={this.props.addJob} editNote={this.editNote} addBookmark={this.addBookmark} />} />
 
       <Route exact path="/search/jobs" render={() => <JobExploreContainer user={this.props.currentUser} savedJobs={this.props.savedJobs} addToSavedJobs={this.addToSavedJobs} savedCompanies={this.props.savedCompanies} />} />
 
@@ -167,8 +168,7 @@ class App extends Component {
       <Route exact path="/myjobs" render={() => <MyJobsContainer savedJobs={this.props.savedJobs} user={this.props.currentUser} addToSavedJobs={this.addToSavedJobs} savedCompanies={this.props.savedCompanies} loadSavedJob={this.props.loadSavedJob} savedNotes={this.props.savedNotes} />} />
 
       <Route path="/myjobs/:jobId" render={(props) => <MyJobsItemDetail
-          user={this.props.currentUser} jobId={props.match.params.jobId}
-
+          user={this.props.currentUser} jobId={props.match.params.jobId} addBookmark = {this.addBookmark}
            job={this.props.savedJobs.find((job) => job.id == props.match.params.jobId)}
 
            company = {this.props.savedCompanies.find((company) => company.id == this.props.savedJobs.find((job) => job.id == props.match.params.jobId).company_id)}

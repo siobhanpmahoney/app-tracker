@@ -1,7 +1,9 @@
 import React from 'react'
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+import {BrowserRouter as Router, Link, Route, Switch} from 'react-router-dom';
 import * as Actions from '../../actions'
+import CompanyDetail from './CompanyDetail'
 
 
 class CompanySearchResultItem extends React.Component {
@@ -24,7 +26,7 @@ class CompanySearchResultItem extends React.Component {
   }
 
   render() {
-    console.log(this.props.company)
+    console.log(this.props)
     return (
       <div>
 
@@ -37,7 +39,7 @@ class CompanySearchResultItem extends React.Component {
           <h4>{this.props.company.name}</h4>
         <div className="location">{this.renderIndustryList()}</div>
         <div className="industryList">{this.renderLocationList()}</div>
-
+        <Link to={`/search/companies/${this.props.company.id}`} company={this.props.company} museCompanyId={this.props.company.id}>Read More</Link>
 
 
       </div>

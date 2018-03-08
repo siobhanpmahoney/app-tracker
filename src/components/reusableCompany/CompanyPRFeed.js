@@ -18,7 +18,7 @@ class CompanyPRFeed extends React.Component {
 
   componentDidMount() {
       let searchCompany = this.props.company.name.split(" ").join("+")
-      let url = `https://newsapi.org/v2/everything?q=%22${searchCompany}%22&pageSize=100&domains=prnewswire.com,reuters.com&language=en&sortBy=relevancy&apiKey=ad5900690118454582f702c63e4286f8`
+      let url = `https://newsapi.org/v2/everything?q=%22${searchCompany}%22&pageSize=100&domains=prnewswire.com,businesswire.com,reuters.com&language=en&sortBy=relevancy&apiKey=ad5900690118454582f702c63e4286f8`
 
       fetch(url)
       .then(response => response.json())
@@ -50,7 +50,7 @@ dynamicBookmarkIcon = (info) => {
 }
 
   render() {
-    console.log(this.props)
+    console.log(this.state)
     if (!this.props) {
       return<div>Loading!</div>
     }

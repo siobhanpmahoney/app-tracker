@@ -8,6 +8,7 @@ import NotesContainer from '../myNotes/NotesContainer'
 import NoteCreate from '../myNotes/NoteCreate'
 import BookmarkList from '../myBookmarks/BookmarkList'
 import MyJobsDetailDashboard from './MyJobsDetailDashboard'
+import MyJobsResourceFeedInterviews from './MyJobsResourceFeedInterviews'
 
 class MyJobsItemDetail extends React.Component {
   constructor(props) {
@@ -189,6 +190,8 @@ class MyJobsItemDetail extends React.Component {
             <p><label>Date Saved: <input type="text" value={this.formattedDate()} readOnly /></label></p>
 
             <p><label>Applied?<input type="checkbox" name="applied_status" checked={this.props.job.applied_status} onChange={this.dashboardListener} /></label></p>
+
+<MyJobsResourceFeedInterviews addBookmark={this.props.addNewBookmark} company={this.props.company} user={this.props.user}/>
 
             {this.props.job.applied_status &&
 

@@ -103,7 +103,7 @@ export function saveNewJob(selectedJob) {
             date_saved: Date.now(),
             applied_status: false,
             company_museId: selectedJob.company.id,
-            category: selectedJob.categories,
+            category: selectedJob.categories[0],
             overall_active_status: true
           }
         })

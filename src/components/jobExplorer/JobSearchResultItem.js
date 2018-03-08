@@ -1,7 +1,10 @@
 import React from 'react'
 import {BrowserRouter as Router, Link, Route, Switch} from 'react-router-dom';
+import { withRouter } from 'react-router'
 import JobDescription from './JobDescription'
-
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import * as Actions from '../../actions'
 
 class JobSearchResultItem extends React.Component {
   constructor(props) {
@@ -30,7 +33,7 @@ class JobSearchResultItem extends React.Component {
   }
 
   dynamicIcon = () => {
-  
+
 
     if (this.props.savedJobs.length < 1) {
       return (<i className="material-icons" onClick={this.saveJob} style={{color:"blue"}}>bookmark_border</i>)
@@ -61,4 +64,20 @@ class JobSearchResultItem extends React.Component {
   }
 }
 
-export default JobSearchResultItem
+function mapStateToProps(state, props) {
+  return {
+    currentUser: state.user.currentUser,
+    savedJobs: state.user.savedJobs,
+    savedCompanies: state.user.savedCompanies,
+    savedNotes: state.user.savedNotes,
+    savedBookmarks: state.user.savedBookmarks,
+    savedCategories: state.user.savedCategories,
+    savedIndustries: state.user.savedIndustries
+  }
+}
+
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators(Actions, dispatch);
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(JobSearchResultItem);
