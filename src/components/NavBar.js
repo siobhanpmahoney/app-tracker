@@ -7,8 +7,8 @@ import { NavLink } from 'react-router-dom';
 const link = {
   width: '100px',
   padding: '1em',
-  margin: '0 6px 6px',
-  background: '#ff2348',
+  margin: '1em',
+  backgroundColor: '#ff2348',
   color: 'white',
 }
 
@@ -17,7 +17,7 @@ class NavBar extends React.Component {
   renderHTML = () => {
     if (!!this.props.currentUser) {
       return (
-        <div>
+        <div style={{backgroundColor:"white"}}>
         <NavLink to="/" exact style={link} activeStyle={{background: '#FF5370'}}>Profile</NavLink>
 
         <NavLink to="/search/companies" exact style={link} activeStyle={{background: '#FF5370'}}>Explore Companies</NavLink>

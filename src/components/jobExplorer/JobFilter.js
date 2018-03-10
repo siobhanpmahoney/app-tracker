@@ -6,68 +6,69 @@ const JobFilter = ({categorySelectListener, levelSelectListener, locationSelectL
 
   return (
     <div className="jobFilters">
-      <div className="jobFilterCategory">
+      <div className="jobFilterCategory" style={{backgroundColor:"white", padding:"0.5em", margin:"0.5em", boxShadow: "0 4px 4px rgba(0,0,0,0.25), 0 4px 4px rgba(0,0,0,0.22)", height:"410px", fontSize:"14px", style:"inlineBlock", float:"left", gridAutoFlow:"column"}}>
+
         <h3>Select Job Category</h3>
           {categoryOptions.map((c) => {
             return <label>{c}
               <input type="checkbox" value={c.split("&").join("%26").split(" ").join("%20")} onChange={categorySelectListener} />
-            </label>
+            <br /></label>
           })}
       </div>
 
-      <div className="jobFilterLevel">
+      <div className="jobFilterLevel" style={{backgroundColor:"white", padding:"0.5em", margin:"0.5em", boxShadow: "0 4px 4px rgba(0,0,0,0.25), 0 4px 4px rgba(0,0,0,0.22)", height:"410px", fontSize:"14px", style:"inlineBlock", float:"left", gridAutoFlow:"column"}}>
         <h3>Select Level</h3>
         <label>Internship
           <input type="checkbox" onChange={levelSelectListener} value="Internship" />
-        </label>
+        <br /></label>
         <label>Entry Level
           <input type="checkbox" onChange={levelSelectListener} value="Entry%20Level" />
-        </label>
+        <br /></label>
         <label>Mid Level
           <input type="checkbox" onChange={levelSelectListener} value="Mid%20Level" />
-        </label>
+        <br /></label>
         <label>Senior Level
           <input type="checkbox" onChange={levelSelectListener} value="Senior%20Level" />
-        </label>
+        <br /></label>
       </div>
 
-      <div className="jobFilterLocation">
+      <div className="jobFilterLocation"style={{backgroundColor:"white", padding:"0.5em", margin:"0.5em", boxShadow: "0 4px 4px rgba(0,0,0,0.25), 0 4px 4px rgba(0,0,0,0.22)", height:"410px", fontSize:"14px", style:"inlineBlock", float:"left", gridAutoFlow:"column"}}>
       <h3>Filter By City</h3>
       <label style={{padding:"3px"}}>Austin, TX
       <input type="checkbox" onChange={locationSelectListener} value="Austin%2C%20TX" />
-      </label>
+      <br /></label>
 
       <label style={{padding:"3px"}}>Boston, MA
       <input type="checkbox" onChange={locationSelectListener} value="Boston%2C%20MA" />
-      </label>
+      <br /></label>
 
       <label style={{padding:"3px"}}>Chicago, IL
       <input type="checkbox" onChange={locationSelectListener} value="Chicago%2C%20IL" />
-      </label>
+      <br /></label>
 
       <label style={{padding:"3px"}}>Los Angeles, CA
       <input type="checkbox" onChange={locationSelectListener} value="Los%20Angeles%2C%20CA" />
-      </label>
+      <br /></label>
 
       <label style={{padding:"3px"}}>New York City, NY
       <input type="checkbox" onChange={locationSelectListener} value="New%20York%20City%2C%20NY" />
-      </label>
+      <br /></label>
 
       <label style={{padding:"3px"}}>Portland, OR
       <input type="checkbox" onChange={locationSelectListener} value="Portland%2C%20OR" />
-      </label>
+      <br /></label>
 
       <label style={{padding:"3px"}}>San Francisco, CA
       <input type="checkbox" onChange={locationSelectListener} value="San%20Francisco%2C%20CA" />
-      </label>
+      <br /></label>
 
       <label style={{padding:"3px"}}>Seattle, WA
       <input type="checkbox" onChange={locationSelectListener} value="Seattle%2C%20WA" />
-      </label>
+      <br /></label>
 
       <label style={{padding:"3px"}}>Washington, DC
       <input type="checkbox" onChange={locationSelectListener} value="Washington%2C%20DC" />
-      </label>
+      <br /></label>
       </div>
       <div className="searchButton" style={{gridColumn:"1/ span 1"}}>
         <input type="submit" value="search" onClick={handleJobSearchSubmit} />

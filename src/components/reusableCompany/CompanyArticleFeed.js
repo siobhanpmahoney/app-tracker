@@ -78,7 +78,7 @@ dynamicBookmarkIcon = (info) => {
           <div className="companyPressCardTitle" style={{fontSize:"12.5px", fontFamily:"Roboto", margin:"0.25em", padding:"0.25em", fontStyle:"italic" }}>{article.publishedAt}</div>
 
           </div>
-        })}}
+        })}
       </div>
     )
   }

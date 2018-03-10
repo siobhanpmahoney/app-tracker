@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import * as Actions from '../../actions'
 
 const JobSearchResultList = ({jobSearchResults, savedJobs, addToSavedJobs}) => {
-  
+
   return(
     <div className="jobSearchResultList">
       {jobSearchResults.map((j) => {

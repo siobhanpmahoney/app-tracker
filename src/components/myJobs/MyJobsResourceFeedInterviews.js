@@ -43,7 +43,7 @@ console.log(this.props)
     return (
       <div className="postList">
         {this.state.interviewAdvice.map((post) => {
-          return <div className="advicePost">
+          return <div className="advicePost" style={{boxShadow: "0 2px 2px rgba(0,0,0,0.5), 0 2px 2px rgba(0,0,0,0.2)", padding:"0.5em", margin:"0.25em"}}>
           <span><a href={post.refs.landing_page} target="_blank"><i className="material-icons" style={{fontSize:"18px"}}>launch</i></a>{this.dynamicBookmarkIcon(post)}</span>
           <h4>{post.name}</h4>
           <p>{post.description}</p>

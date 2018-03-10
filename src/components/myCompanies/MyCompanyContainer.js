@@ -40,8 +40,16 @@ class MyCompanyContainer extends React.Component {
         <h1>Saved Companies</h1>
         <div className="myCompanyList">
           {this.props.savedCompanies.map((company) => {
-            return <div className="myCompanyListItem">  <Link to={`/mycompanies/${company.id}`} key={company.id} onClick={this.loadCompanyDetail}>
-              {company.name}</Link>
+            return <div className="companySearchResultCard">
+              {company.image_link &&
+                <img src={company.image_link} style={{width:"350px"}} />
+              }
+
+              <h4>{company.name}</h4>
+                <div className="location">{company.location}</div>
+                <div className="industryList">{company.industry_name}</div>
+                <Link to={`/mycompanies/${company.id}`} key={company.id} onClick={this.loadCompanyDetail}>
+              Read More</Link>
             </div>
           })}
         </div>

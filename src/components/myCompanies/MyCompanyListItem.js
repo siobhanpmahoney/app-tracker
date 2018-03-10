@@ -11,8 +11,11 @@ class MyCompanyListItem extends React.Component {
   render() {
     console.log(this.props)
     return (
-      <div>
-       {this.props.company.name}
+      <div className="companySearchResultCard">
+
+       <h4> {this.props.company.name}</h4>
+     <div className="location">{this.props.company.location}</div>
+     <div className="industryList">{this.props.company.industry_name}</div>
       </div>
 
     )

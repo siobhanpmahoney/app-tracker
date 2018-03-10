@@ -90,13 +90,13 @@ class JobExploreContainer extends React.Component {
 
     render() {
       return (
-      <div>
+      <div className="jobSearchContainer" style={{backgroundColor:"background-color: #F9FBFB"}}>
       <h2>Search for a Job!</h2>
 
       <JobFilter categorySelectListener={this.categorySelectListener} levelSelectListener = {this.levelSelectListener} locationSelectListener={this.locationSelectListener} handleJobSearchSubmit={this.handleJobSearchSubmit} />
 
-      <div className="searchContainerResults">
-        
+      <div className="searchContainerResults" style={{backgroundColor:"#F9FBFB"}}>
+
       <JobSearchResultList jobSearchResults = {this.state.jobSearchResults} savedJobs={this.props.savedJobs} addToSavedJobs={this.props.addToSavedJobs} />
       </div>
       </div>

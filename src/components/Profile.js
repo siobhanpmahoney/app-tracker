@@ -30,21 +30,24 @@ class Profile extends React.Component {
     return (
       <div className = "profile">
         <div className="welcome"><h1>Welcome back</h1></div>
+
+
+        <div className="jobSuggestions" >
+          <h2>Suggested Jobs</h2>
+          <JobSuggestionContainer currentUser={this.props.currentUser} savedJobs={this.props.savedJobs} savedCategories={this.props.savedCategories} savedIndustries={this.props.savedIndustries} addToSavedJobs={this.props.addToSavedJobs}  categoryUrl={this.categoryUrl()}/>
+        </div>
+
+        <div className="companySuggestionContainer">
+
+        <CompanySuggestionContainer industryUrl={this.industryUrl()} />
+        </div>
+
         <div className="resources">
           <h2>Get Advice!</h2>
           <MyJobsResourceFeedInterviews />
         </div>
 
 
-        <div className="jobSuggestions">
-          <h2>Suggested Jobs</h2>
-          <JobSuggestionContainer currentUser={this.props.currentUser} savedJobs={this.props.savedJobs} savedCategories={this.props.savedCategories} savedIndustries={this.props.savedIndustries} addToSavedJobs={this.props.addToSavedJobs}  categoryUrl={this.categoryUrl()}/>
-        </div>
-
-
-
-
-        <CompanySuggestionContainer industryUrl={this.industryUrl()} />
       </div>
     )
   }

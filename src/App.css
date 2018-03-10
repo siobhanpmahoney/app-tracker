@@ -1,8 +1,17 @@
 .App {
   font-family: "Avenir";
   margin: 1em;
+  background-color:  #F9FBFB;
+
 }
 
+
+body {
+  font: #3A4A4D "Roboto";
+  backgroundColor: #F9FBFB;
+  margin: 1em;
+  padding: 1em;
+}
 
 
 .App-header {
@@ -30,6 +39,8 @@
 	grid-gap: 16px;
 	grid-template-columns: repeat(2, 1fr) minmax(50px, 1fr);
 	grid-template-rows: repeat(10, min-content);
+  margin-top: 1em;
+  padding: 1em;
 }
 
 .jobFilters {
@@ -38,7 +49,22 @@
 	grid-template-columns: repeat(2, 1fr) minmax(50px, 1fr);
 	grid-template-rows: repeat(10, min-content);
   grid-auto-flow: dense;
+  margin: 1em;
+  padding: 1em;
+  background-color: #8ee3ef;
 }
+
+.myCompanyDetail {
+  display: grid;
+	grid-gap: 16px;
+	grid-template-columns: repeat(2, 1fr) minmax(50px, 1fr);
+	grid-template-rows: repeat(10, min-content);
+  grid-auto-flow: dense;
+  margin: 1em;
+  padding: 1em;
+  background-color: #F9FBFB;
+}
+
 
 .companyFilters {
   display: grid;
@@ -46,23 +72,35 @@
   grid-template-columns: repeat(2, 1fr) minmax(50px, 1fr);
   grid-template-rows: repeat(10, min-content);
   grid-auto-flow: dense;
+  background-color: #8ee3ef;
+  font-size: 14px;
 }
 
 .jobFilterCategory .locationList {
   grid-column: 1 / span 1;
+  box-shadow: 0 14px 14px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+  grid-auto-flow: dense;
+  float: left;
+
 }
+
+
+
 
 .jobFilterLevel .industryFilter {
   grid-column: 2 / span 2;
+  box-shadow: 0 14px 14px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
 }
 
 .jobFilterLocation .sizeFilter {
   grid-column: 3 / span 1;
+  box-shadow: 0 14px 14px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
 }
 
 .searchContainerResults {
   grid-column: 1 / span 3;
   grid-auto-flow: dense;
+
 }
 
 .companySearchResults {
@@ -71,11 +109,17 @@
 }
 
 .resources {
-  grid-column: 3 / span 3;
+  grid-column: -1 / span -1;
 
 }
 
 .jobSuggestions {
+  background-color:#F9FBFB;
+  grid-column: 1 / span 2;
+  float: left;
+}
+
+.companySuggestionContainer {
   grid-column: 1 / span 2;
 }
 
@@ -109,12 +153,20 @@
 
 }
 
+.jobSearchContainer {
+
+}
+
 .jobSearchResultItem {
   padding: 0.25em;
   margin: 1em;
-  height: 180px;
-  width: 280px;
+  height: 220px;
+  width: 360px;
+  font: "Roboto";
   /* border: groove 1px; */
+  float: left;
+  box-shadow: 0 4px 4px rgba(0,0,0,0.25), 0 4px 4px rgba(0,0,0,0.22);
+  grid-auto-flow: dense;
   float: left;
 }
 
@@ -126,15 +178,21 @@
 .mySavedJobList {
   margin: 1em;
   padding: 1em;
+  background-color:"#8ee3ef"
 }
 
 .mySavedJob {
   padding: 0.25em;
   margin: 1em;
-  height: 180px;
-  width: 280px;
-  border: groove 1px;
+  height: 220px;
+  width: 360px;
+  font: "Roboto";
+  /* border: groove 1px; */
   float: left;
+  box-shadow: 0 4px 4px rgba(0,0,0,0.25), 0 4px 4px rgba(0,0,0,0.22);
+  grid-auto-flow: dense;
+  float: left;
+  background-color: "#8ee3ef"
 }
 
 .mySavedJob div.dateSaved {
@@ -156,7 +214,9 @@
 
 .myJobResource {
   grid-column: -1 / span -1;
-  border: blue 1px groove;
+  border-left: 1px groove #37718e;
+  margin: 1em;
+  border: 1em;
 
 }
 
@@ -198,11 +258,12 @@
   grid-column: 1 / span 2;
    /* grid-column: 1 / span 1;
   /* display: grid;*/
-  background-color: #f4f4f8;
+  background-color:  #F9FBFB;
   overflow-y: scroll;
 }
 
 .bookmarks {
+  border-bottom: #3A4A4D 1px inset;
   /* grid-column: 1; */
 
 }
@@ -213,9 +274,10 @@ div.notes {
 
 
 div.noteTitleList {
-  border: 1px groove #355C7D;
-  margin: 0 0.3em;
-  padding: 0.3em;
+  border-bottom: 1px inset #F9FBFB;
+
+  /* margin: 0.3em; */
+  padding: 0.9em;
   font-size: 1em;
 }
 
@@ -243,7 +305,7 @@ button.openButton {
   grid-gap: 10px;
   grid-auto-rows: minmax(100px, auto);
   grid-auto-columns: 100%;
-  background-color: #c0c2ce;
+  background-color:  #8ee3ef;
   padding: 0.25em;
   height: 100%;
   width: 100%;
