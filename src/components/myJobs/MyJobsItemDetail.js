@@ -9,6 +9,8 @@ import NoteCreate from '../myNotes/NoteCreate'
 import BookmarkList from '../myBookmarks/BookmarkList'
 import MyJobsDetailDashboard from './MyJobsDetailDashboard'
 import MyJobsResourceFeedInterviews from './MyJobsResourceFeedInterviews'
+import MyCompanyDetail from '../myCompanies/MyCompanyDetail'
+
 
 class MyJobsItemDetail extends React.Component {
   constructor(props) {
@@ -20,6 +22,7 @@ class MyJobsItemDetail extends React.Component {
       notes: [],
       bookmarks: [],
       displayNote: {},
+      savedInfoDisplay: {},
       noteStatusNew: false
     }
   }
@@ -36,6 +39,7 @@ class MyJobsItemDetail extends React.Component {
         notes: this.props.savedNotes.filter((note) =>  note.company_id == json.company.id),
         // notes: json.notes.sort((a,b) => b.id - a.id),
         bookmarks: json.bookmarks,
+        savedInfoDisplay: "job",
         noteStatusNew: true
       });
       //   fetch(`https://api-v2.themuse.com/companies/${json.company.id}`)
@@ -177,13 +181,66 @@ class MyJobsItemDetail extends React.Component {
     })
   }
 
+  infoDisplay=(event) => {
+    const relevantNotes = this.relevantNotes()
+    const relevantBookmarks = this.relevantBookmarks()
+    if (this.state.savedInfoDisplay === "notes") {
+      return(
+        <div className = "notes">
+        <h2>Notes <button onClick={this.renderNewNoteForm}>+</button></h2>
+
+        {relevantNotes.map((note) => {
+          return <div className="noteTitleList" id={note.id} onClick={this.displayNote}>
+            {note.title}
+
+            <button className="openButton"><i className="material-icons" style={{fontSize:"15px"}}>launch</i></button>
+          </div>
+        })}
+      </div>
+    )}
+    else if (this.state.savedInfoDisplay==="bookmarks") {
+      return(
+        <div classname="bookmarks">
+          <h2>Bookmarks</h2>
+          <BookmarkList bookmarks={relevantBookmarks}/>
+        </div>
+      )}
+      else if (this.state.savedInfoDisplay==="company") {
+        return(
+          <div className="company">
+
+          <MyCompanyDetail user={this.props.currentUser} addBookmark = {this.props.addBookmark} companyId={this.props.company.id}/>
+        </div>
+      )}
+    else {
+      return(
+        <div className="myJobDetailDescrip" >
+
+          <h2>Job Description</h2>
+          <div dangerouslySetInnerHTML={this.contents()}></div>
+
+      </div>
+      )
+    }
+  }
+
+  infoSelect=(event)=>{
+    event.preventDefault()
+    let selection = event.target.name
+    this.setState({
+      savedInfoDisplay: selection
+    })
+  }
+
+
+
+
   render() {
 
     if (!this.props.job) {
       return <div>Loading</div>;
       }
-      const relevantNotes = this.relevantNotes()
-      const relevantBookmarks = this.relevantBookmarks()
+
       return (
         <div className="myJobDetail">
           <div className="header">
@@ -325,45 +382,17 @@ class MyJobsItemDetail extends React.Component {
           </div>
 
 
+    <div className="myJobDetailSavedInfo">
+<div className="buttons" style={{alignment:"center"}}>
 
+  <button name="job" onClick={this.infoSelect}>Job</button>
+    <button name="company" onClick={this.infoSelect}>Company</button>
+  <button name="notes" onClick={this.infoSelect}>Notes</button>
+  <button name="bookmarks" onClick={this.infoSelect}>Bookmarks</button>
 
+  </div>
 
-
-
-
-              <div className="myJobDetailSavedInfo">
-                <div className="myJobDetailDescrip" >
-
-                  <h2>Job Description</h2>
-                  <div dangerouslySetInnerHTML={this.contents()}></div>
-
-              </div>
-
-                <div classname="bookmarks">
-
-                  <h2>Bookmarks</h2>
-
-                  <BookmarkList bookmarks={relevantBookmarks}/>
-
-                </div>
-
-
-
-
-              <div className = "notes">
-                <h2>Notes <button onClick={this.renderNewNoteForm}>+</button></h2>
-
-                {relevantNotes.map((note) => {
-                  return <div className="noteTitleList" id={note.id} onClick={this.displayNote}>
-                    {note.title}
-
-                    <button className="openButton"><i className="material-icons" style={{fontSize:"15px"}}>launch</i></button>
-                  </div>
-                })}
-
-
-</div>
-
+  {this.infoDisplay()}
 
  </div>
 

@@ -53,15 +53,28 @@ input[type=submit] {
   color: #718CA1;
 }
 
-.myJobDetailDashboard button {
+.myJobDetailDashboard button{
   border: none;
   background-color: #D95468;
   font-family: "Avenir";
   color: white;
-  font-size: 14px;
+  font-size: 13px;
   margin: 12px 6px;
   padding: 6px 6px;
   border-radius: 6px;
+}
+
+.buttons button {
+  border: none;
+  background-color: #718CA1;
+  font-family: "Avenir";
+  color: white;
+  font-size: 14px;
+  width: 100px;
+  margin: 12px 6px;
+  padding: 6px 6px;
+  border-radius: 6px;
+   
 }
 
 

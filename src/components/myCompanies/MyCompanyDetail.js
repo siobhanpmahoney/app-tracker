@@ -79,7 +79,9 @@ class MyCompanyDetail extends React.Component {
     if (!this.state.myJobs) {
       return <div>Loading...</div>
     }
+    console.log("here")
     console.log(this.state.myJobs)
+    console.log(this.props)
 
     return (
   <div className="myCompanyDetail">
