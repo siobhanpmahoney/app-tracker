@@ -342,8 +342,9 @@ class MyJobsItemDetail extends React.Component {
                 <div classname="bookmarks">
 
                   <h2>Bookmarks</h2>
-                  <BookmarkList bookmarks={relevantBookmarks}/>
 
+                  <BookmarkList bookmarks={relevantBookmarks}/>
+                  
                 </div>
 
 

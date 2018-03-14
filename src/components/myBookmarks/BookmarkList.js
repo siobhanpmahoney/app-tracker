@@ -7,11 +7,16 @@ class BookmarkList extends React.Component {
 
   render() {
     console.log("in bookmark")
+    console.log(this.props.bookmarks)
     return (
       <div>
 
         {this.props.bookmarks.map((bookmark) => {
-          return <div>{bookmark.title}</div>
+          return <details>
+            <summary>
+              {bookmark.title}
+            </summary>
+        </details>
         })}
       </div>
     )
