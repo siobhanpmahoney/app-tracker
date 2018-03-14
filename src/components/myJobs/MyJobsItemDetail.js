@@ -36,7 +36,7 @@ class MyJobsItemDetail extends React.Component {
         notes: this.props.savedNotes.filter((note) =>  note.company_id == json.company.id),
         // notes: json.notes.sort((a,b) => b.id - a.id),
         bookmarks: json.bookmarks,
-        displayNote: json.notes[json.notes.length -1]
+        noteStatusNew: true
       });
       //   fetch(`https://api-v2.themuse.com/companies/${json.company.id}`)
       //     .then(r => r.json())
@@ -344,7 +344,7 @@ class MyJobsItemDetail extends React.Component {
                   <h2>Bookmarks</h2>
 
                   <BookmarkList bookmarks={relevantBookmarks}/>
-                  
+
                 </div>
 
 

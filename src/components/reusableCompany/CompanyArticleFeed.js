@@ -34,8 +34,8 @@ class CompanyArticleFeed extends React.Component {
 
 addBookmark = (article) => {
   console.log("in PR component")
-  console.log(article.title, article.url, this.props.user.user.id, this.props.company.id)
-  this.props.addBookmark(article.title, article.url, this.props.user.user.id, this.props.company.id)
+  console.log(article.title, article.source.name, article.description, article.url, this.props.user.user.id, this.props.company.id)
+  this.props.addBookmark(article.title, article.source.name, article.description, article.url, this.props.user.user.id, this.props.company.id)
 }
 
 dynamicBookmarkIcon = (info) => {

@@ -171,7 +171,7 @@ export function saveNewJob(selectedJob) {
     }
   }
 
-  export function addNewBookmark(bookmarkTitle, bookmarkUrl, bookmarkUserId, bookmarkCompanyId) {
+  export function addNewBookmark(bookmarkTitle, bookmarkSourceName, bookmarkSummary, bookmarkUrl, bookmarkUserId, bookmarkCompanyId) {
     console.log(bookmarkTitle, bookmarkUrl, bookmarkUserId, bookmarkCompanyId)
     return (dispatch) => {
       fetch('http://localhost:3000/api/v1/bookmarks', {
@@ -182,6 +182,8 @@ export function saveNewJob(selectedJob) {
         },
         body: JSON.stringify({
           title: bookmarkTitle,
+          source_name: bookmarkSourceName,
+          summary: bookmarkSummary,
           url: bookmarkUrl,
           user_id: bookmarkUserId,
           company_id: bookmarkCompanyId

@@ -116,9 +116,9 @@ class App extends Component {
     this.props.editNote(selectedNote, noteUserId, noteJobId, noteCompanyId)
   }
 
-  addBookmark = (bookmarkTitle, bookmarkUrl, bookmarkUserId, bookmarkCompanyId) => {
-    console.log(bookmarkTitle, bookmarkUrl, bookmarkUserId, bookmarkCompanyId)
-    this.props.addNewBookmark(bookmarkTitle, bookmarkUrl, bookmarkUserId, bookmarkCompanyId)
+  addBookmark = (bookmarkTitle, bookmarkSourceName, bookmarkSummary, bookmarkUrl, bookmarkUserId, bookmarkCompanyId) => {
+    console.log(bookmarkTitle, bookmarkSourceName, bookmarkSummary, bookmarkUrl, bookmarkUserId, bookmarkCompanyId)
+    this.props.addNewBookmark(bookmarkTitle, bookmarkSourceName, bookmarkSummary, bookmarkUrl, bookmarkUserId, bookmarkCompanyId)
   }
 
   relevantNotes = (company) => {
