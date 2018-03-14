@@ -324,24 +324,23 @@ class MyJobsItemDetail extends React.Component {
             </div>
           </div>
 
-          <div className="myJobDetailDescrip" >
-          <details>
-            <summary>Job Description</summary>
-            <div dangerouslySetInnerHTML={this.contents()}></div>
-          </details>
-        </div>
 
-        <div className="myJobDetailNote">
-            {this.noteTypeRender()}
-        </div>
+
+
 
 
 
 
               <div className="myJobDetailSavedInfo">
+                <div className="myJobDetailDescrip" >
 
+                  <h2>Job Description</h2>
+                  <div dangerouslySetInnerHTML={this.contents()}></div>
+
+              </div>
 
                 <div classname="bookmarks">
+
                   <h2>Bookmarks</h2>
                   <BookmarkList bookmarks={relevantBookmarks}/>
 
@@ -365,6 +364,10 @@ class MyJobsItemDetail extends React.Component {
 </div>
 
 
+ </div>
+
+ <div className="myJobDetailNote">
+     {this.noteTypeRender()}
  </div>
 
 

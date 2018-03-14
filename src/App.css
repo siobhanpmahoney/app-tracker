@@ -280,11 +280,8 @@ input[type=submit] {
   margin-right: -4em;
 }
 
-.myJobDetailDescrip {
-  grid-column: 1 / span 2;
-  /* grid-row: 3 / span 4; */
 
-}
+
 
 
 .myJobInfoAndNotes {
@@ -305,8 +302,13 @@ input[type=submit] {
 .myJobDetailSavedInfo {
   grid-column: 1 / span 2;
   background-color:  #F9FBFB;
+  height: 600px;
   overflow-y: scroll;
 }
+
+/* .myJobDetailDescrip {
+  grid-column: 1 / span 2;
+} */
 
 .bookmarks {
   border-bottom: #3A4A4D 1px inset;
@@ -352,6 +354,7 @@ button.openButton {
   height: 100%;
   width: 100%;
   align-self: center;
+  position: sticky;
 }
 
 .myJobDetailSavedNote {
