@@ -194,7 +194,7 @@ class MyJobsItemDetail extends React.Component {
           <div className="myJobDetailDashboard">
             <p><label>Date Saved: <input type="text" value={this.formattedDate()} readOnly /></label></p>
 
-            <p><label>Applied?<input type="checkbox" name="applied_status" checked={this.props.job.applied_status} onChange={this.dashboardListener} /></label></p>
+            <p><label>Applied? <input type="checkbox" name="applied_status" checked={this.props.job.applied_status} onChange={this.dashboardListener} /></label></p>
 
 
 
@@ -219,10 +219,10 @@ class MyJobsItemDetail extends React.Component {
               {this.props.job.application_response_status == "interview invite" &&
                 <div className="firstInterview">
                   <h4>Interviews</h4>
-                  <p><b>First Round:</b></p>
-                  <span> <label>Interview Date:<input type="text" name="interview_1_date" onChange={this.dashboardListener} value={this.props.job.interview_1_date}/></label>
+                  <p><b>First Round: </b></p>
+                  <span> <label>Interview Date: <input type="text" name="interview_1_date" onChange={this.dashboardListener} value={this.props.job.interview_1_date}/></label>
 
-                  <label>Interview Type:
+                  <label>  Interview Type:
                     <select name="interview_1_type" value = {this.props.job.interview_1_type} onChange={this.dashboardListener}>
                       <option value=''>Select...</option>
                       <option value="telephone">Telephone Screening</option>
@@ -231,10 +231,10 @@ class MyJobsItemDetail extends React.Component {
                     </select>
                   </label>
 
-                  <label> Technical Interview?
+                  <label>  Technical Interview?
                     <input type="checkbox" name="interview_1_technical" checked={this.props.job.interview_1_technical} onChange={this.dashboardListener} /></label>
 
-                    <label>Outcome:
+                    <label>  Outcome:
                       <select name="interview_1_response" value ={this.props.job.interview_1_response} onChange={this.dashboardListener}>
                         <option value=''>Select...</option>
                         <option value="job offer">Job Offer</option>
@@ -249,9 +249,9 @@ class MyJobsItemDetail extends React.Component {
               {this.props.job.interview_1_response == "next interview round" &&
                 <div className="interview2status">
                   <p><b>Second Round:</b></p>
-                  <span> <label>Interview Date:<input type="text" name="interview_2_date" onChange={this.dashboardListener} value={this.props.job.interview_2_date}/></label>
+                  <span> <label>  Interview Date:<input type="text" name="interview_2_date" onChange={this.dashboardListener} value={this.props.job.interview_2_date}/></label>
 
-                  <label>Interview Type:
+                  <label>  Interview Type:
                     <select name="interview_2_type" value = {this.props.job.interview_2_type} onChange={this.dashboardListener}>
                       <option value=''>Select...</option>
                       <option value="telephone">Telephone Screening</option>
@@ -260,10 +260,10 @@ class MyJobsItemDetail extends React.Component {
                     </select>
                   </label>
 
-                  <label> Technical Interview?
+                  <label>  Technical Interview?
                     <input type="checkbox" name="interview_2_technical" checked={this.props.job.interview_2_technical} onChange={this.dashboardListener} /></label>
 
-                    <label>Outcome:
+                    <label>  Outcome:
                       <select name="interview_2_response" value = {this.props.job.interview_2_response} onChange={this.dashboardListener}>
                         <option value=''>Select...</option>
                         <option value="job offer">Job Offer</option>
@@ -277,10 +277,10 @@ class MyJobsItemDetail extends React.Component {
 
               { this.props.job.interview_2_response == "next interview round" &&
                 <div className="interview3status">
-                  <p><b>Third Round:</b></p>
+                  <p><b>  Third Round:</b></p>
                   <span> <label>Interview Date:<input type="text" name="interview_3_date" onChange={this.dashboardListener} value={this.props.job.interview_3_date}/></label>
 
-                  <label>Interview Type:
+                  <label>  Interview Type:
                     <select value = {this.props.job.interview_3_type} onChange={this.dashboardListener}>
                       <option name="interview_3_type" value=''>Select...</option>
                       <option name="interview_3_type" value="telephone">Telephone Screening</option>
@@ -289,10 +289,10 @@ class MyJobsItemDetail extends React.Component {
                     </select>
                   </label>
 
-                  <label> Technical Interview?
+                  <label>  Technical Interview?
                     <input type="checkbox" name="interview_3_technical" checked={this.props.job.interview_3_technical} onChange={this.dashboardListener} /></label>
 
-                    <label>Outcome:
+                    <label>  Outcome:
                       <select value = {this.props.job.interview_3_response} onChange={this.dashboardListener}>
                         <option name="interview_3_response" value=''>Select...</option>
                         <option name="interview_3_response" value="job offer">Job Offer</option>
@@ -331,10 +331,12 @@ class MyJobsItemDetail extends React.Component {
           </details>
         </div>
 
-      <div className="underDescrip" >
+        <div className="myJobDetailNote">
+            {this.noteTypeRender()}
+        </div>
 
 
-            <div className="myJobInfoAndNotes">
+
 
               <div className="myJobDetailSavedInfo">
 
@@ -359,18 +361,13 @@ class MyJobsItemDetail extends React.Component {
                   </div>
                 })}
 
-              </div>
+
 </div>
 
 
  </div>
- <div className="myJobDetailNote">
-     {this.noteTypeRender()}
- </div>
-          </div>
-          <div className="myJobResource">
-                    <MyJobsResourceFeedInterviews addBookmark={this.props.addNewBookmark} company={this.props.company} user={this.props.user}/>
-                    </div>
+
+
 
         </div>
 

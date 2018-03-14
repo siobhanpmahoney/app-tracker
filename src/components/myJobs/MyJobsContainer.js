@@ -3,6 +3,8 @@ import MyJobsList from './MyJobsList'
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import * as Actions from '../../actions'
+import {BrowserRouter as Router, Route, Switch, Redirect, NavLink, Link, withRouter, HashRouter} from 'react-router-dom';
+
 
 class MyJobsContainer extends React.Component {
 

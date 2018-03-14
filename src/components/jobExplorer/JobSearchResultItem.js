@@ -53,7 +53,7 @@ class JobSearchResultItem extends React.Component {
   render() {
 
     return (
-      <div className="jobSearchResultItem" style={{backgroundColor:"white", color:"#3A4A4D", fontSize:"14px"}}>
+      <div className="jobSearchResultItem" style={{ color:"#3A4A4D", fontSize:"14px"}}>
         {this.dynamicIcon()}
         <h4>{this.props.job.name}</h4>
         <div className="jobSearchResultCompany">{this.props.job.company.name}</div>

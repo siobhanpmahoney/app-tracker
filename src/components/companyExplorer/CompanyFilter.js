@@ -67,7 +67,7 @@ const CompanyFilter = ({industrySelectListener, handleCompanySearchSubmit, indus
     <input type="checkbox" value={size.split(' ').join('%20')} onChange={sizeSelectListener} key={size}/> </label></p>
   })}
 </div>
-<p><input type="submit" onClick={handleCompanySearchSubmit}/></p>
+<p><input type="submit" value="search" className="button" onClick={handleCompanySearchSubmit}/></p>
 </div>
 )
 

@@ -6,10 +6,19 @@ import { NavLink } from 'react-router-dom';
 
 const link = {
   width: '100px',
-  padding: '1em',
-  margin: '1em',
-  backgroundColor: '#ff2348',
-  color: 'white',
+  paddingTop: '1em',
+  paddingBottom: '1em',
+  paddingLeft: '0.75em',
+  paddingRight: '0.75em',
+  marginTop: '1em',
+  marginBottom: '1em',
+  marginLeft: '0.75em',
+  marginRight: '0.75em',
+  color: '#718CA1',
+  fontSize: '13px',
+  alignText: "right",
+  textDecoration: "none",
+  borderRadius: "6px"
 }
 
 class NavBar extends React.Component {
@@ -17,18 +26,21 @@ class NavBar extends React.Component {
   renderHTML = () => {
     if (!!this.props.currentUser) {
       return (
-        <div style={{backgroundColor:"white"}}>
-        <NavLink to="/" exact style={link} activeStyle={{background: '#FF5370'}}>Profile</NavLink>
+        <div style={{backgroundColor:"white", padding:"1em"}}>
+          <span style={{color:"#30c9e8", fontSize:"40px", fontWeight:"800", fontFamily:"Montserrat", style:"inline"}}>Capture</span>
+          <span style={{float:"right", style:"inline"}}>
+        <NavLink to="/" exact style={link} activeStyle={{backgroundColor:'#7FE6E1', color:"white", textDecoration:"none"}}>Profile</NavLink>
 
-        <NavLink to="/search/companies" exact style={link} activeStyle={{background: '#FF5370'}}>Explore Companies</NavLink>
+        <NavLink to="/search/companies" exact style={link} activeStyle={{color:'#EBBF83', fontWeight:"800"}}>Explore Companies</NavLink>
 
-        <NavLink to="/search/jobs" exact style={link} activeStyle={{background:'#FF5370'}}>Search Jobs</NavLink>
+        <NavLink to="/search/jobs" exact style={link} activeStyle={{backgroundColor:'#7FE6E1', color:"white", textDecoration:"none"}}>Search Jobs</NavLink>
 
-      <NavLink to="/mycompanies" exact style={link} activeStyle={{background:'#FF5370'}}>My Companies</NavLink>
+      <NavLink to="/mycompanies" exact style={link} activeStyle={{backgroundColor:'#7FE6E1', color:"white", textDecoration:"none"}}>My Companies</NavLink>
 
-      <NavLink to="/myjobs" exact style={link} activeStyle={{background:'#FF5370'}}>My Jobs</NavLink>
+      <NavLink to="/myjobs" exact style={link} activeStyle={{backgroundColor:'#7FE6E1', color:"white", textDecoration:"none"}}>My Jobs</NavLink>
 
-    <NavLink onClick={this.props.logOutUser} to="/logout" exact style={link} activeStyle={{background: '#FF5370'}}> Log Out </NavLink>
+    <NavLink onClick={this.props.logOutUser} to="/logout" exact style={link} activeStyle={{backgroundColor:'#7FE6E1', color:"white", textDecoration:"none"}}> Log Out </NavLink>
+    </span>
     </div>
   )
 

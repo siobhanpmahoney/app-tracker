@@ -135,7 +135,7 @@ class App extends Component {
 
   render() {
     console.log(this.props)
-    
+
     // if (!this.props.savedJobs) {
     //   return <div>Loading</div>;
     // }
@@ -166,7 +166,7 @@ class App extends Component {
           user={this.props.currentUser}
           companyId={props.match.params.companyId} currentUser={this.props.currentUser} savedJobs={this.props.savedJobs} savedCompanies={this.props.savedCompanies} savedNotes={this.props.savedNotes} editJob={this.props.editJob} addJob={this.props.addJob} editNote={this.editNote} addBookmark={this.addBookmark} />} />
 
-      <Route exact path="/myjobs" render={() => <MyJobsContainer savedJobs={this.props.savedJobs} user={this.props.currentUser} addToSavedJobs={this.addToSavedJobs} savedCompanies={this.props.savedCompanies} loadSavedJob={this.props.loadSavedJob} savedNotes={this.props.savedNotes} />} />
+        <Route exact path="/myjobs" render={() => <MyJobsContainer savedJobs={this.props.savedJobs} user={this.props.currentUser} addToSavedJobs={this.addToSavedJobs} savedCompanies={this.props.savedCompanies} loadSavedJob={this.props.loadSavedJob} savedNotes={this.props.savedNotes} />} />
 
       <Route path="/myjobs/:jobId" render={(props) => <MyJobsItemDetail
           user={this.props.currentUser} jobId={props.match.params.jobId} addBookmark = {this.addBookmark}

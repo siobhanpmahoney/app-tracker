@@ -3,6 +3,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import * as Actions from '../../actions'
 import JobSearchResultList from './JobSearchResultList'
+import JobSearchResultItem from './JobSearchResultItem'
 
 class JobSuggestionContainer extends React.Component {
   constructor(props) {
@@ -39,9 +40,7 @@ class JobSuggestionContainer extends React.Component {
   }
 
   render() {
-    console.log("in sugg")
-    console.log(this.state)
-    console.log(`https://api-v2.themuse.com/jobs?category=${this.props.categoryUrl}&api-key=82b2d1f745512b99a70044e6c6b316d86739a97719d5e88caf67a3f7fd788a00&page=1`)
+
 
 
     if (this.state.suggestedJobs == []) {
@@ -51,9 +50,18 @@ class JobSuggestionContainer extends React.Component {
     return (
       <div>
 
+        <div style={{background:"blue"}}>
+          <h2>Suggested Jobs</h2>
+        {this.state.suggestedJobs.map((j) => {
+          return <JobSearchResultItem job={j} key={j.id} savedJobs={this.props.savedJobs} addToSavedJobs={this.props.addToSavedJobs} museJobId={j.id}/>
+        })}
 
+xxxx
+</div>
+<div>
         <JobSearchResultList currentUser={this.props.currentUser} jobSearchResults = {this.state.suggestedJobs} savedJobs={this.props.savedJobs} addToSavedJobs={this.props.addToSavedJobs} />
 
+      </div>
       </div>
     )
   }
