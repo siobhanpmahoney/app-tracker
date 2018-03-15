@@ -139,6 +139,7 @@ class MyJobsItemDetail extends React.Component {
 
     event.preventDefault()
     let selectedNote = this.relevantNotes().find((note) => note.id == event.target.id)
+    console.log(selectedNote)
     this.setState({
       displayNote: selectedNote,
       noteStatusNew: false

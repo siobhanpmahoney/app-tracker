@@ -63,9 +63,9 @@ class JobDescription extends React.Component {
     if (this.props.savedJobs.find((job) => {
       return job.museId == this.state.job.id
     })) {
-      return (<i className="material-icons" style={{color:"blue", fontSize:"100%"}}>bookmark</i>)
+      return (<i className="material-icons" style={{color:"#FF5370", fontSize:"100%"}}>bookmark</i>)
     } else {
-      return (<i className="material-icons" onClick={this.saveJob} style={{color:"blue"}}>bookmark_border</i>)
+      return (<i className="material-icons" onClick={this.saveJob} style={{color:"#FF5370"}}>bookmark_border</i>)
     }
   }
 

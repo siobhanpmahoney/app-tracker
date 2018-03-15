@@ -85,9 +85,9 @@ class MyCompanyDetail extends React.Component {
 
     return (
   <div className="myCompanyDetail">
-      <h1 style={{gridColumn:"1 / span 3"}}>{this.state.company.name}</h1>
-      <img src={this.state.company.image_link} style={{width:"400px", gridColumn:" 3 / span 3"}} />
-      <div style={{gridColumn:"1 / span 2"}}>
+      <h1>{this.state.company.name}</h1>
+      <img src={this.state.company.image_link} style={{width:"400px"}} />
+      <div>
       <h3>{this.state.company.location}</h3>
       <h3>{this.state.company.size}</h3>
         <div style={{fontSize:"18px"}}>{this.state.company.description}</div>
@@ -97,7 +97,7 @@ class MyCompanyDetail extends React.Component {
 
 
 
-    <div className="myCompanyMyJobs" style={{gridColumn:"1/span 2"}}>
+    <div className="myCompanyMyJobs" style={{clear:"both"}}>
       <h2>Bookmarked Jobs</h2>
       {this.state.myJobs.map((job) => {
         return <MyJobsItem job={job} key={job.id} user = {this.props.currentUser} savedJobs={this.props.savedJobs} savedCompanies={this.props.savedCompanies} savedNotes={this.props.savedNotes} user={this.props.currentUser}/>
@@ -106,17 +106,21 @@ class MyCompanyDetail extends React.Component {
     </div>
 
 
-    <div className="myCompanyPressReleases" style={{gridColumn:"1/span 2"}}>
+    <div className="myCompanyPressReleases" style={{clear:"both"}}>
       <h2>Press Releases mentioning {this.state.company.name}</h2>
+      <div style={{float:"left", display:"inlineBlock"}}>
       <CompanyPRFeed addBookmark = {this.props.addBookmark} user = {this.props.user} company={this.state.company}/>
+      </div>
     </div>
 
-    <div className="myCompanyNews" style={{gridColumn:"1/span 2"}}>
+    <div className="myCompanyNews" style={{clear:"both"}}>
       <h2>{this.state.company.name} in the News</h2>
+      <div style={{float:"left", display:"inlineBlock"}}>
       <CompanyArticleFeed company={this.state.company} addBookmark = {this.props.addBookmark} user = {this.props.user} company={this.state.company}/>
+      </div>
     </div>
 
-    <div className="myCompanyFindJobs" style={{gridColumn:"1/span 2"}}>
+    <div className="myCompanyFindJobs" style={{clear:"both"}}>
       <h2>Explore Open Positions at {this.state.company.name}</h2>
       <JobSearchResultList jobSearchResults = {this.state.openJobs} savedJobs={this.props.savedJobs} addToSavedJobs={this.props.saveNewJob} />
     </div>

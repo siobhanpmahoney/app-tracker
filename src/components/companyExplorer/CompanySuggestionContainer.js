@@ -41,7 +41,7 @@ class CompanySuggestionContainer extends React.Component {
       return <div>Loading...</div>
     }
     return (
-      <div>
+      <div style={{margin:"2em"}}>
         <h2>Check out these Companies!</h2>
         <CompanySearchResultList companySearchResults={this.state.companySearchResults} />
       </div>

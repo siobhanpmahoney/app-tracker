@@ -42,9 +42,9 @@ dynamicBookmarkIcon = (info) => {
   if (this.props.savedBookmarks.find((bookmark) => {
     return bookmark.url == info.url
   })) {
-    return (<i className="material-icons" name={info.title} id={info.url} style={{color:"blue", fontSize:"100%"}}>bookmark</i>)
+    return (<i className="material-icons" name={info.title} id={info.url} style={{color:"#FF5370", fontSize:"100%"}}>bookmark</i>)
   } else {
-    return (<i className="material-icons" value={info.title} id={info.url} onClick={()=>this.addBookmark(info)} style={{color:"blue"}}>bookmark_border</i>)
+    return (<i className="material-icons" value={info.title} id={info.url} onClick={()=>this.addBookmark(info)} style={{color:"#FF5370"}}>bookmark_border</i>)
   }
 }
 
@@ -60,22 +60,24 @@ dynamicBookmarkIcon = (info) => {
     return (
       <div>
         {this.state.articles.map((article) => {
-          return <div style={{display: "block", verticalAlign: "middle", justifyContent: "left", boxShadow:"rgba(0, 0, 0, 0.25) 0px 14px 14px, rgba(0, 0, 0, 0.22) 0px 10px 10px", margin: "0.5em", padding: "0.5em", height: "150px", width: "360px", paddingTop:"2em"}}>
+          return <div style={{display: "inlineBlock", float:"left", verticalAlign: "top", background:"white", boxShadow:"rgba(0, 0, 0, 0.25) 0px 14px 14px, rgba(0, 0, 0, 0.22) 0px 10px 10px", margin: "1em", padding: "0.25em", height: "150px", width: "360px"}}>
 
-            <span style={{display:"block", verticalAlign:"top",clear:"both", alignment:"right", margin:"0.1em", color:"blue"}}>
+            <span style={{display:"inline", verticalAlign:"top", alignment:"right", margin:"0.1em", color:"#FF5370"}}>
 
           {this.dynamicBookmarkIcon(article)}
 
-          <a href={article.url} target="_blank"><i className="material-icons" style={{fontSize:"18px"}}>launch</i></a>
+
           </span>
 
-          <div><img src={article.urlToImage} style={{maxHeight:"75px", maxWidth:"120px", float:"right", display:"inlineBlock", verticalAlign: "top", padding:"0.2em", margin:"0.2em", border:"1px red solid"}} /></div>
+          <div><img src={article.urlToImage} style={{maxHeight:"70px", maxWidth:"100px", float:"left", display:"inlineBlock", verticalAlign: "top", padding:"0.25em", margin:"0.25em"}} /></div>
 
-          <div style={{marginTop:"1em", padding:"0.5em", fontSize:"12.5px", fontWeight:"bold", display:"inline",  verticalAlign:"bottom"}}>{article.source.name}</div>
+          <div style={{margin:"0.25em", padding:"0.1em", fontSize:"12.5px", fontWeight:"bold", display:"inline",  verticalAlign:"top"}}>{article.source.name}</div>
 
-          <div className="companyPressCardTitle" style={{margin:"0.25em", padding:"0.25em", display:"inlineBlock", verticalAlign:"bottom", textIndent:"0em", fontSize:"13px", fontFamily:"Roboto"}}>{article.title}</div>
+          <div className="companyPressCardTitle" style={{margin:"0.25em", padding:"0.25em", display:"inlineBlock", verticalAlign:"bottom", textIndent:"0em", fontSize:"13px", fontFamily:"Calibri"}}>
+            <a href={article.url} target="_blank">{article.title}</a>
+          </div>
 
-          <div className="companyPressCardTitle" style={{fontSize:"12.5px", fontFamily:"Roboto", margin:"0.25em", padding:"0.25em", fontStyle:"italic" }}>{article.publishedAt}</div>
+          <div className="companyPressCardTitle" style={{fontSize:"12.5px", fontFamily:"Calibri", margin:"0.25em", padding:"0.25em", fontStyle:"italic" }}>Published {new Date(article.publishedAt).toLocaleDateString()}</div>
 
           </div>
         })}

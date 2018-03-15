@@ -15,11 +15,11 @@ class JobSuggestionContainer extends React.Component {
   }
 
   componentDidMount() {
-    let url = `https://api-v2.themuse.com/jobs?category=${this.props.categoryUrl}&api-key=82b2d1f745512b99a70044e6c6b316d86739a97719d5e88caf67a3f7fd788a00&page=1`
+    let url = `https://api-v2.themuse.com/jobs?category=${this.props.categoryUrl}&location=New%20York%20City%2C%20NY&location=San%20Francisco%2C%20CA&location=Los%20Angeles%2C%20CA&api-key=82b2d1f745512b99a70044e6c6b316d86739a97719d5e88caf67a3f7fd788a00&page=1`
     fetch(url)
       .then(response=>response.json())
       .then(json => this.setState({
-        suggestedJobs: json.results
+        suggestedJobs: json.results.filter((job) => job.company.name != "Goldman Sachs")
        })
     )
 
@@ -50,18 +50,14 @@ class JobSuggestionContainer extends React.Component {
     return (
       <div>
 
-        <div style={{background:"blue"}}>
-          <h2>Suggested Jobs</h2>
+        <div>
+
         {this.state.suggestedJobs.map((j) => {
           return <JobSearchResultItem job={j} key={j.id} savedJobs={this.props.savedJobs} addToSavedJobs={this.props.addToSavedJobs} museJobId={j.id}/>
         })}
 
 xxxx
 </div>
-<div>
-        <JobSearchResultList currentUser={this.props.currentUser} jobSearchResults = {this.state.suggestedJobs} savedJobs={this.props.savedJobs} addToSavedJobs={this.props.addToSavedJobs} />
-
-      </div>
       </div>
     )
   }

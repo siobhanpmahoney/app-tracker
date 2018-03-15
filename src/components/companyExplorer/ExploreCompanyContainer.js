@@ -101,7 +101,7 @@ class ExploreCompanyContainer extends React.Component{
    render() {
      console.log(this.props)
      return (
-       <div>
+       <div style={{margin:"1em"}}>
        <h2>Search for a Company!</h2>
        <div>
          <CompanyFilter industrySelectListener={this.industrySelectListener}

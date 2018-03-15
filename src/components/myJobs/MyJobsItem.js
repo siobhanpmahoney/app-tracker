@@ -27,12 +27,16 @@ class MyJobsItem extends React.Component {
   render() {
     console.log(this.props)
     return(
-      <div className="mySavedJob" style={{backgroundColor:"white"}}>
+      <div className="mySavedJob" style={{background:"white", color:"#3A4A4D", fontSize:"13.5px", style:"inlineBlock", margin:"1em"}}>
+        <div style={{background:"#333F4A", margin:"-.25em"}}>
+        <span style={{fontSize:"14px", fontWeight: "600", display:"block", padding:"0.5em", color:"white", fontFamily:"Avenir"}}>{this.props.job.company_name}</span>
+        </div>
+        <div style={{paddingTop:"0.5em"}}>
         <Link to={`/myjobs/${this.props.job.id}`}
-          job={this.props.job} loadSavedJob={this.props.loadSavedJob}  ><h3>{this.props.job.title}</h3></Link>
+          job={this.props.job} loadSavedJob={this.props.loadSavedJob}  >  <span className="jobSearchResultCompany" style={{fontWeight:"500"}}>{this.props.job.title}</span> </Link>
 
-        <h4>{this.props.job.company_name}</h4>
         <div className="dateSaved">Date saved: {this.formattedSavedDate()}</div>
+      </div>
       </div>
     )
   }

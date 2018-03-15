@@ -26,26 +26,35 @@ class Profile extends React.Component {
   }
 
   render() {
+    if (!this.props.currentUser) {
+      return(<div>Loading...</div>)
+    }
+    if (!this.props.currentUser.user){
+      return(<div>Loading...</div>)
+    }
+    if (!this.props.currentUser.user.username){
+      return(<div>Loading...</div>)
+    }
 
+    console.log(this.props.currentUser)
+    console.log(this.props.currentUser.user.username)
     return (
       <div className = "profile">
-        <div className="welcome"><h1>Welcome back</h1></div>
+        <div className="welcome">Welcome Back, {this.props.currentUser.user.username}!</div>
 
 
-        <div className="jobSuggestions" >
-          <h2>Suggested Jobs</h2>
+        <div className="jobSuggestions" style={{background:"#cfdae6", margin:"1em -1em"}}>
+          <div className="insideJobSuggestions" style={{margin:"1em", padding:"0.5em"}}>
+          <h1><b>Suggested Jobs</b></h1>
           <JobSuggestionContainer currentUser={this.props.currentUser} savedJobs={this.props.savedJobs} savedCategories={this.props.savedCategories} savedIndustries={this.props.savedIndustries} addToSavedJobs={this.props.addToSavedJobs}  categoryUrl={this.categoryUrl()}/>
+          </div>
         </div>
 
-        <div className="companySuggestionContainer">
+        <div className="companySuggestionContainer" style={{margin:"1em", padding: "1em"}}>
 
         <CompanySuggestionContainer industryUrl={this.industryUrl()} />
         </div>
 
-        <div className="resources">
-          <h2>Get Advice!</h2>
-          <MyJobsResourceFeedInterviews />
-        </div>
 
 
       </div>

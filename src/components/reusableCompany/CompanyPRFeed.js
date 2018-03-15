@@ -43,9 +43,9 @@ dynamicBookmarkIcon = (info) => {
   if (this.props.savedBookmarks.find((bookmark) => {
     return bookmark.url == info.url
   })) {
-    return (<i className="material-icons" name={info.title} id={info.url} style={{color:"blue", fontSize:"100%"}}>bookmark</i>)
+    return (<i className="material-icons" name={info.title} id={info.url} style={{color:"#FF5370", fontSize:"100%"}}>bookmark</i>)
   } else {
-    return (<i className="material-icons" value={info.title} id={info.url} onClick={()=>this.addBookmark(info)} style={{color:"blue"}}>bookmark_border</i>)
+    return (<i className="material-icons" value={info.title} id={info.url} onClick={()=>this.addBookmark(info)} style={{color:"#FF5370"}}>bookmark_border</i>)
   }
 }
 
@@ -67,24 +67,31 @@ dynamicBookmarkIcon = (info) => {
     return (
       <div>
         {this.state.pressReleases.map((press) => {
-          return <div style={{display: "block", verticalAlign: "middle", justifyContent: "left", boxShadow:"rgba(0, 0, 0, 0.25) 0px 14px 14px, rgba(0, 0, 0, 0.22) 0px 10px 10px", margin: "0.5em", padding: "0.5em", height: "150px", width: "360px", paddingTop:"2em"}}>
+          return <div style={{display: "inlineBlock", float:"left", verticalAlign: "top", background:"white", boxShadow:"rgba(0, 0, 0, 0.25) 0px 14px 14px, rgba(0, 0, 0, 0.22) 0px 10px 10px", margin: "1em", padding: "0.25em", height: "300px", width: "250px"}}>
 
-            <span style={{display:"block", verticalAlign:"top",clear:"both", alignment:"right", margin:"0.1em", color:"blue"}}>
+            <div style={{margin:"-1em"}}>
+            <div style={{margin:"0.75em", padding:"0.5em", fontSize:"12.5px", fontWeight:"bold", display:"block", backgroundColor:"#30c9e8", color:"white"}}>{press.source.name}</div>
+            </div>
+
+<div>
+            <div><img src={press.urlToImage} style={{width:"256px", display:"block", verticalAlign: "top", marginLeft:"-0.45em", marginRight:"-0.35em", marginTop:"0.25em", padding:"0.25em"}} /></div>
+
+            <div style={{backgroundColor:"white", padding:"0.25em", marginTop:"0.25em"}}>
+            <span style={{display:"inlineBlock", verticalAlign:"top", alignment:"right", margin:"0.1em", color:"#FF5370"}}>
 
           {this.dynamicBookmarkIcon(press)}
 
-          <a href={press.url} target="_blank"><i className="material-icons" style={{fontSize:"18px"}}>launch</i></a>
+
           </span>
 
-          <div><img src={press.urlToImage} style={{maxHeight:"75px", maxWidth:"120px", float:"right", display:"inlineBlock", verticalAlign: "top", padding:"0.2em", margin:"0.2em", border:"1px red solid"}} /></div>
+          <span className="companyPressCardTitle" style={{margin:"0.25em", padding:"0.25em", display:"inlineBlock", verticalAlign:"bottom", textIndent:"0em", fontSize:"13px", fontFamily:"Calibri"}}>
+            <a href={press.url} target="_blank">{press.title}</a>
+          </span>
 
-          <div style={{marginTop:"1em", padding:"0.5em", fontSize:"12.5px", fontWeight:"bold", display:"inline",  verticalAlign:"bottom"}}>{press.source.name}</div>
-
-          <div className="companyPressCardTitle" style={{margin:"0.25em", padding:"0.25em", display:"inlineBlock", verticalAlign:"bottom", textIndent:"0em", fontSize:"13px", fontFamily:"Roboto"}}>{press.title}</div>
-
-          <div className="companyPressCardTitle" style={{fontSize:"12.5px", fontFamily:"Roboto", margin:"0.25em", padding:"0.25em", fontStyle:"italic" }}>{press.publishedAt}</div>
-
+          <div className="companyPressCardTitle" style={{fontSize:"12.5px", fontFamily:"Calibri", margin:"0.25em", padding:"0.25em", fontStyle:"italic" }}>Published {new Date(press.publishedAt).toLocaleDateString()}</div>
+</div>
           </div>
+        </div>
         })}
       </div>
     )

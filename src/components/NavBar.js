@@ -27,7 +27,7 @@ class NavBar extends React.Component {
     if (!!this.props.currentUser) {
       return (
         <div style={{backgroundColor:"white", padding:"1em"}}>
-          <span style={{color:"#30c9e8", fontSize:"40px", fontWeight:"800", fontFamily:"Montserrat", style:"inline"}}>Capture</span>
+          <span style={{color:"#30c9e8", fontSize:"42px", fontWeight:"800", fontFamily:"Montserrat", style:"inline", marginTop:"0.75em", padding:"0.75em"}}>Capture</span>
           <span style={{float:"right", style:"inline"}}>
         <NavLink to="/" exact style={link} activeStyle={{backgroundColor:'#7FE6E1', color:"white", textDecoration:"none"}}>Profile</NavLink>
 

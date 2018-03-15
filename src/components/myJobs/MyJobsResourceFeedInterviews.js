@@ -30,9 +30,9 @@ dynamicBookmarkIcon = (info) => {
   if (this.props.savedBookmarks.find((bookmark) => {
     return bookmark.url == info.refs.landing_page
   })) {
-    return (<i className="material-icons" name={info.name} id={info.refs.landing_page} style={{color:"blue", fontSize:"100%"}}>bookmark</i>)
+    return (<i className="material-icons" name={info.name} id={info.refs.landing_page} style={{color:"#FF5370", fontSize:"100%"}}>bookmark</i>)
   } else {
-    return (<i className="material-icons" value={info.name} id={info.refs.landing_page} onClick={()=>this.addBookmark(info)} style={{color:"blue"}}>bookmark_border</i>)
+    return (<i className="material-icons" value={info.name} id={info.refs.landing_page} onClick={()=>this.addBookmark(info)} style={{color:"#FF5370"}}>bookmark_border</i>)
   }
 }
 

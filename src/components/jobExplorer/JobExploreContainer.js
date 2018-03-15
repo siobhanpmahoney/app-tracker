@@ -74,23 +74,23 @@ class JobExploreContainer extends React.Component {
 
       let currentResults = this.state.jobSearchResults.slice()
 
-      for(let i=0; i<6; i++) {
+      for(let i=0; i<10; i++) {
 
 
         let jobUrl = "https://api-v2.themuse.com/jobs?" + categories + levels + locations + "&api-key=82b2d1f745512b99a70044e6c6b316d86739a97719d5e88caf67a3f7fd788a00&page=" + i
         fetch(jobUrl)
         .then(response => response.json())
-        .then(json => json.results.map((res) => currentResults.push(res)))
+        .then(json => json.results.filter((job) => job.company.name != "Goldman Sachs").map((res) => currentResults.push(res)))
       }
+
       this.setState({
         jobSearchResults: currentResults
       })
-
     }
 
     render() {
       return (
-      <div className="jobSearchContainer" style={{backgroundColor:"background-color: #F9FBFB"}}>
+      <div className="jobSearchContainer" style={{backgroundColor:"background-color: #F9FBFB", margin:"1em"}}>
       <h2>Search for a Job!</h2>
 
       <JobFilter categorySelectListener={this.categorySelectListener} levelSelectListener = {this.levelSelectListener} locationSelectListener={this.locationSelectListener} handleJobSearchSubmit={this.handleJobSearchSubmit} />
