@@ -12,11 +12,16 @@ class BookmarkList extends React.Component {
       <div>
 
         {this.props.bookmarks.map((bookmark) => {
-          return <details>
-            <summary>
-              {bookmark.title}
+          return <div style={{padding:"0.5em", margin:"1.25em", borderColor:"#ABDEE8", borderStyle:"solid"}}><details>
+            <summary style={{background:"#ABDEE8", padding:"0.5em", fontFamily:"calibri", color:"white"}}>
+              <a href={bookmark.url} target="_blank">{bookmark.title}</a>
             </summary>
-        </details>
+            <div style={{background:"white", fontSize:"14px", padding:"0.5em", fontFamily:"calibri"}}>
+              <b>{bookmark.source_name}</b><br />
+              {bookmark.summary}
+
+            </div>
+        </details></div>
         })}
       </div>
     )

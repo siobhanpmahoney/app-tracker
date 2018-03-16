@@ -74,7 +74,7 @@ dynamicBookmarkIcon = (info) => {
             </div>
 
 <div>
-            <div><img src={press.urlToImage} style={{width:"256px", display:"block", verticalAlign: "top", marginLeft:"-0.45em", marginRight:"-0.35em", marginTop:"0.25em", padding:"0.25em"}} /></div>
+            <div><img src={press.urlToImage} style={{width:"256px", maxHeight:"125px", display:"block", verticalAlign: "top", marginLeft:"-0.45em", marginRight:"-0.35em", marginTop:"0.25em", padding:"0.25em"}} /></div>
 
             <div style={{backgroundColor:"white", padding:"0.25em", marginTop:"0.25em"}}>
             <span style={{display:"inlineBlock", verticalAlign:"top", alignment:"right", margin:"0.1em", color:"#FF5370"}}>
@@ -84,9 +84,9 @@ dynamicBookmarkIcon = (info) => {
 
           </span>
 
-          <span className="companyPressCardTitle" style={{margin:"0.25em", padding:"0.25em", display:"inlineBlock", verticalAlign:"bottom", textIndent:"0em", fontSize:"13px", fontFamily:"Calibri"}}>
+          <div className="companyPressCardTitle" style={{margin:"0.25em", padding:"0.25em", display:"inlineBlock", verticalAlign:"bottom", textIndent:"0em", fontSize:"13px", fontFamily:"Calibri"}}>
             <a href={press.url} target="_blank">{press.title}</a>
-          </span>
+          </div>
 
           <div className="companyPressCardTitle" style={{fontSize:"12.5px", fontFamily:"Calibri", margin:"0.25em", padding:"0.25em", fontStyle:"italic" }}>Published {new Date(press.publishedAt).toLocaleDateString()}</div>
 </div>

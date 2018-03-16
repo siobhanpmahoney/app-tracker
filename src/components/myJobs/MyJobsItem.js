@@ -25,7 +25,7 @@ class MyJobsItem extends React.Component {
   }
 
   render() {
-    console.log(this.props)
+    
     return(
       <div className="mySavedJob" style={{background:"white", color:"#3A4A4D", fontSize:"13.5px", style:"inlineBlock", margin:"1em"}}>
         <div style={{background:"#333F4A", margin:"-.25em"}}>
