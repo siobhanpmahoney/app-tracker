@@ -54,11 +54,14 @@ class Login extends React.Component {
   render() {
     console.log(this.props)
     return (
+      <div className="login">
+
       <form>
       <input type="text" name="username" onChange={this.formListener} />
       <input type="password" name="password" onChange={this.formListener} />
-      <button onClick={this.loginUser}>Login</button>
+      <button className="buttons" onClick={this.loginUser}>Login</button>
       </form>
+      </div>
     )
   }
 }

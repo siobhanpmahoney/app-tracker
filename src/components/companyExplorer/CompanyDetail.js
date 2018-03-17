@@ -93,9 +93,6 @@ class CompanyDetail extends React.Component {
     </div>
   }
 
-    <div className="myCompanySocial" style={{clear:"both"}}>
-      <h2>Keep Up-to-Date with {this.state.company.name} on Social Media</h2>
-    </div>
 
 {this.state.company &&
     <div className="myCompanyPressReleases" style={{clear:"both"}}>

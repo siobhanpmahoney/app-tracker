@@ -3,6 +3,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import * as Actions from '../actions'
 import { NavLink } from 'react-router-dom';
+import { withRouter } from 'react-router';
 
 const link = {
   width: '100px',
@@ -26,42 +27,44 @@ class NavBar extends React.Component {
   renderHTML = () => {
     if (!!this.props.currentUser) {
       return (
-        <div style={{backgroundColor:"white", padding:"1em"}}>
-          <span style={{color:"#30c9e8", fontSize:"42px", fontWeight:"800", fontFamily:"Montserrat", style:"inline", marginTop:"0.75em", padding:"0.75em"}}>Capture</span>
+        <span style={{backgroundColor:"white", padding:"1em", margin:"1em"}}>
+
           <span style={{float:"right", style:"inline"}}>
         <NavLink to="/" exact style={link} activeStyle={{backgroundColor:'#7FE6E1', color:"white", textDecoration:"none"}}>Profile</NavLink>
 
-        <NavLink to="/search/companies" exact style={link} activeStyle={{color:'#EBBF83', fontWeight:"800"}}>Explore Companies</NavLink>
+      <NavLink to="/search/jobs" exact style={link} activeStyle={{backgroundColor:'#7FE6E1', color:"white", textDecoration:"none"}}>Search Jobs</NavLink>
 
-        <NavLink to="/search/jobs" exact style={link} activeStyle={{backgroundColor:'#7FE6E1', color:"white", textDecoration:"none"}}>Search Jobs</NavLink>
+        <NavLink to="/search/companies" exact style={link} activeStyle={{backgroundColor:'#7FE6E1', color:"white", textDecoration:"none"}}>Explore Companies</NavLink>
+
+        <NavLink to="/myjobs" exact style={link} activeStyle={{backgroundColor:'#7FE6E1', color:"white", textDecoration:"none"}}>My Jobs</NavLink>
 
       <NavLink to="/mycompanies" exact style={link} activeStyle={{backgroundColor:'#7FE6E1', color:"white", textDecoration:"none"}}>My Companies</NavLink>
 
-      <NavLink to="/myjobs" exact style={link} activeStyle={{backgroundColor:'#7FE6E1', color:"white", textDecoration:"none"}}>My Jobs</NavLink>
 
     <NavLink onClick={this.props.logOutUser} to="/logout" exact style={link} activeStyle={{backgroundColor:'#7FE6E1', color:"white", textDecoration:"none"}}> Log Out </NavLink>
     </span>
-    </div>
+  </span>
   )
 
       } else {
         return (
-          <div>
+          <span style={{float:"right", style:"inline", margin:"1em"}}>
           <NavLink
             to="/login"
             exact
             style={link}
             activeStyle={{
-              background: '#FF5370'
+              backgroundColor:'#7FE6E1', color:"white", textDecoration:"none"
             }}>Log In</NavLink>
-            </div>
+        </span>
         )
       }
     }
 
   render() {
     return (
-      <div className="navbar">
+      <div className="navbar" style={{backgroundColor:"white", padding:"1em"}}>
+        <span style={{color:"#30c9e8", fontSize:"42px", fontWeight:"800", fontFamily:"Montserrat", style:"inline", marginTop:"0.75em", padding:"0.75em"}}>Capture</span>
         {this.renderHTML()}
       </div>)
     }
@@ -85,4 +88,4 @@ function mapDispatchToProps(dispatch) {
   return bindActionCreators(Actions, dispatch);
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(NavBar);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(NavBar));

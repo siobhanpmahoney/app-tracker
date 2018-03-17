@@ -11,6 +11,15 @@ body {
   background: #f6f8fe;
 }
 
+.filters select {
+  border: 1px solid #00A8CA;
+  color: #00A8CA;
+  font-family: "Avenir";
+  font-size: 13px;
+  padding: 10px 10px;
+  border-radius: 3px;
+}
+
 input[type=submit] {
     border: 1px solid #30c9e8;
     color: #30c9e8;
@@ -29,6 +38,24 @@ input[type=submit] {
   font-family: "Avenir";
   font-size: 14px;
   padding: 6px 6px;
+}
+
+.login input[type=text], input[type=password] {
+  border: 1px solid #00A8CA;
+  color: #00A8CA;
+  font-family: "Avenir";
+  font-size: 14px;
+  padding: 12px 12px;
+  margin: 1em
+}
+
+.appliedStatus input[type=checkbox] {
+  border: 1px solid #00A8CA;
+  color: #00A8CA;
+  font-family: "Avenir";
+  font-size: 14px;
+  padding: 6px 6px;
+  border-radius: 3px;
 }
 
 .myJobDetailDashboard input[type=checkbox] {
@@ -74,7 +101,6 @@ input[type=submit] {
   margin: 12px 6px;
   padding: 6px 6px;
   border-radius: 6px;
-
 }
 
 

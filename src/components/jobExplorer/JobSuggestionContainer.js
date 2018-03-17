@@ -56,7 +56,6 @@ class JobSuggestionContainer extends React.Component {
           return <JobSearchResultItem job={j} key={j.id} savedJobs={this.props.savedJobs} addToSavedJobs={this.props.addToSavedJobs} museJobId={j.id}/>
         })}
 
-xxxx
 </div>
       </div>
     )
